@@ -1,0 +1,41 @@
+/* FXUI utility classes */
+
+.fx-press {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.fx-press:active {
+  transform: translate(4px, 4px);
+  box-shadow: none !important;
+}
+
+.fx-neon-yellow {
+  background-color: #FFE500;
+  border: 2px solid #0a0a0a;
+  box-shadow: 4px 4px 0px #0a0a0a;
+}
+
+.fx-neon-pink {
+  background-color: #FF2D78;
+  border: 2px solid #0a0a0a;
+  box-shadow: 4px 4px 0px #0a0a0a;
+}
+
+.fx-neon-green {
+  background-color: #00FF94;
+  border: 2px solid #0a0a0a;
+  box-shadow: 4px 4px 0px #0a0a0a;
+}
+
+.fx-grid-pattern {
+  background-image:
+    linear-gradient(rgba(10, 10, 10, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.dark .fx-grid-pattern {
+  background-image:
+    linear-gradient(rgba(250, 250, 250, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 250, 250, 0.05) 1px, transparent 1px);
+}

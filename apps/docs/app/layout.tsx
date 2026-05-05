@@ -1,0 +1,23 @@
+import type { Metadata } from 'next';
+import './globals.css';
+import { Sidebar } from '../components/Sidebar';
+
+export const metadata: Metadata = {
+  title: 'FXUI — Neo-brutalist React UI Library',
+  description: 'Bold. Raw. Unapologetically different.',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-fx-white dark:bg-fx-black text-fx-black dark:text-fx-white font-sans min-h-screen">
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1 ml-64 min-h-screen">
+            {children}
+          </main>
+        </div>
+      </body>
+    </html>
+  );
+}

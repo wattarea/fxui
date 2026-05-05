@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap');
+
+:root {
+  /* Color tokens */
+  --fx-color-black:  #0a0a0a;
+  --fx-color-white:  #fafafa;
+  --fx-color-yellow: #FFE500;
+  --fx-color-pink:   #FF2D78;
+  --fx-color-green:  #00FF94;
+  --fx-color-blue:   #0066FF;
+  --fx-color-purple: #7C3AED;
+
+  /* Layout tokens */
+  --fx-border: 2px solid #0a0a0a;
+  --fx-border-3: 3px solid #0a0a0a;
+  --fx-shadow: 4px 4px 0px #0a0a0a;
+  --fx-shadow-sm: 2px 2px 0px #0a0a0a;
+  --fx-shadow-lg: 6px 6px 0px #0a0a0a;
+  --fx-radius: 4px;
+  --fx-transition: all 0.15s ease;
+  --fx-font-sans: 'Space Grotesk', 'Inter', sans-serif;
+  --fx-font-mono: 'Space Mono', monospace;
+  --fx-font-display: 'Archivo Black', sans-serif;
+}
+
+.dark {
+  --fx-border: 2px solid #fafafa;
+  --fx-border-3: 3px solid #fafafa;
+  --fx-shadow: 4px 4px 0px #fafafa;
+  --fx-shadow-sm: 2px 2px 0px #fafafa;
+  --fx-shadow-lg: 6px 6px 0px #fafafa;
+}
+
+@layer components {
+  .fx-brutalist {
+    border: var(--fx-border);
+    box-shadow: var(--fx-shadow);
+    border-radius: var(--fx-radius);
+    transition: var(--fx-transition);
+  }
+
+  .fx-brutalist:hover {
+    box-shadow: var(--fx-shadow-sm);
+    transform: translate(2px, 2px);
+  }
+
+  .fx-brutalist:active {
+    box-shadow: none;
+    transform: translate(4px, 4px);
+  }
+}
