@@ -1,0 +1,64 @@
+# Progress
+
+A progress bar built on Radix UI Progress. Supports multiple colors, sizes, and custom value formatting.
+
+## Import
+
+```tsx
+import { Progress } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Progress value={60} />
+```
+
+## With Label and Value
+
+```tsx
+<Progress value={60} max={100} label="Upload" showValue />
+```
+
+## Colors
+
+```tsx
+<Progress value={75} color="default" />
+<Progress value={75} color="success" />
+<Progress value={75} color="warning" />
+<Progress value={75} color="error" />
+<Progress value={75} color="info" />
+<Progress value={75} color="neon" />
+```
+
+## Sizes
+
+```tsx
+<Progress value={50} size="sm" />
+<Progress value={50} size="md" />
+<Progress value={50} size="lg" />
+```
+
+## Custom Format
+
+```tsx
+<Progress
+  value={3}
+  max={10}
+  label="Steps"
+  showValue
+  formatValue={(v, m) => `${v} of ${m}`}
+/>
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Current value |
+| `max` | `number` | `100` | Maximum value |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Bar height |
+| `color` | `'default' \| 'success' \| 'warning' \| 'error' \| 'info' \| 'neon'` | `'default'` | Fill color |
+| `label` | `string` | — | Label above the bar |
+| `showValue` | `boolean` | `false` | Show value badge |
+| `formatValue` | `(value, max) => string` | `% format` | Custom value formatter |

@@ -1,0 +1,52 @@
+# Carousel
+
+Slide-based content carousel with arrow navigation, dot indicators, optional autoplay, and keyboard support. No external dependencies.
+
+## Usage
+
+```tsx
+import { Carousel } from '@fxui/core';
+
+const slides = [
+  <div className="h-48 bg-fx-yellow flex items-center justify-center">Slide 1</div>,
+  <div className="h-48 bg-fx-pink flex items-center justify-center">Slide 2</div>,
+  <div className="h-48 bg-fx-green flex items-center justify-center">Slide 3</div>,
+];
+
+<Carousel items={slides} />
+```
+
+## AutoPlay
+
+```tsx
+<Carousel items={slides} autoPlay autoPlayInterval={3000} />
+```
+
+## Without Controls
+
+```tsx
+<Carousel items={slides} showArrows={false} showDots={false} />
+```
+
+## No Loop
+
+```tsx
+<Carousel items={slides} loop={false} />
+```
+
+## Keyboard Navigation
+
+When focused, `←` and `→` keys navigate between slides.
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `items` | `React.ReactNode[]` | **required** |
+| `autoPlay` | `boolean` | `false` |
+| `autoPlayInterval` | `number` | `3000` |
+| `loop` | `boolean` | `true` |
+| `showDots` | `boolean` | `true` |
+| `showArrows` | `boolean` | `true` |
+| `defaultIndex` | `number` | `0` |
+| `onIndexChange` | `(index: number) => void` | — |

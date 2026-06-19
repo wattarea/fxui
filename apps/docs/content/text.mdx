@@ -1,0 +1,81 @@
+# Text
+
+Body text primitive with size, weight, color, alignment, line-height, and mono variants. Renders as `<p>` by default, switchable to `span`, `div`, `strong`, etc.
+
+## Usage
+
+```tsx
+import { Text } from '@fxui/core';
+
+<Text>FXUI is a neo-brutalist React component library.</Text>
+```
+
+## Sizes
+
+```tsx
+<Text size="xs">Extra small</Text>
+<Text size="sm">Small</Text>
+<Text size="base">Base</Text>     {/* default */}
+<Text size="lg">Large</Text>
+<Text size="xl">Extra large</Text>
+```
+
+## Colors
+
+```tsx
+<Text color="default">Default</Text>
+<Text color="muted">Muted</Text>
+<Text color="primary">Primary blue</Text>
+<Text color="success">Success green</Text>
+<Text color="warning">Warning amber</Text>
+<Text color="error">Error red</Text>
+```
+
+## Weights
+
+```tsx
+<Text weight="normal">Normal</Text>
+<Text weight="medium">Medium</Text>
+<Text weight="semibold">Semibold</Text>
+<Text weight="bold">Bold</Text>
+<Text weight="black">Black</Text>
+```
+
+## Monospace
+
+```tsx
+<Text mono>const x = 42;</Text>
+<Text mono color="success" size="sm">✓ Build passed</Text>
+```
+
+## Line Height
+
+```tsx
+<Text leading="tight">...</Text>
+<Text leading="normal">...</Text>    {/* default */}
+<Text leading="relaxed">...</Text>
+<Text leading="loose">...</Text>
+```
+
+## As Span (Inline)
+
+```tsx
+<Text>
+  Normal text with{' '}
+  <Text as="span" weight="bold">bold</Text> and{' '}
+  <Text as="span" color="primary">blue</Text> parts.
+</Text>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `size` | `'xs' \| 'sm' \| 'base' \| 'lg' \| 'xl'` | `'base'` |
+| `weight` | `'normal' \| 'medium' \| 'semibold' \| 'bold' \| 'black'` | `'normal'` |
+| `color` | `'default' \| 'muted' \| 'primary' \| 'success' \| 'warning' \| 'error' \| 'white'` | `'default'` |
+| `align` | `'left' \| 'center' \| 'right' \| 'justify'` | `'left'` |
+| `leading` | `'tight' \| 'normal' \| 'relaxed' \| 'loose'` | `'normal'` |
+| `mono` | `boolean` | `false` |
+| `truncate` | `boolean` | `false` |
+| `as` | `'p' \| 'span' \| 'div' \| 'label' \| 'small' \| 'strong' \| 'em'` | `'p'` |

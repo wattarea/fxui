@@ -1,0 +1,66 @@
+# CopyButton
+
+A button that copies text to the clipboard using the Clipboard API. Shows a temporary checkmark after a successful copy, then reverts after a configurable timeout.
+
+## Usage
+
+```tsx
+import { CopyButton } from '@fxui/core';
+
+<CopyButton value="pnpm add @fxui/core" />
+```
+
+## Variants
+
+```tsx
+<CopyButton value="copy me" variant="default" />   {/* bordered button */}
+<CopyButton value="copy me" variant="ghost" />     {/* text-only */}
+<CopyButton value="copy me" iconOnly />            {/* icon only */}
+```
+
+## Sizes
+
+```tsx
+<CopyButton value="copy" size="sm" />
+<CopyButton value="copy" size="md" />
+<CopyButton value="copy" size="lg" />
+```
+
+## Custom Labels
+
+```tsx
+<CopyButton value="npm install @fxui/core" label="Copy command" copiedLabel="Done!" />
+```
+
+## With Code Block
+
+```tsx
+const snippet = "pnpm add @fxui/core";
+
+<div className="flex items-center justify-between border-2 border-fx-black rounded-[4px] px-4 py-2">
+  <Code>{snippet}</Code>
+  <CopyButton value={snippet} iconOnly />
+</div>
+```
+
+## Callback
+
+```tsx
+<CopyButton
+  value="secret-token"
+  onCopy={(val) => analytics.track('copy', { value: val })}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` | **required** |
+| `variant` | `'default' \| 'ghost' \| 'icon'` | `'default'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `iconOnly` | `boolean` | `false` |
+| `label` | `string` | `'Copy'` |
+| `copiedLabel` | `string` | `'Copied!'` |
+| `timeout` | `number` (ms) | `2000` |
+| `onCopy` | `(value: string) => void` | — |

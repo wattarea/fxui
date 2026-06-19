@@ -1,0 +1,31 @@
+# SegmentedControl
+
+iOS-style tab selector rendered as a connected button group. Supports icons, sizes, full-width, and per-option disabled state.
+
+## Usage
+
+```tsx
+import { SegmentedControl } from '@fxui/core';
+
+<SegmentedControl
+  options={[
+    { value: 'grid', label: 'Grid' },
+    { value: 'list', label: 'List' },
+    { value: 'table', label: 'Table' },
+  ]}
+  defaultValue="grid"
+  onChange={(val) => setView(val)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `options` | `SegmentedControlOption[]` | **required** |
+| `value` | `string` | — |
+| `defaultValue` | `string` | first option |
+| `onChange` | `(value: string) => void` | — |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `fullWidth` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |

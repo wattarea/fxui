@@ -1,0 +1,78 @@
+# AutoComplete
+
+An async autocomplete input that fires `onSearch` as the user types and displays a dropdown of suggestions. Built on Radix UI Popover for correct positioning.
+
+## Import
+
+```tsx
+import { AutoComplete } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+const [options, setOptions] = React.useState([]);
+
+async function handleSearch(query: string) {
+  const results = await fetchSuggestions(query);
+  setOptions(results);
+}
+
+<AutoComplete
+  placeholder="Search components..."
+  options={options}
+  onSearch={handleSearch}
+  onSelect={(value) => console.log(value)}
+/>
+```
+
+## Static Options
+
+```tsx
+const fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+
+<AutoComplete
+  placeholder="Pick a fruit"
+  options={fruits.map(f => ({ label: f, value: f.toLowerCase() }))}
+  onSearch={() => {}}
+/>
+```
+
+## Loading State
+
+```tsx
+<AutoComplete
+  placeholder="Search..."
+  options={options}
+  loading={isLoading}
+  onSearch={handleSearch}
+/>
+```
+
+## Controlled Value
+
+```tsx
+const [value, setValue] = React.useState('');
+
+<AutoComplete
+  value={value}
+  onValueChange={setValue}
+  options={options}
+  onSearch={handleSearch}
+  onSelect={(val) => setValue(val)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `options` | `{ label: string; value: string }[]` | `[]` |
+| `onSearch` | `(query: string) => void` | — |
+| `onSelect` | `(value: string) => void` | — |
+| `value` | `string` | — |
+| `onValueChange` | `(value: string) => void` | — |
+| `loading` | `boolean` | `false` |
+| `placeholder` | `string` | — |
+| `emptyText` | `string` | `'No results'` |
+| `minChars` | `number` | `1` |

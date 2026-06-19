@@ -1,0 +1,31 @@
+# NavMenu
+
+Horizontal navigation with hover-triggered dropdown groups. Items can be plain links or have a group of sub-links with icons and descriptions.
+
+## Usage
+
+```tsx
+import { NavMenu } from '@fxui/core';
+
+<NavMenu
+  items={[
+    { label: 'Home', href: '/' },
+    {
+      label: 'Products',
+      group: {
+        trigger: 'Products',
+        links: [
+          { label: 'Core', href: '/core', description: 'Open-source library', icon: '⚡' },
+          { label: 'Pro', href: '/pro', description: 'Premium components', icon: '💎' },
+        ],
+      },
+    },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `items` | `NavMenuItem[]` | **required** |

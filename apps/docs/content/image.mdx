@@ -1,0 +1,70 @@
+# Image
+
+Enhanced image component with lazy loading, aspect ratio locking, shimmer placeholder, error fallback, and optional caption.
+
+## Usage
+
+```tsx
+import { Image } from '@fxui/core';
+
+<Image
+  src="https://example.com/photo.jpg"
+  alt="A mountain landscape"
+  ratio="video"
+  bordered
+  rounded
+/>
+```
+
+## Aspect Ratio Presets
+
+```tsx
+<Image src={src} alt="..." ratio="square" />   // 1:1
+<Image src={src} alt="..." ratio="video" />    // 16:9
+<Image src={src} alt="..." ratio="photo" />    // 4:3
+<Image src={src} alt="..." ratio="wide" />     // 21:9
+<Image src={src} alt="..." ratio="portrait" /> // 3:4
+<Image src={src} alt="..." ratio={2.35} />     // custom
+```
+
+## With Caption
+
+```tsx
+<Image
+  src={src}
+  alt="Mountain"
+  ratio="photo"
+  bordered
+  rounded
+  caption="Morning light over the peaks"
+/>
+```
+
+## Error Fallback
+
+```tsx
+// Default broken-image icon
+<Image src="broken-url" alt="Photo" ratio="video" bordered />
+
+// Custom fallback
+<Image
+  src="broken-url"
+  alt="Photo"
+  ratio="video"
+  bordered
+  fallback={<span className="text-4xl">📷</span>}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `src` | `string` | — |
+| `alt` | `string` | **required** |
+| `ratio` | `number \| 'square' \| 'video' \| 'photo' \| 'wide' \| 'portrait'` | — |
+| `objectFit` | `'cover' \| 'contain' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'` |
+| `bordered` | `boolean` | `false` |
+| `rounded` | `boolean` | `false` |
+| `fallback` | `React.ReactNode` | broken-image icon |
+| `caption` | `string` | — |

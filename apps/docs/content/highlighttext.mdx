@@ -1,0 +1,29 @@
+# HighlightText
+
+Wraps matching substrings in `<mark>` elements with a highlight style. Useful for search result UIs.
+
+## Usage
+
+```tsx
+import { HighlightText } from '@fxui/core';
+
+<HighlightText
+  text="A neo-brutalist React component library"
+  highlight="React"
+/>
+
+// Multiple terms
+<HighlightText
+  text="Built with React, TypeScript, and Tailwind"
+  highlight={['React', 'TypeScript']}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `text` | `string` | **required** |
+| `highlight` | `string \| string[]` | **required** |
+| `caseSensitive` | `boolean` | `false` |
+| `highlightClassName` | `string` | `'bg-fx-yellow text-fx-black px-0.5 rounded-[2px]'` |

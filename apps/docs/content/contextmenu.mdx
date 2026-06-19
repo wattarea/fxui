@@ -1,0 +1,61 @@
+# ContextMenu
+
+Right-click context menu with the same compound API as `DropdownMenu`. Built on `@radix-ui/react-context-menu`.
+
+## Usage
+
+```tsx
+import { ContextMenu } from '@fxui/core';
+
+<ContextMenu>
+  <ContextMenu.Trigger asChild>
+    <div className="h-40 border-2 border-dashed border-fx-black">
+      Right-click here
+    </div>
+  </ContextMenu.Trigger>
+  <ContextMenu.Content>
+    <ContextMenu.Item icon="✂️" shortcut="⌘X">Cut</ContextMenu.Item>
+    <ContextMenu.Item icon="📋" shortcut="⌘C">Copy</ContextMenu.Item>
+    <ContextMenu.Item icon="📌" shortcut="⌘V">Paste</ContextMenu.Item>
+    <ContextMenu.Separator />
+    <ContextMenu.Item icon="🗑️" destructive>Delete</ContextMenu.Item>
+  </ContextMenu.Content>
+</ContextMenu>
+```
+
+## With Labels and Groups
+
+```tsx
+<ContextMenu.Content>
+  <ContextMenu.Label>Formatting</ContextMenu.Label>
+  <ContextMenu.CheckboxItem checked={bold} onCheckedChange={setBold}>Bold</ContextMenu.CheckboxItem>
+  <ContextMenu.CheckboxItem checked={italic} onCheckedChange={setItalic}>Italic</ContextMenu.CheckboxItem>
+</ContextMenu.Content>
+```
+
+## With Submenu
+
+```tsx
+<ContextMenu.Sub>
+  <ContextMenu.SubTrigger icon="🔗">Share</ContextMenu.SubTrigger>
+  <ContextMenu.SubContent>
+    <ContextMenu.Item icon="🐦">Twitter</ContextMenu.Item>
+    <ContextMenu.Item icon="📧">Email</ContextMenu.Item>
+  </ContextMenu.SubContent>
+</ContextMenu.Sub>
+```
+
+## Compound Components
+
+| Component | Description |
+|-----------|-------------|
+| `ContextMenu` | Root (wraps `Radix.Root`) |
+| `ContextMenu.Trigger` | Wraps the right-clickable area |
+| `ContextMenu.Content` | Menu panel (auto-portaled) |
+| `ContextMenu.Item` | Clickable row with `icon`, `shortcut`, `destructive` |
+| `ContextMenu.CheckboxItem` | Toggleable item |
+| `ContextMenu.Label` | Section header |
+| `ContextMenu.Separator` | Horizontal divider |
+| `ContextMenu.Sub` | Submenu root |
+| `ContextMenu.SubTrigger` | Opens the submenu |
+| `ContextMenu.SubContent` | Submenu panel |

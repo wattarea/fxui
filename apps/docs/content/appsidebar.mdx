@@ -1,0 +1,35 @@
+# AppSidebar
+
+Collapsible navigation sidebar with section headers, icons, and badge counts. Exports as `AppSidebar` to avoid conflict with the docs layout component.
+
+## Usage
+
+```tsx
+import { AppSidebar } from '@fxui/core';
+
+<AppSidebar
+  sections={[
+    {
+      title: 'Main',
+      items: [
+        { label: 'Dashboard', icon: '📊', active: true },
+        { label: 'Inbox', icon: '📬', badge: 12 },
+      ],
+    },
+  ]}
+  logo={<span className="font-display font-black">FXUI</span>}
+  collapsible
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `sections` | `AppSidebarSection[]` | **required** |
+| `logo` | `React.ReactNode` | — |
+| `footer` | `React.ReactNode` | — |
+| `collapsible` | `boolean` | `false` |
+| `defaultCollapsed` | `boolean` | `false` |
+| `width` | `number` (px) | `240` |
+| `collapsedWidth` | `number` (px) | `56` |

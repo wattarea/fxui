@@ -1,0 +1,28 @@
+# PinInput
+
+Security-focused digit PIN entry with individual boxes. Supports masked input, completion callback, variants, and sizes.
+
+## Usage
+
+```tsx
+import { PinInput } from '@fxui/core';
+
+<PinInput
+  label="Verification Code"
+  length={6}
+  onComplete={(pin) => verify(pin)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `length` | `number` | `6` |
+| `value` | `string` | — |
+| `onChange` | `(value, complete) => void` | — |
+| `onComplete` | `(value) => void` | — |
+| `masked` | `boolean` | `false` |
+| `numeric` | `boolean` | `true` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `variant` | `'default' \| 'filled' \| 'flushed'` | `'default'` |

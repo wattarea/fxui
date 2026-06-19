@@ -1,0 +1,59 @@
+# Stat
+
+KPI card for displaying a single metric with its label, value, optional trend indicator, and description. Great for dashboards.
+
+## Usage
+
+```tsx
+import { Stat } from '@fxui/core';
+
+<Stat
+  label="Total Revenue"
+  value="$48,295"
+  change="+12.5%"
+  trend="up"
+  description="vs last month"
+/>
+```
+
+## Trends
+
+The `trend` prop controls the arrow direction and color of the change indicator:
+
+```tsx
+<Stat label="Revenue" value="$48k" change="+12%" trend="up" />
+<Stat label="Churn" value="2.4%" change="-0.3%" trend="down" />
+<Stat label="Users" value="1,204" change="0%" trend="neutral" />
+```
+
+- `up` → green arrow ↑
+- `down` → red arrow ↓
+- `neutral` → grey arrow →
+
+## With Icon
+
+```tsx
+<Stat label="Users" value="12,453" change="+8.2%" trend="up" icon="👥" description="this week" />
+```
+
+## Dashboard Grid
+
+```tsx
+<div className="grid grid-cols-4 gap-4">
+  <Stat label="MRR" value="$12.4k" change="+18%" trend="up" description="vs last month" />
+  <Stat label="ARR" value="$148k" change="+18%" trend="up" description="annualized" />
+  <Stat label="Churn" value="1.2%" change="-0.5%" trend="down" description="vs last month" />
+  <Stat label="NPS" value="72" change="+4" trend="up" description="last survey" />
+</div>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `label` | `string` | **required** |
+| `value` | `string \| number` | **required** |
+| `change` | `string \| number` | — |
+| `trend` | `'up' \| 'down' \| 'neutral'` | `'neutral'` |
+| `icon` | `React.ReactNode` | — |
+| `description` | `string` | — |

@@ -1,0 +1,71 @@
+# InputGroup
+
+Wraps an input inside a single bordered container with optional prefix and suffix addons. Unlike `Input`'s built-in addon slots, `InputGroup` treats the entire group as one visual unit.
+
+## Import
+
+```tsx
+import { InputGroup } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<InputGroup prefix="https://" placeholder="yoursite.com" />
+```
+
+## With Suffix
+
+```tsx
+<InputGroup placeholder="0.00" suffix="USD" />
+```
+
+## Both Prefix and Suffix
+
+```tsx
+<InputGroup prefix="$" placeholder="0.00" suffix=".00" />
+```
+
+## Icon Prefix
+
+```tsx
+<InputGroup
+  prefix={<SearchIcon className="h-4 w-4" />}
+  placeholder="Search..."
+/>
+```
+
+## Sizes
+
+```tsx
+<InputGroup size="sm" prefix="@" placeholder="username" />
+<InputGroup size="md" prefix="@" placeholder="username" />
+<InputGroup size="lg" prefix="@" placeholder="username" />
+```
+
+## Error State
+
+```tsx
+<InputGroup
+  prefix="https://"
+  placeholder="yoursite.com"
+  error="Invalid URL"
+/>
+```
+
+## Disabled
+
+```tsx
+<InputGroup prefix="$" placeholder="0.00" disabled />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `prefix` | `ReactNode` | — |
+| `suffix` | `ReactNode` | — |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `error` | `string` | — |
+| `disabled` | `boolean` | `false` |
+| `wrapperClassName` | `string` | — |

@@ -1,0 +1,25 @@
+# ProgressRing
+
+SVG circular progress indicator with animated arc and centered percentage label.
+
+## Usage
+
+```tsx
+import { ProgressRing } from '@fxui/core';
+
+<ProgressRing value={75} color="yellow" label="Quality" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `number` | **required** |
+| `max` | `number` | `100` |
+| `size` | `number` (px) | `80` |
+| `strokeWidth` | `number` | `8` |
+| `color` | `'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple' \| 'black'` | `'yellow'` |
+| `showValue` | `boolean` | `true` |
+| `label` | `string` | — |
+| `format` | `(value, max) => string` | — |
+| `animate` | `boolean` | `true` |

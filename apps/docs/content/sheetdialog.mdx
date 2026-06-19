@@ -1,0 +1,33 @@
+# SheetDialog
+
+Full-side sheet modal that slides in from any edge. Different from Drawer — content-first layout with optional title/description/footer.
+
+## Usage
+
+```tsx
+import { SheetDialog } from '@fxui/core';
+
+<SheetDialog
+  title="Edit Profile"
+  description="Update your account details."
+  side="right"
+  size="md"
+  trigger={<button>Open Sheet</button>}
+  footer={<button>Save</button>}
+>
+  {/* Your form content */}
+</SheetDialog>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `side` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'` |
+| `title` | `string` | — |
+| `description` | `string` | — |
+| `footer` | `React.ReactNode` | — |
+| `trigger` | `React.ReactNode` | — |
+| `open` | `boolean` | — |
+| `onOpenChange` | `(open: boolean) => void` | — |

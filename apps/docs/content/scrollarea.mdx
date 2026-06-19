@@ -1,0 +1,43 @@
+# ScrollArea
+
+Custom-styled scrollable container that replaces native browser scrollbars with neo-brutalist ones. Built on `@radix-ui/react-scroll-area`.
+
+## Usage
+
+```tsx
+import { ScrollArea } from '@fxui/core';
+
+<ScrollArea maxHeight={300}>
+  <div className="p-4">
+    {/* tall content */}
+  </div>
+</ScrollArea>
+```
+
+## Horizontal
+
+```tsx
+<ScrollArea orientation="horizontal" maxWidth={400}>
+  <div className="flex gap-3 p-3" style={{ width: 'max-content' }}>
+    {items.map(item => <Chip key={item}>{item}</Chip>)}
+  </div>
+</ScrollArea>
+```
+
+## Both Axes
+
+```tsx
+<ScrollArea orientation="both" maxHeight={300} maxWidth={400}>
+  {/* wide + tall content */}
+</ScrollArea>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `orientation` | `'vertical' \| 'horizontal' \| 'both'` | `'vertical'` |
+| `type` | `'auto' \| 'always' \| 'scroll' \| 'hover'` | `'hover'` |
+| `scrollbarSize` | `number` | `8` |
+| `maxHeight` | `string \| number` | — |
+| `maxWidth` | `string \| number` | — |

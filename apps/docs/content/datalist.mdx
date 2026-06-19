@@ -1,0 +1,26 @@
+# DataList
+
+Horizontal key-value pair rows with optional stripes and borders. Uses semantic `<dl>/<dt>/<dd>` markup.
+
+## Usage
+
+```tsx
+import { DataList } from '@fxui/core';
+
+<DataList
+  items={[
+    { label: 'Name', value: 'Selman' },
+    { label: 'Role', value: 'Engineer' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `items` | `DataListItem[]` | **required** |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| `striped` | `boolean` | `false` |
+| `bordered` | `boolean` | `true` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |

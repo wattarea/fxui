@@ -1,0 +1,73 @@
+# TagInput
+
+Multi-value text input where users type and confirm tags by pressing Enter or comma. Tags appear inline as removable chips. Supports validation, max count, and controlled mode.
+
+## Usage
+
+```tsx
+import { TagInput } from '@fxui/core';
+
+<TagInput label="Skills" placeholder="Add skill…" hint="Press Enter or comma to add" />
+```
+
+## With Default Value
+
+```tsx
+<TagInput
+  label="Technologies"
+  defaultValue={['React', 'TypeScript', 'Tailwind']}
+  placeholder="Add more…"
+/>
+```
+
+## Max Tags
+
+```tsx
+<TagInput label="Labels (max 3)" max={3} placeholder="Add label…" />
+```
+
+## Validation
+
+```tsx
+<TagInput
+  label="Email recipients"
+  placeholder="Enter email…"
+  validate={(tag) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(tag)}
+  hint="Only valid emails are accepted"
+/>
+```
+
+Invalid tags are silently ignored. Combine with `error` for user feedback.
+
+## Controlled
+
+```tsx
+const [tags, setTags] = React.useState(['design', 'code']);
+
+<TagInput value={tags} onChange={setTags} label="Tags" />
+```
+
+## Keyboard
+
+| Key | Action |
+|-----|--------|
+| `Enter` | Add current input as tag |
+| `,` | Add current input as tag |
+| `Backspace` | Remove last tag (when input is empty) |
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string[]` | — |
+| `defaultValue` | `string[]` | `[]` |
+| `onChange` | `(tags: string[]) => void` | — |
+| `placeholder` | `string` | `'Add tag…'` |
+| `max` | `number` | — |
+| `separator` | `string \| string[]` | `['Enter', ',']` |
+| `validate` | `(tag: string) => boolean` | — |
+| `disabled` | `boolean` | `false` |
+| `invalid` | `boolean` | `false` |
+| `label` | `string` | — |
+| `hint` | `string` | — |
+| `error` | `string` | — |

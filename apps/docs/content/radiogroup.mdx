@@ -1,0 +1,106 @@
+# RadioGroup
+
+A group of radio buttons built on Radix UI RadioGroup. Supports vertical/horizontal orientation, descriptions, and error state.
+
+## Import
+
+```tsx
+import { RadioGroup } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<RadioGroup
+  label="Plan"
+  defaultValue="free"
+  options={[
+    { value: 'free', label: 'Free' },
+    { value: 'pro', label: 'Pro' },
+    { value: 'enterprise', label: 'Enterprise' },
+  ]}
+/>
+```
+
+## With Descriptions
+
+```tsx
+<RadioGroup
+  label="Notifications"
+  defaultValue="mentions"
+  options={[
+    { value: 'all', label: 'All', description: 'Receive every notification.' },
+    { value: 'mentions', label: 'Mentions only', description: 'Only when you are mentioned.' },
+    { value: 'none', label: 'None', description: 'No notifications.' },
+  ]}
+/>
+```
+
+## Horizontal
+
+```tsx
+<RadioGroup
+  label="Size"
+  orientation="horizontal"
+  defaultValue="md"
+  options={[
+    { value: 'sm', label: 'Small' },
+    { value: 'md', label: 'Medium' },
+    { value: 'lg', label: 'Large' },
+  ]}
+/>
+```
+
+## Error & Hint
+
+```tsx
+<RadioGroup label="Role" options={options} error="You must select a role." />
+<RadioGroup label="Role" options={options} hint="You can change this later." />
+```
+
+## Disabled Option
+
+```tsx
+<RadioGroup
+  options={[
+    { value: 'viewer', label: 'Viewer' },
+    { value: 'admin', label: 'Admin', disabled: true },
+  ]}
+/>
+```
+
+## Controlled
+
+```tsx
+const [value, setValue] = React.useState('free');
+
+<RadioGroup
+  value={value}
+  onValueChange={setValue}
+  options={planOptions}
+/>
+```
+
+## API Reference
+
+### RadioGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `RadioOption[]` | — | Array of radio options |
+| `label` | `string` | — | Group label |
+| `error` | `string` | — | Error message |
+| `hint` | `string` | — | Helper text |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction |
+| `value` | `string` | — | Controlled value |
+| `defaultValue` | `string` | — | Uncontrolled initial value |
+| `onValueChange` | `(value: string) => void` | — | Called on selection |
+
+### RadioOption
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `value` | `string` | Option value |
+| `label` | `string` | Display label |
+| `description` | `string` | Optional supporting text |
+| `disabled` | `boolean` | Disables this option |

@@ -1,0 +1,29 @@
+# Callout
+
+Inline highlighted block for tips, warnings, dangers, and notes. Uses left-border accent with icon and optional title.
+
+## Usage
+
+```tsx
+import { Callout } from '@fxui/core';
+
+<Callout variant="tip" title="Pro Tip">
+  Use the cn() utility to merge class names.
+</Callout>
+
+<Callout variant="danger">
+  This action cannot be undone.
+</Callout>
+```
+
+## Variants
+
+`tip` · `warning` · `danger` · `info` · `note`
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `string` | `'tip'` |
+| `title` | `string` | — |
+| `icon` | `React.ReactNode` | auto |

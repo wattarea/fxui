@@ -1,0 +1,55 @@
+# Container
+
+Max-width wrapper with responsive horizontal padding. Centers content and constrains line length across breakpoints.
+
+## Usage
+
+```tsx
+import { Container } from '@fxui/core';
+
+<Container>
+  <p>Content is centered and max-width constrained.</p>
+</Container>
+```
+
+## Sizes
+
+```tsx
+<Container size="sm" />    {/* max-w-screen-sm  — 640px  */}
+<Container size="md" />    {/* max-w-screen-md  — 768px  */}
+<Container size="lg" />    {/* max-w-screen-lg  — 1024px */}
+<Container size="xl" />    {/* max-w-screen-xl  — 1280px (default) */}
+<Container size="2xl" />   {/* max-w-screen-2xl — 1536px */}
+<Container size="full" />  {/* max-w-full       — no constraint */}
+```
+
+## Boxed
+
+Adds a border and shadow for card-style page sections:
+
+```tsx
+<Container size="md" boxed className="py-12">
+  <h2>Section with border</h2>
+</Container>
+```
+
+## Nesting
+
+```tsx
+<Container size="xl">
+  {/* Full-width header */}
+  <header>...</header>
+
+  {/* Narrower article body */}
+  <Container size="md">
+    <article>...</article>
+  </Container>
+</Container>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | `'xl'` |
+| `boxed` | `boolean` | `false` |

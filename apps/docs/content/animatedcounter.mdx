@@ -1,0 +1,26 @@
+# AnimatedCounter
+
+Number that animates from a start value to a target using requestAnimationFrame. Supports prefix, suffix, separators, and easing functions.
+
+## Usage
+
+```tsx
+import { AnimatedCounter } from '@fxui/core';
+
+<AnimatedCounter value={12847} separator="," className="text-4xl font-black" />
+<AnimatedCounter value={3.42} decimals={2} suffix="%" className="text-4xl text-fx-green" />
+<AnimatedCounter value={94521} prefix="$" className="text-4xl text-fx-yellow" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `number` | **required** |
+| `from` | `number` | `0` |
+| `duration` | `number` (ms) | `1500` |
+| `decimals` | `number` | `0` |
+| `prefix` | `string` | `''` |
+| `suffix` | `string` | `''` |
+| `separator` | `string` | `','` |
+| `easing` | `'linear' \| 'easeOut' \| 'easeInOut'` | `'easeOut'` |

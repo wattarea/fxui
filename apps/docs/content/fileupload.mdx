@@ -1,0 +1,82 @@
+# FileUpload
+
+Drag-and-drop file upload zone with a file list below. Supports single or multiple files, file type restrictions, size validation, and controlled mode.
+
+## Usage
+
+```tsx
+import { FileUpload } from '@fxui/core';
+
+<FileUpload label="Upload file" hint="PNG, JPG, PDF up to 10 MB" />
+```
+
+## Images Only
+
+```tsx
+<FileUpload
+  accept="image/*"
+  label="Avatar"
+  hint="PNG or JPG, max 2 MB"
+  maxSize={2 * 1024 * 1024}
+/>
+```
+
+## Multiple Files
+
+```tsx
+<FileUpload
+  multiple
+  maxFiles={5}
+  label="Documents"
+  hint="Upload up to 5 files"
+/>
+```
+
+## Controlled
+
+```tsx
+const [files, setFiles] = React.useState<File[]>([]);
+
+<FileUpload
+  multiple
+  value={files}
+  onChange={setFiles}
+  label="Attachments"
+/>
+```
+
+## Max File Size
+
+```tsx
+<FileUpload
+  maxSize={5 * 1024 * 1024}  // 5 MB
+  hint="Max 5 MB per file"
+/>
+```
+
+Files exceeding `maxSize` are rejected and an error is shown below the zone.
+
+## Accept Attribute
+
+Uses the native HTML `accept` attribute:
+
+```tsx
+<FileUpload accept=".pdf,.doc,.docx" />
+<FileUpload accept="image/*, video/*" />
+<FileUpload accept=".csv, application/json" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `accept` | `string` | — |
+| `multiple` | `boolean` | `false` |
+| `maxSize` | `number` (bytes) | — |
+| `maxFiles` | `number` | — |
+| `value` | `File[]` | — |
+| `onChange` | `(files: File[]) => void` | — |
+| `disabled` | `boolean` | `false` |
+| `label` | `string` | — |
+| `hint` | `string` | — |
+| `error` | `string` | — |

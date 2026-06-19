@@ -1,0 +1,81 @@
+# ClipboardInput
+
+A read-only input with a built-in copy button. Ideal for displaying API keys, install commands, or share links.
+
+## Import
+
+```tsx
+import { ClipboardInput } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<ClipboardInput value="https://fxui.dev/components/button" />
+```
+
+## With Label
+
+```tsx
+<ClipboardInput label="Share link" value="https://fxui.dev" />
+```
+
+## Masked (API Keys)
+
+```tsx
+{/* Shows dots — reveal toggle built in */}
+<ClipboardInput
+  label="Secret key"
+  value="sk_live_xxxxxxxxxxxxxxxxxxxx"
+  masked
+/>
+```
+
+## With Prefix
+
+```tsx
+<ClipboardInput prefix="$" value="pnpm add @fxui/core" />
+<ClipboardInput prefix="→" value="import { Button } from '@fxui/core'" />
+```
+
+## Sizes
+
+```tsx
+<ClipboardInput size="sm" value="small" />
+<ClipboardInput size="md" value="medium" />  {/* default */}
+<ClipboardInput size="lg" value="large" />
+```
+
+## Copy Callback
+
+```tsx
+<ClipboardInput
+  value="my-api-key"
+  onCopied={(val) => toast({ title: 'Copied!', description: val })}
+/>
+```
+
+## Install Commands
+
+```tsx
+{[
+  { prefix: 'npm',  value: 'npm install @fxui/core' },
+  { prefix: 'pnpm', value: 'pnpm add @fxui/core' },
+  { prefix: 'yarn', value: 'yarn add @fxui/core' },
+].map(({ prefix, value }) => (
+  <ClipboardInput key={prefix} prefix={prefix} value={value} />
+))}
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` | **required** |
+| `label` | `string` | — |
+| `masked` | `boolean` | `false` |
+| `prefix` | `ReactNode` | — |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `successDuration` | `number` (ms) | `2000` |
+| `onCopied` | `(value: string) => void` | — |
+| `wrapperClassName` | `string` | — |

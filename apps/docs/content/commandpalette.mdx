@@ -1,0 +1,96 @@
+# CommandPalette
+
+⌘K-style modal command palette with live search, grouped results, keyboard navigation, and icon/shortcut support. Built on `@radix-ui/react-dialog`.
+
+## Setup
+
+Wrap your app with `CommandPaletteProvider` to enable the global ⌘K shortcut:
+
+```tsx
+// layout.tsx
+import { CommandPaletteProvider } from '@fxui/core';
+
+export default function RootLayout({ children }) {
+  return (
+    <CommandPaletteProvider shortcut="k">
+      {children}
+    </CommandPaletteProvider>
+  );
+}
+```
+
+Then place `CommandPalette` once (e.g. in your root layout or navbar):
+
+```tsx
+import { CommandPalette, useCommandPalette } from '@fxui/core';
+
+function AppShell() {
+  const items = [
+    { id: '1', label: 'Dashboard', icon: '🏠', group: 'Navigation', action: () => router.push('/') },
+    { id: '2', label: 'Settings', icon: '⚙️', group: 'Navigation', action: () => router.push('/settings') },
+    { id: '3', label: 'New Document', icon: '📄', group: 'Actions', action: createDoc, shortcut: '⌘N' },
+  ];
+
+  return <CommandPalette items={items} />;
+}
+```
+
+## Programmatic Open
+
+```tsx
+const { setOpen } = useCommandPalette();
+
+<Button onClick={() => setOpen(true)}>Open</Button>
+```
+
+## Controlled Mode
+
+Use without the provider:
+
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<CommandPalette items={items} open={open} onOpenChange={setOpen} />
+```
+
+## CommandItem Type
+
+```ts
+interface CommandItem {
+  id: string;
+  label: string;
+  description?: string;       // secondary line below label
+  icon?: React.ReactNode;
+  shortcut?: string;          // shown right-aligned
+  group?: string;             // section header
+  keywords?: string[];        // extra search terms
+  action: () => void;
+}
+```
+
+## Keyboard Controls
+
+| Key | Action |
+|-----|--------|
+| `⌘K` / `Ctrl+K` | Open / close |
+| `↑` / `↓` | Navigate results |
+| `Enter` | Run selected command |
+| `Esc` | Close |
+
+## Props
+
+### CommandPaletteProvider
+
+| Prop | Type | Default |
+|------|------|---------|
+| `shortcut` | `string` | `'k'` |
+
+### CommandPalette
+
+| Prop | Type | Default |
+|------|------|---------|
+| `items` | `CommandItem[]` | **required** |
+| `placeholder` | `string` | `'Search commands…'` |
+| `emptyText` | `string` | `'No results found.'` |
+| `open` | `boolean` | — |
+| `onOpenChange` | `(open: boolean) => void` | — |

@@ -1,0 +1,71 @@
+# Input
+
+A text input with label, error, hint, and addon support.
+
+## Import
+
+```tsx
+import { Input } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Input placeholder="Enter value..." />
+```
+
+## With Label and Hint
+
+```tsx
+<Input
+  label="Email"
+  hint="We'll never share your email."
+  placeholder="you@example.com"
+/>
+```
+
+## Error State
+
+```tsx
+<Input
+  label="Username"
+  error="Username is already taken."
+  defaultValue="johndoe"
+/>
+```
+
+## Variants
+
+```tsx
+<Input variant="default" placeholder="Default" />
+<Input variant="filled" placeholder="Filled" />
+<Input variant="flushed" placeholder="Flushed" />
+```
+
+## Addons
+
+```tsx
+<Input leftAddon="https://" placeholder="yoursite.com" />
+<Input rightAddon=".com" placeholder="yoursite" />
+<Input leftAddon="$" rightAddon="USD" placeholder="0.00" />
+```
+
+## Disabled
+
+```tsx
+<Input disabled placeholder="Disabled input" />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'filled' \| 'flushed'` | `'default'` | Visual style |
+| `label` | `string` | — | Label rendered above the input |
+| `error` | `string` | — | Error message (turns border red) |
+| `hint` | `string` | — | Helper text below input (hidden when error is set) |
+| `leftAddon` | `ReactNode` | — | Content prepended to the input |
+| `rightAddon` | `ReactNode` | — | Content appended to the input |
+| `className` | `string` | — | Additional Tailwind classes |
+
+Extends all native `<input>` HTML attributes.

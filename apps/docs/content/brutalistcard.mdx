@@ -1,0 +1,88 @@
+# BrutalistCard
+
+A preset neo-brutalist card with configurable shadow depth, color accents, filled variants, hover/press effects, and an optional corner stamp.
+
+## Import
+
+```tsx
+import { BrutalistCard } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<BrutalistCard>
+  <h3 className="font-display font-black text-xl">Card Title</h3>
+  <p className="text-sm text-gray-500">Card content goes here.</p>
+</BrutalistCard>
+```
+
+## Shadow Depth
+
+```tsx
+<BrutalistCard shadow="sm">Subtle</BrutalistCard>
+<BrutalistCard shadow="md">Default</BrutalistCard>
+<BrutalistCard shadow="lg">Heavy</BrutalistCard>
+<BrutalistCard shadow="xl">Extra heavy</BrutalistCard>
+<BrutalistCard shadow="none">No shadow</BrutalistCard>
+```
+
+## Top Accent
+
+```tsx
+<BrutalistCard accent="yellow">Yellow top border</BrutalistCard>
+<BrutalistCard accent="pink">Pink top border</BrutalistCard>
+<BrutalistCard accent="green">Green top border</BrutalistCard>
+```
+
+## Left Accent
+
+```tsx
+<BrutalistCard accent="left_yellow">Left yellow accent</BrutalistCard>
+<BrutalistCard accent="left_pink">Left pink accent</BrutalistCard>
+```
+
+## Filled
+
+```tsx
+<BrutalistCard filled="yellow">Yellow fill</BrutalistCard>
+<BrutalistCard filled="pink">Pink fill</BrutalistCard>
+<BrutalistCard filled="black">Black fill</BrutalistCard>
+```
+
+## Hoverable + Pressable
+
+```tsx
+<BrutalistCard hoverable>
+  Translates on hover
+</BrutalistCard>
+
+<BrutalistCard hoverable pressable>
+  Translates + shadow removes on press
+</BrutalistCard>
+```
+
+## With Stamp
+
+```tsx
+<BrutalistCard
+  accent="yellow"
+  stamp={<Badge variant="solid" color="yellow">NEW</Badge>}
+  stampPosition="top-right"
+>
+  <p>New feature announcement</p>
+</BrutalistCard>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `shadow` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` |
+| `accent` | `'none' \| 'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple' \| 'black' \| 'left_*'` | `'none'` |
+| `filled` | `'none' \| 'yellow' \| 'pink' \| 'green' \| 'blue' \| 'black'` | `'none'` |
+| `hoverable` | `boolean` | `false` |
+| `pressable` | `boolean` | `false` |
+| `padding` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` |
+| `stamp` | `ReactNode` | — |
+| `stampPosition` | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left'` | `'top-right'` |

@@ -1,0 +1,46 @@
+# OTPInput
+
+One-time password input with auto-focus-next, backspace navigation, paste support, grouping separators, and numeric/alphanumeric modes.
+
+## Usage
+
+```tsx
+import { OTPInput } from '@fxui/core';
+
+const [value, setValue] = React.useState('');
+
+<OTPInput value={value} onChange={setValue} onComplete={(v) => verify(v)} />
+```
+
+## Lengths & Grouping
+
+```tsx
+<OTPInput length={4} groupSize={0} label="PIN" />          // no separator
+<OTPInput length={6} groupSize={3} label="OTP" />          // 3-3
+<OTPInput length={8} groupSize={4} type="alphanumeric" />  // license key
+```
+
+## Keyboard Behavior
+
+| Key | Action |
+|-----|--------|
+| `0–9` / `A–Z` | Fill current box, advance |
+| `Backspace` | Clear current, or go back |
+| `←` / `→` | Move between boxes |
+| Paste | Fill from cursor position |
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `length` | `number` | `6` |
+| `value` | `string` | — |
+| `onChange` | `(v: string) => void` | — |
+| `onComplete` | `(v: string) => void` | — |
+| `type` | `'numeric' \| 'alphanumeric'` | `'numeric'` |
+| `autoFocus` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `groupSize` | `number` | `3` |
+| `label` | `string` | — |
+| `error` | `string` | — |

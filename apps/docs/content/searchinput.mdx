@@ -1,0 +1,25 @@
+# SearchInput
+
+Search input with a leading icon, clear button, enter-to-search, and optional debounce.
+
+## Usage
+
+```tsx
+import { SearchInput } from '@fxui/core';
+
+<SearchInput
+  placeholder="Search..."
+  onSearch={(q) => fetchResults(q)}
+  debounceMs={300}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `onSearch` | `(value: string) => void` | — |
+| `onChange` | `(value: string) => void` | — |
+| `debounceMs` | `number` | — |
+| `clearable` | `boolean` | `true` |
+| `isLoading` | `boolean` | `false` |

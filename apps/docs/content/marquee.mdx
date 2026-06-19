@@ -1,0 +1,27 @@
+# Marquee
+
+Infinite horizontal scroll with configurable speed, direction, and pause-on-hover.
+
+## Usage
+
+```tsx
+import { Marquee } from '@fxui/core';
+
+<Marquee speed={30} pauseOnHover gap={16}>
+  <span>React</span>
+  <span>TypeScript</span>
+  <span>Tailwind</span>
+</Marquee>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `speed` | `number` | `40` |
+| `direction` | `'left' \| 'right'` | `'left'` |
+| `pauseOnHover` | `boolean` | `true` |
+| `gap` | `number` (px) | `16` |
+| `repeat` | `number` | `4` |
+| `gradient` | `boolean` | `true` |
+| `gradientWidth` | `number` (px) | `64` |

@@ -1,0 +1,63 @@
+# Stepper
+
+A multi-step progress indicator. Shows completed, current, and upcoming steps.
+
+## Import
+
+```tsx
+import { Stepper } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Stepper
+  steps={[
+    { title: 'Cart', description: 'Review items' },
+    { title: 'Shipping', description: 'Enter address' },
+    { title: 'Payment', description: 'Confirm & pay' },
+  ]}
+  currentStep={1}
+/>
+```
+
+## Vertical
+
+```tsx
+<Stepper steps={steps} currentStep={1} orientation="vertical" />
+```
+
+## Interactive (controlled)
+
+```tsx
+const [step, setStep] = React.useState(0);
+
+<Stepper steps={steps} currentStep={step} />
+
+<Button onClick={() => setStep(s => s - 1)} disabled={step === 0}>Back</Button>
+<Button onClick={() => setStep(s => s + 1)} disabled={step === steps.length - 1}>Next</Button>
+```
+
+## Completed State
+
+Set `currentStep` equal to `steps.length` to mark all steps complete.
+
+```tsx
+<Stepper steps={steps} currentStep={steps.length} />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `steps` | `StepperStep[]` | — | Array of steps |
+| `currentStep` | `number` | — | Zero-indexed active step |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### StepperStep
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | `string` | Step label |
+| `description` | `string` | Optional supporting text |

@@ -1,0 +1,80 @@
+# Kbd
+
+Keyboard key display component for shortcut documentation, inline prose, and shortcut reference tables. Renders a styled `<kbd>` element with a bottom shadow that mimics a physical key.
+
+## Usage
+
+```tsx
+import { Kbd } from '@fxui/core';
+
+Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> to open the command palette.
+```
+
+## Sizes
+
+```tsx
+<Kbd size="sm">⌘</Kbd>
+<Kbd size="md">⌘</Kbd>
+<Kbd size="lg">⌘</Kbd>
+```
+
+## Combos
+
+`Kbd.Combo` renders a sequence of keys separated by `+`:
+
+```tsx
+<Kbd.Combo keys={['⌘', 'K']} />
+<Kbd.Combo keys={['⌘', 'Shift', 'P']} />
+<Kbd.Combo keys={['Ctrl', 'C']} />
+```
+
+Custom separator:
+
+```tsx
+<Kbd.Combo keys={['⌘', 'K']} separator="then" />
+```
+
+## Shortcut Table
+
+```tsx
+<table>
+  <tbody>
+    {[
+      { keys: ['⌘', 'K'], desc: 'Open search' },
+      { keys: ['⌘', 'S'], desc: 'Save file' },
+      { keys: ['?'], desc: 'Show shortcuts' },
+    ].map(({ keys, desc }) => (
+      <tr key={desc}>
+        <td><Kbd.Combo keys={keys} /></td>
+        <td>{desc}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+```
+
+## Inline in Prose
+
+```tsx
+<p>
+  Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> to open search,
+  or <Kbd.Combo keys={['⌘', 'Shift', 'P']} /> for advanced options.
+  Hit <Kbd>Esc</Kbd> to close.
+</p>
+```
+
+## Props
+
+### Kbd
+
+| Prop | Type | Default |
+|------|------|---------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+
+### Kbd.Combo
+
+| Prop | Type | Default |
+|------|------|---------|
+| `keys` | `string[]` | **required** |
+| `size` | same as Kbd size | `'md'` |
+| `separator` | `React.ReactNode` | `'+'` |

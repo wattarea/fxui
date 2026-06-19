@@ -1,0 +1,65 @@
+# EmptyState
+
+Full-page or section-level empty state with an icon, title, description, and optional action button. Rendered with a dashed border to communicate the "blank canvas" feel.
+
+## Usage
+
+```tsx
+import { EmptyState } from '@fxui/core';
+
+<EmptyState
+  icon="📭"
+  title="No messages yet"
+  description="When you receive messages, they'll appear here."
+/>
+```
+
+## With Action
+
+```tsx
+<EmptyState
+  icon="📁"
+  title="No files found"
+  description="Upload your first file to get started."
+  action={<Button>+ Upload file</Button>}
+/>
+```
+
+## Common Patterns
+
+### Search no results
+```tsx
+<EmptyState
+  icon="🔍"
+  title={`No results for "${query}"`}
+  description="Try adjusting your search or clearing filters."
+  action={<Button variant="outline" onClick={clearFilters}>Clear filters</Button>}
+/>
+```
+
+### Error state
+```tsx
+<EmptyState
+  icon="⚠️"
+  title="Something went wrong"
+  description="We couldn't load this content. Please try again."
+  action={<Button onClick={retry}>Retry</Button>}
+/>
+```
+
+### No icon
+```tsx
+<EmptyState
+  title="Your cart is empty"
+  description="Add items and they'll show up here."
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `icon` | `React.ReactNode` | — |
+| `title` | `string` | **required** |
+| `description` | `string` | — |
+| `action` | `React.ReactNode` | — |

@@ -1,0 +1,69 @@
+# FormField
+
+A wrapper component that provides a label, hint text, and error state for any form input. Clones its child to inject `id`, `aria-describedby`, and `aria-invalid` automatically.
+
+## Import
+
+```tsx
+import { FormField } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<FormField label="Email" htmlFor="email">
+  <Input id="email" type="email" placeholder="you@example.com" />
+</FormField>
+```
+
+## With Error
+
+```tsx
+<FormField label="Username" error="Username is already taken">
+  <Input defaultValue="john" />
+</FormField>
+```
+
+## With Hint
+
+```tsx
+<FormField label="Password" hint="Minimum 8 characters">
+  <PasswordInput />
+</FormField>
+```
+
+## Required Field
+
+```tsx
+<FormField label="Full name" required>
+  <Input placeholder="Alice Kim" />
+</FormField>
+```
+
+## Complete Form
+
+```tsx
+<form className="flex flex-col gap-4 max-w-sm">
+  <FormField label="Full name" required>
+    <Input placeholder="Alice Kim" />
+  </FormField>
+  <FormField label="Email" required hint="We'll never share your email">
+    <Input type="email" placeholder="alice@example.com" />
+  </FormField>
+  <FormField label="Bio" hint="Max 160 characters">
+    <Textarea rows={3} />
+  </FormField>
+  <Button type="submit">Save</Button>
+</form>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `label` | `string` | — |
+| `htmlFor` | `string` | auto-generated |
+| `hint` | `string` | — |
+| `error` | `string` | — |
+| `required` | `boolean` | `false` |
+| `children` | `ReactNode` | — |

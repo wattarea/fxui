@@ -1,0 +1,67 @@
+# Divider
+
+Horizontal or vertical separator line. Supports an optional centered label, three line styles, and vertical orientation for use in navigation bars and breadcrumbs.
+
+## Usage
+
+```tsx
+import { Divider } from '@fxui/core';
+
+<Divider />
+```
+
+## Variants
+
+```tsx
+<Divider variant="solid" />
+<Divider variant="dashed" />
+<Divider variant="dotted" />
+```
+
+## With Label
+
+```tsx
+<Divider label="OR" />
+<Divider label="CONTINUE WITH" />
+<Divider label="TODAY" variant="dashed" />
+```
+
+## Label Placement
+
+```tsx
+<Divider label="Start" labelPlacement="start" />
+<Divider label="Center" labelPlacement="center" />   {/* default */}
+<Divider label="End" labelPlacement="end" />
+```
+
+## Vertical
+
+Use `orientation="vertical"` inside a flex container:
+
+```tsx
+<div className="flex items-center gap-4 h-8">
+  <span>Home</span>
+  <Divider orientation="vertical" />
+  <span>About</span>
+</div>
+```
+
+## In a Form
+
+```tsx
+<form>
+  <Input placeholder="Email" />
+  <Input type="password" placeholder="Password" />
+  <Divider label="OR" className="my-5" />
+  <Button variant="outline">Continue with GitHub</Button>
+</form>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'solid' \| 'dashed' \| 'dotted'` | `'solid'` |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| `label` | `React.ReactNode` | — |
+| `labelPlacement` | `'start' \| 'center' \| 'end'` | `'center'` |

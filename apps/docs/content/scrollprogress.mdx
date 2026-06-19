@@ -1,0 +1,32 @@
+# ScrollProgress
+
+Thin reading-progress bar fixed to the top or bottom of the viewport. Tracks `window` scroll by default, or any scrollable element via `target` ref.
+
+## Usage
+
+```tsx
+import { ScrollProgress } from '@fxui/core';
+
+// In your layout (tracks window scroll)
+<ScrollProgress color="yellow" height={3} position="top" />
+```
+
+## Custom Container
+
+```tsx
+const ref = React.useRef(null);
+<div ref={ref} style={{ overflowY: 'scroll', height: 400 }}>
+  <ScrollProgress target={ref} color="blue" />
+  {/* content */}
+</div>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `color` | `'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple' \| 'black'` | `'yellow'` |
+| `height` | `number` (px) | `3` |
+| `position` | `'top' \| 'bottom'` | `'top'` |
+| `zIndex` | `number` | `50` |
+| `target` | `React.RefObject<HTMLElement>` | `window` |

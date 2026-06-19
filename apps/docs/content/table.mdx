@@ -1,0 +1,105 @@
+# Table
+
+Responsive data table with sortable columns, striped rows, bordered variants, and a footer. Built with native HTML table elements wrapped in a compound component API.
+
+## Usage
+
+```tsx
+import { Table } from '@fxui/core';
+
+<Table>
+  <Table.Head>
+    <Table.Row>
+      <Table.HeaderCell>Name</Table.HeaderCell>
+      <Table.HeaderCell>Role</Table.HeaderCell>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Alice</Table.Cell>
+      <Table.Cell>Admin</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+```
+
+## Variants
+
+### Default
+Clean table with a bold black header.
+
+```tsx
+<Table>...</Table>
+```
+
+### Striped
+Alternating row background for easier row scanning.
+
+```tsx
+<Table variant="striped" hoverable>...</Table>
+```
+
+### Bordered
+Every cell gets a full border.
+
+```tsx
+<Table variant="bordered">...</Table>
+```
+
+## Hoverable
+Rows highlight on hover when `hoverable` is `true`.
+
+```tsx
+<Table hoverable>...</Table>
+```
+
+## With Footer
+
+```tsx
+<Table>
+  <Table.Head>...</Table.Head>
+  <Table.Body>...</Table.Body>
+  <Table.Foot>
+    <Table.Row>
+      <Table.Cell colSpan={2}>Total</Table.Cell>
+      <Table.Cell>$56.00</Table.Cell>
+    </Table.Row>
+  </Table.Foot>
+</Table>
+```
+
+## Sortable Columns
+
+```tsx
+const [sort, setSort] = React.useState(null);
+const toggle = (col) => setSort(s => s?.col === col
+  ? { col, dir: s.dir === 'asc' ? 'desc' : 'asc' }
+  : { col, dir: 'asc' }
+);
+
+<Table.HeaderCell
+  sortable
+  sortDirection={sort?.col === 'name' ? sort.dir : null}
+  onClick={() => toggle('name')}
+>
+  Name
+</Table.HeaderCell>
+```
+
+## Props
+
+### Table
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'default' \| 'striped' \| 'bordered'` | `'default'` |
+| `hoverable` | `boolean` | `false` |
+| `stickyHeader` | `boolean` | `false` |
+| `caption` | `string` | — |
+
+### Table.HeaderCell
+
+| Prop | Type | Default |
+|------|------|---------|
+| `sortable` | `boolean` | `false` |
+| `sortDirection` | `'asc' \| 'desc' \| null` | `null` |

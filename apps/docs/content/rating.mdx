@@ -1,0 +1,54 @@
+# Rating
+
+Interactive star rating with full and half-star precision, custom colors, read-only mode, and keyboard navigation. No external dependencies.
+
+## Usage
+
+```tsx
+import { Rating } from '@fxui/core';
+
+const [value, setValue] = React.useState(3);
+
+<Rating value={value} onChange={setValue} />
+```
+
+## Half-Star Precision
+
+```tsx
+<Rating value={3.5} onChange={setValue} precision="half" />
+```
+
+## Read-Only
+
+```tsx
+<Rating value={4.5} readOnly precision="half" />
+```
+
+## Custom Color and Max
+
+```tsx
+<Rating value={7} onChange={setValue} max={10} color="#FF2D78" />
+```
+
+## Sizes
+
+```tsx
+<Rating size="sm" defaultValue={3} />
+<Rating size="md" defaultValue={3} />
+<Rating size="lg" defaultValue={3} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `number` | — |
+| `defaultValue` | `number` | `0` |
+| `onChange` | `(v: number) => void` | — |
+| `max` | `number` | `5` |
+| `precision` | `'full' \| 'half'` | `'full'` |
+| `readOnly` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `color` | `string` | `'#FFE500'` |
+| `label` | `string` | — |

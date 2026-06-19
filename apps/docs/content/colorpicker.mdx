@@ -1,0 +1,24 @@
+# ColorPicker
+
+Color input combining a native `<input type="color">`, text input, and preset swatches. Supports HEX, RGB, and HSL output formats.
+
+## Usage
+
+```tsx
+import { ColorPicker } from '@fxui/core';
+
+<ColorPicker label="Brand Color" defaultValue="#FFE500" onChange={(hex) => setColor(hex)} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` (hex) | — |
+| `defaultValue` | `string` | `'#FFE500'` |
+| `onChange` | `(hex: string, formatted: string) => void` | — |
+| `format` | `'hex' \| 'rgb' \| 'hsl'` | `'hex'` |
+| `presets` | `string[]` | FXUI token colors |
+| `showPresets` | `boolean` | `true` |
+| `showInput` | `boolean` | `true` |
+| `label` | `string` | — |

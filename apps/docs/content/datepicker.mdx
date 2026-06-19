@@ -1,0 +1,81 @@
+# DatePicker
+
+Calendar popover for selecting a single date. Built on `@radix-ui/react-popover` with a custom calendar grid. Supports min/max constraints, clearable selection, and controlled mode.
+
+## Usage
+
+```tsx
+import { DatePicker } from '@fxui/core';
+
+<DatePicker label="Date" placeholder="Pick a date" />
+```
+
+## Default Value
+
+```tsx
+<DatePicker
+  label="Start date"
+  defaultValue={new Date(2025, 5, 15)}
+/>
+```
+
+## Min / Max Date
+
+```tsx
+const today = new Date();
+const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+<DatePicker
+  label="Booking date"
+  minDate={today}
+  maxDate={nextMonth}
+  hint="Available for the next 30 days"
+/>
+```
+
+Days outside the range are rendered disabled and unclickable.
+
+## Controlled
+
+```tsx
+const [date, setDate] = React.useState<Date | null>(null);
+
+<DatePicker
+  label="Event date"
+  value={date}
+  onChange={setDate}
+  placeholder="Select date…"
+/>
+```
+
+## Clearable
+
+Clearable is on by default. Click the × in the trigger to clear the value.
+
+```tsx
+<DatePicker clearable={false} />  {/* hides × button */}
+```
+
+## Date Range (two pickers)
+
+```tsx
+<DatePicker label="Check in" placeholder="Arrival…" />
+<DatePicker label="Check out" placeholder="Departure…" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `Date \| null` | — |
+| `defaultValue` | `Date \| null` | `null` |
+| `onChange` | `(date: Date \| null) => void` | — |
+| `minDate` | `Date` | — |
+| `maxDate` | `Date` | — |
+| `placeholder` | `string` | `'Pick a date'` |
+| `clearable` | `boolean` | `true` |
+| `disabled` | `boolean` | `false` |
+| `invalid` | `boolean` | `false` |
+| `label` | `string` | — |
+| `hint` | `string` | — |
+| `error` | `string` | — |

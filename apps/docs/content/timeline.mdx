@@ -1,0 +1,73 @@
+# Timeline
+
+Vertical timeline for displaying chronological events, deployment logs, activity feeds, or order tracking steps. Each item supports a title, optional description, date, icon, and semantic variant color.
+
+## Usage
+
+```tsx
+import { Timeline } from '@fxui/core';
+
+<Timeline
+  items={[
+    { title: 'Order placed', date: 'Jan 10', description: 'Order #4521 confirmed.' },
+    { title: 'Shipped', date: 'Jan 12', variant: 'success' },
+    { title: 'Delivered', date: 'Jan 14', variant: 'success' },
+  ]}
+/>
+```
+
+## Item Variants
+
+Each item can have a colored dot:
+
+```tsx
+{ title: 'Tests passed', variant: 'success' }
+{ title: 'Build failed', variant: 'error' }
+{ title: 'Processing', variant: 'info' }
+{ title: 'Awaiting approval', variant: 'warning' }
+{ title: 'Step completed', variant: 'default' }   // black dot
+```
+
+## With Icons
+
+Pass any emoji or React node as `icon` for a square icon badge instead of a dot:
+
+```tsx
+<Timeline
+  items={[
+    { title: 'Order placed', icon: '🛒' },
+    { title: 'Shipped', icon: '📦', variant: 'success' },
+    { title: 'Delivered', icon: '✓', variant: 'success' },
+  ]}
+/>
+```
+
+## Activity Feed
+
+```tsx
+<Timeline
+  items={[
+    { title: 'Alice commented on PR #42', date: 'Just now' },
+    { title: 'Bob merged feature/nav', date: '5 min ago', variant: 'success' },
+    { title: 'CI pipeline failed', date: '12 min ago', variant: 'error' },
+  ]}
+/>
+```
+
+## Item Type
+
+```ts
+interface TimelineItem {
+  title: string;
+  description?: string;
+  date?: string;
+  icon?: React.ReactNode;
+  variant?: 'default' | 'success' | 'warning' | 'error' | 'info';
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `items` | `TimelineItem[]` | **required** |

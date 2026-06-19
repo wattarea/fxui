@@ -1,0 +1,100 @@
+# QRCode
+
+Generates a QR code from any string (URL, text, vCard, etc.) as an inline SVG. Uses the `qrcode` package.
+
+## Import
+
+```tsx
+import { QRCode } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<QRCode value="https://fxui.dev" />
+```
+
+## With Label
+
+```tsx
+<QRCode value="https://fxui.dev" label="fxui.dev" />
+```
+
+## Size
+
+```tsx
+<QRCode value="https://fxui.dev" size={100} />
+<QRCode value="https://fxui.dev" size={200} />  {/* default */}
+<QRCode value="https://fxui.dev" size={300} />
+```
+
+## Custom Colors
+
+```tsx
+<QRCode
+  value="https://fxui.dev"
+  foreground="#0a0a0a"
+  background="#FFE500"
+/>
+
+{/* Inverted */}
+<QRCode
+  value="https://fxui.dev"
+  foreground="#fafafa"
+  background="#0a0a0a"
+/>
+```
+
+## Error Correction Level
+
+```tsx
+{/* Higher levels allow more of the QR to be obscured (e.g. by a logo) */}
+<QRCode value="https://fxui.dev" errorLevel="L" />  {/* 7% */}
+<QRCode value="https://fxui.dev" errorLevel="M" />  {/* 15% — default */}
+<QRCode value="https://fxui.dev" errorLevel="Q" />  {/* 25% */}
+<QRCode value="https://fxui.dev" errorLevel="H" />  {/* 30% */}
+```
+
+## With Logo
+
+```tsx
+<QRCode
+  value="https://fxui.dev"
+  errorLevel="H"
+  logo="/logo.png"
+  logoSize={40}
+/>
+```
+
+## No Border
+
+```tsx
+<QRCode value="https://fxui.dev" bordered={false} />
+```
+
+## Non-URL Content
+
+```tsx
+{/* Plain text */}
+<QRCode value="Hello, World!" />
+
+{/* Email */}
+<QRCode value="mailto:hello@fxui.dev" />
+
+{/* vCard */}
+<QRCode value={`BEGIN:VCARD\nFN:FXUI\nURL:https://fxui.dev\nEND:VCARD`} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` | **required** |
+| `size` | `number` | `200` |
+| `errorLevel` | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'` |
+| `foreground` | `string` | `'#0a0a0a'` |
+| `background` | `string` | `'#fafafa'` |
+| `label` | `string` | — |
+| `logo` | `string` | — |
+| `logoSize` | `number` | `36` |
+| `bordered` | `boolean` | `true` |

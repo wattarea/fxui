@@ -1,0 +1,86 @@
+# Getting Started
+
+FXUI is a Neo-brutalist React component library built with TypeScript, Tailwind CSS, and Radix UI.
+
+## Installation
+
+Install the package and its peer dependencies:
+
+```bash
+pnpm add @fxui/core
+# or
+npm install @fxui/core
+# or
+yarn add @fxui/core
+```
+
+## Setup Tailwind CSS
+
+Add the FXUI package to your Tailwind `content` array so utility classes are included in your bundle:
+
+```typescript
+// tailwind.config.ts
+import type { Config } from 'tailwindcss';
+
+export default {
+  content: [
+    './src/**/*.{ts,tsx}',
+    './node_modules/@fxui/core/dist/**/*.js', // Add this
+  ],
+  // ... rest of config
+} satisfies Config;
+```
+
+## Import Styles
+
+Import the FXUI stylesheet in your root layout or `_app.tsx`:
+
+```typescript
+import '@fxui/core/styles';
+```
+
+## Quick Start
+
+```tsx
+import { Button, Card, Input } from '@fxui/core';
+import '@fxui/core/styles';
+
+export default function App() {
+  return (
+    <Card variant="elevated" className="w-96">
+      <Card.Header>Create Account</Card.Header>
+      <Card.Body className="space-y-4">
+        <Input label="Email" type="email" placeholder="you@example.com" />
+        <Input label="Password" type="password" placeholder="••••••••" />
+      </Card.Body>
+      <Card.Footer>
+        <Button variant="default" className="w-full">Sign Up</Button>
+      </Card.Footer>
+    </Card>
+  );
+}
+```
+
+## TypeScript
+
+FXUI is written in TypeScript and ships with full type definitions. No `@types` package needed.
+
+## Dark Mode
+
+FXUI supports dark mode via Tailwind's `dark:` prefix. To enable it, add `class` strategy to your Tailwind config:
+
+```typescript
+// tailwind.config.ts
+export default {
+  darkMode: 'class',
+  // ...
+}
+```
+
+Then toggle the `dark` class on the `<html>` element:
+
+```typescript
+document.documentElement.classList.toggle('dark');
+```
+
+In dark mode, all FXUI shadows use `#fafafa` instead of `#0a0a0a`.

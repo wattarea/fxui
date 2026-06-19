@@ -1,0 +1,69 @@
+# Switch
+
+A toggle switch built on Radix UI Switch with smooth animation and optional label/description.
+
+## Import
+
+```tsx
+import { Switch } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Switch label="Enable notifications" />
+```
+
+## With Description
+
+```tsx
+<Switch
+  label="Dark mode"
+  description="Switch between light and dark theme."
+/>
+```
+
+## Default On
+
+```tsx
+<Switch label="Already enabled" defaultChecked />
+```
+
+## Controlled
+
+```tsx
+const [enabled, setEnabled] = React.useState(false);
+
+<Switch
+  label="Controlled switch"
+  checked={enabled}
+  onCheckedChange={setEnabled}
+/>
+```
+
+## Without Label
+
+```tsx
+<Switch aria-label="Toggle feature" />
+```
+
+## Disabled
+
+```tsx
+<Switch label="Not available" disabled />
+<Switch label="Locked on" disabled defaultChecked />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Label rendered next to the switch |
+| `description` | `string` | — | Supporting text below the label |
+| `checked` | `boolean` | — | Controlled checked state |
+| `defaultChecked` | `boolean` | `false` | Uncontrolled initial state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | Called when state changes |
+| `disabled` | `boolean` | `false` | Disables interaction |
+| `className` | `string` | — | Additional Tailwind classes on the root element |
+
+Extends `@radix-ui/react-switch` Root props.

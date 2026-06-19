@@ -1,0 +1,76 @@
+# DropdownMenu
+
+Trigger-activated dropdown with items, groups, separators, shortcuts, checkbox items, radio groups, and nested submenus. Built on `@radix-ui/react-dropdown-menu`.
+
+## Usage
+
+```tsx
+import { DropdownMenu } from '@fxui/core';
+
+<DropdownMenu>
+  <DropdownMenu.Trigger asChild>
+    <Button>Options</Button>
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Item icon="✏️" shortcut="⌘E">Edit</DropdownMenu.Item>
+    <DropdownMenu.Item icon="📋">Duplicate</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item icon="🗑️" destructive>Delete</DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu>
+```
+
+## With Groups and Labels
+
+```tsx
+<DropdownMenu.Content>
+  <DropdownMenu.Label>My Account</DropdownMenu.Label>
+  <DropdownMenu.Item icon="👤">Profile</DropdownMenu.Item>
+  <DropdownMenu.Item icon="⚙️">Settings</DropdownMenu.Item>
+  <DropdownMenu.Separator />
+  <DropdownMenu.Item icon="🚪" destructive>Log out</DropdownMenu.Item>
+</DropdownMenu.Content>
+```
+
+## Checkbox Items
+
+```tsx
+const [grid, setGrid] = React.useState(true);
+
+<DropdownMenu.CheckboxItem checked={grid} onCheckedChange={setGrid}>
+  Show Grid
+</DropdownMenu.CheckboxItem>
+```
+
+## Radio Group
+
+```tsx
+const [theme, setTheme] = React.useState('system');
+
+<DropdownMenu.RadioGroup value={theme} onValueChange={setTheme}>
+  <DropdownMenu.RadioItem value="light">Light</DropdownMenu.RadioItem>
+  <DropdownMenu.RadioItem value="dark">Dark</DropdownMenu.RadioItem>
+  <DropdownMenu.RadioItem value="system">System</DropdownMenu.RadioItem>
+</DropdownMenu.RadioGroup>
+```
+
+## Submenu
+
+```tsx
+<DropdownMenu.Sub>
+  <DropdownMenu.SubTrigger>Open recent</DropdownMenu.SubTrigger>
+  <DropdownMenu.SubContent>
+    <DropdownMenu.Item>index.tsx</DropdownMenu.Item>
+    <DropdownMenu.Item>package.json</DropdownMenu.Item>
+  </DropdownMenu.SubContent>
+</DropdownMenu.Sub>
+```
+
+## Item Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `icon` | `React.ReactNode` | — |
+| `shortcut` | `string` | — |
+| `destructive` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |

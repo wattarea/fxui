@@ -1,0 +1,59 @@
+# Checkbox
+
+A custom styled checkbox built on Radix UI Checkbox with Neo-brutalist aesthetics.
+
+## Import
+
+```tsx
+import { Checkbox } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Checkbox label="Accept terms and conditions" />
+```
+
+## Without Label
+
+```tsx
+<Checkbox aria-label="Select item" />
+```
+
+## Default Checked
+
+```tsx
+<Checkbox label="Remember me" defaultChecked />
+```
+
+## Controlled
+
+```tsx
+const [checked, setChecked] = React.useState(false);
+
+<Checkbox
+  label="Controlled checkbox"
+  checked={checked}
+  onCheckedChange={setChecked}
+/>
+```
+
+## Disabled
+
+```tsx
+<Checkbox label="Not available" disabled />
+<Checkbox label="Locked on" disabled defaultChecked />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Label rendered next to the checkbox |
+| `checked` | `boolean` | — | Controlled checked state |
+| `defaultChecked` | `boolean` | `false` | Uncontrolled initial state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | Called when state changes |
+| `disabled` | `boolean` | `false` | Disables interaction |
+| `className` | `string` | — | Additional Tailwind classes on the root element |
+
+Extends `@radix-ui/react-checkbox` Root props.

@@ -1,0 +1,35 @@
+# SplitLayout
+
+Resizable two-pane layout with a draggable divider. Supports horizontal (left/right) and vertical (top/bottom) splits. Drag the divider to resize — uses mouse and touch events.
+
+## Usage
+
+```tsx
+import { SplitLayout } from '@fxui/core';
+
+<SplitLayout direction="horizontal" defaultSplit={40}>
+  <div>Left panel content</div>
+  <div>Right panel content</div>
+</SplitLayout>
+```
+
+## Vertical Split
+
+```tsx
+<SplitLayout direction="vertical" defaultSplit={50}>
+  <div>Top</div>
+  <div>Bottom</div>
+</SplitLayout>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| `defaultSplit` | `number` (%) | `50` |
+| `minSize` | `number` (%) | `10` |
+| `maxSize` | `number` (%) | `90` |
+| `dividerSize` | `number` (px) | `6` |
+
+Accepts exactly **2 children** — the first fills the primary pane, the second fills the remainder.

@@ -1,0 +1,31 @@
+# HoverCard
+
+Rich preview card that appears on hover. Built on `@radix-ui/react-hover-card` with configurable open/close delays and placement.
+
+## Usage
+
+```tsx
+import { HoverCard } from '@fxui/core';
+
+<HoverCard
+  trigger={<a href="#">@selman</a>}
+  side="bottom"
+  openDelay={300}
+>
+  <div className="p-4 w-64">
+    <p className="font-bold">Alex Johnson</p>
+    <p className="text-sm text-gray-400">Building FXUI</p>
+  </div>
+</HoverCard>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `trigger` | `React.ReactNode` | **required** |
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` |
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` |
+| `sideOffset` | `number` | `8` |
+| `openDelay` | `number` (ms) | `300` |
+| `closeDelay` | `number` (ms) | `150` |

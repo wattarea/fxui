@@ -1,0 +1,70 @@
+# Blockquote
+
+Styled `<blockquote>` with a thick left border accent in FXUI brand colors. Supports an optional author byline and source link.
+
+## Usage
+
+```tsx
+import { Blockquote } from '@fxui/core';
+
+<Blockquote author="Steve Jobs">
+  Design is not just what it looks like. Design is how it works.
+</Blockquote>
+```
+
+## Variants
+
+The `variant` controls the left border color:
+
+```tsx
+<Blockquote variant="default">Default (black border)</Blockquote>
+<Blockquote variant="yellow">Yellow accent</Blockquote>
+<Blockquote variant="pink">Pink accent</Blockquote>
+<Blockquote variant="green">Green accent</Blockquote>
+<Blockquote variant="blue">Blue accent</Blockquote>
+<Blockquote variant="purple">Purple accent</Blockquote>
+```
+
+## Sizes
+
+```tsx
+<Blockquote size="sm">Small quote for sidebars</Blockquote>
+<Blockquote size="md">Medium — default body text size</Blockquote>
+<Blockquote size="lg">Large pull quote for hero sections</Blockquote>
+```
+
+## With Author and Source
+
+```tsx
+<Blockquote
+  variant="blue"
+  size="lg"
+  author="Donald Knuth"
+  cite="https://example.com/source"
+>
+  Programs are meant to be read by humans and only incidentally for computers to execute.
+</Blockquote>
+```
+
+When `cite` is provided alongside `author`, a small `↗` link appears after the author name.
+
+## In an Article
+
+```tsx
+<p>Neo-brutalism emerged as a reaction to polished minimalism.</p>
+
+<Blockquote variant="yellow" size="lg">
+  Brutal interfaces are honest interfaces.
+</Blockquote>
+
+<p>This manifests in thick borders, raw shadows, and high-contrast palettes.</p>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'default' \| 'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple'` | `'default'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `author` | `string` | — |
+| `cite` | `string` (URL) | — |

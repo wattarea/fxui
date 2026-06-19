@@ -1,0 +1,52 @@
+# SparkLine
+
+Compact inline chart for embedding in tables, stat cards, and KPI dashboards. Auto-colors based on trend direction.
+
+## Usage
+
+```tsx
+import { SparkLine } from '@fxui/core';
+
+<SparkLine data={[12, 18, 15, 22, 19, 28]} />
+```
+
+## With Trend Indicator
+
+```tsx
+<SparkLine data={[12, 18, 15, 22, 28]} showTrend />
+```
+
+Trend is auto-detected: if last value > first value → `up` (green), else → `down` (pink), else → `neutral` (gray).
+
+## Area Variant
+
+```tsx
+<SparkLine data={[12, 18, 15, 22, 28]} variant="area" />
+```
+
+## In a Table
+
+```tsx
+<td>
+  <SparkLine data={row.history} variant="area" width={80} height={28} />
+</td>
+```
+
+## Custom Color
+
+```tsx
+<SparkLine data={data} color="#7C3AED" width={100} height={36} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `data` | `number[]` | **required** |
+| `variant` | `'line' \| 'area'` | `'line'` |
+| `width` | `number` | `80` |
+| `height` | `number` | `32` |
+| `color` | `string` | auto from trend |
+| `trend` | `'up' \| 'down' \| 'neutral'` | auto-detected |
+| `showTrend` | `boolean` | `false` |
+| `showTooltip` | `boolean` | `false` |

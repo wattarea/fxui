@@ -1,0 +1,87 @@
+# Popover
+
+A floating panel built on Radix UI Popover. Use for contextual menus, mini-forms, or additional info.
+
+## Import
+
+```tsx
+import { Popover } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Popover>
+  <Popover.Trigger>
+    <Button>Open</Button>
+  </Popover.Trigger>
+  <Popover.Content>
+    <p className="font-bold text-sm">Title</p>
+    <p className="text-sm text-gray-500">Supporting content goes here.</p>
+  </Popover.Content>
+</Popover>
+```
+
+## Placements
+
+```tsx
+<Popover.Content side="top" />
+<Popover.Content side="bottom" />   {/* default */}
+<Popover.Content side="left" />
+<Popover.Content side="right" />
+
+{/* Fine-tune alignment */}
+<Popover.Content side="bottom" align="start" />
+<Popover.Content side="bottom" align="center" />
+<Popover.Content side="bottom" align="end" />
+```
+
+## With Arrow
+
+```tsx
+<Popover.Content showArrow>...</Popover.Content>
+```
+
+## With Form (close on submit)
+
+```tsx
+<Popover>
+  <Popover.Trigger><Button>Edit</Button></Popover.Trigger>
+  <Popover.Content className="w-64">
+    <input className="..." />
+    <Popover.Close asChild>
+      <Button size="sm">Apply</Button>
+    </Popover.Close>
+  </Popover.Content>
+</Popover>
+```
+
+## Controlled
+
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<Popover open={open} onOpenChange={setOpen}>
+  ...
+</Popover>
+```
+
+## API Reference
+
+### Popover
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Called on state change |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled initial state |
+
+### Popover.Content
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Preferred side |
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` | Alignment along side |
+| `sideOffset` | `number` | `6` | Distance from trigger in px |
+| `showArrow` | `boolean` | `false` | Show directional arrow |
+| `className` | `string` | — | Additional Tailwind classes |

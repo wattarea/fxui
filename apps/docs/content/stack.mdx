@@ -1,0 +1,62 @@
+# Stack
+
+Flex container shorthand for building consistent vertical or horizontal layouts with a single gap value. Commonly used for form fields, card content, and navigation lists.
+
+## Usage
+
+```tsx
+import { Stack } from '@fxui/core';
+
+{/* Vertical (default) */}
+<Stack gap="4">
+  <Input label="Name" />
+  <Input label="Email" />
+  <Button>Submit</Button>
+</Stack>
+```
+
+## Direction
+
+```tsx
+<Stack direction="col">...</Stack>      {/* default */}
+<Stack direction="row">...</Stack>
+<Stack direction="row-reverse">...</Stack>
+<Stack direction="col-reverse">...</Stack>
+```
+
+## Alignment
+
+```tsx
+<Stack direction="row" align="center" justify="between">
+  <Logo />
+  <NavLinks />
+</Stack>
+```
+
+`align` → `items-*` (cross axis), `justify` → `justify-*` (main axis).
+
+## Gap Values
+
+`'0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | '10' | '12'` — maps to Tailwind `gap-*`.
+
+```tsx
+<Stack gap="6">...</Stack>
+```
+
+## Wrapping
+
+```tsx
+<Stack direction="row" wrap gap="2">
+  {tags.map(t => <Tag key={t}>{t}</Tag>)}
+</Stack>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `direction` | `'row' \| 'col' \| 'row-reverse' \| 'col-reverse'` | `'col'` |
+| `gap` | `'0'–'12'` | `'4'` |
+| `align` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'stretch'` |
+| `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | `'start'` |
+| `wrap` | `boolean` | `false` |

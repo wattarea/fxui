@@ -1,0 +1,36 @@
+# CheckboxGroup
+
+Grouped checkboxes with optional "Select all" master toggle, descriptions, and validation.
+
+## Usage
+
+```tsx
+import { CheckboxGroup } from '@fxui/core';
+
+<CheckboxGroup
+  label="Frameworks"
+  options={[
+    { value: 'react', label: 'React', description: 'UI library' },
+    { value: 'vue', label: 'Vue', description: 'Progressive framework' },
+  ]}
+  selectAll
+  defaultValue={['react']}
+  onChange={(selected) => console.log(selected)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `options` | `CheckboxGroupOption[]` | **required** |
+| `value` | `string[]` | — |
+| `defaultValue` | `string[]` | `[]` |
+| `onChange` | `(value: string[]) => void` | — |
+| `label` | `string` | — |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` |
+| `selectAll` | `boolean` | `false` |
+| `selectAllLabel` | `string` | `'Select all'` |
+| `error` | `string` | — |
+| `hint` | `string` | — |
+| `disabled` | `boolean` | `false` |

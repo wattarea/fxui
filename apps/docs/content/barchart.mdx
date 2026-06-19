@@ -1,0 +1,49 @@
+# BarChart
+
+Vertical and horizontal bar chart with grouped and stacked variants. Built on [recharts](https://recharts.org).
+
+## Usage
+
+```tsx
+import { BarChart } from '@fxui/core';
+
+const data = [
+  { label: 'Mon', sales: 240, returns: 40 },
+  { label: 'Tue', sales: 380, returns: 60 },
+];
+
+<BarChart
+  data={data}
+  series={[
+    { key: 'sales', label: 'Sales' },
+    { key: 'returns', label: 'Returns' },
+  ]}
+/>
+```
+
+## Stacked
+
+```tsx
+<BarChart data={data} series={series} stacked />
+```
+
+## Horizontal
+
+```tsx
+<BarChart data={data} series={series} orientation="horizontal" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `data` | `Record<string, string \| number>[]` | **required** |
+| `series` | `ChartSeries[]` | **required** |
+| `xKey` | `string` | `'label'` |
+| `height` | `number` | `300` |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` |
+| `stacked` | `boolean` | `false` |
+| `radius` | `number` | `2` |
+| `showGrid` | `boolean` | `true` |
+| `showLegend` | `boolean` | `true` |
+| `showTooltip` | `boolean` | `true` |

@@ -1,0 +1,48 @@
+# Chip
+
+Compact interactive label with optional icon, close button, and selectable state. Distinct from Tag — Chip uses `rounded-full` and supports interactivity patterns like selection and removal.
+
+## Usage
+
+```tsx
+import { Chip } from '@fxui/core';
+
+<Chip>Design</Chip>
+<Chip variant="yellow" icon="⚡">Fast</Chip>
+```
+
+## Closeable
+
+```tsx
+<Chip onClose={() => removeTag(id)}>React</Chip>
+```
+
+## Selectable
+
+```tsx
+<Chip
+  onClick={() => toggle(tag)}
+  selected={isSelected}
+  variant={isSelected ? 'filled' : 'default'}
+  interactive
+>
+  {tag}
+</Chip>
+```
+
+## Variants
+
+`default` · `filled` · `yellow` · `pink` · `green` · `blue` · `purple`
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `string` | `'default'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `icon` | `React.ReactNode` | — |
+| `onClose` | `() => void` | — |
+| `onClick` | `() => void` | — |
+| `selected` | `boolean` | `false` |
+| `interactive` | `boolean` | `false` |
+| `closeLabel` | `string` | `'Remove'` |

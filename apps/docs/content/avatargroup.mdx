@@ -1,0 +1,89 @@
+# AvatarGroup
+
+Displays a stack of overlapping avatars from an array. Shows an overflow badge when the count exceeds `max`.
+
+## Import
+
+```tsx
+import { AvatarGroup } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<AvatarGroup
+  avatars={[
+    { name: 'Alice Kim' },
+    { name: 'Bob Chen' },
+    { name: 'Cara Davis' },
+  ]}
+/>
+```
+
+## With Images
+
+```tsx
+<AvatarGroup
+  avatars={[
+    { name: 'Alice', src: '/avatars/alice.jpg' },
+    { name: 'Bob', src: '/avatars/bob.jpg' },
+    { name: 'Cara', src: '/avatars/cara.jpg' },
+  ]}
+/>
+```
+
+## Overflow Badge
+
+```tsx
+<AvatarGroup
+  avatars={teamMembers}
+  max={4}
+/>
+```
+
+## Color Accents
+
+```tsx
+<AvatarGroup
+  avatars={[
+    { name: 'Alice', color: 'yellow' },
+    { name: 'Bob', color: 'pink' },
+    { name: 'Cara', color: 'green' },
+    { name: 'Dan', color: 'blue' },
+  ]}
+/>
+```
+
+## Spacing
+
+```tsx
+<AvatarGroup avatars={members} spacing="tight" />
+<AvatarGroup avatars={members} spacing="normal" />
+<AvatarGroup avatars={members} spacing="loose" />
+```
+
+## Sizes
+
+```tsx
+<AvatarGroup avatars={members} size="sm" />
+<AvatarGroup avatars={members} size="md" />
+<AvatarGroup avatars={members} size="lg" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `avatars` | `AvatarItem[]` | **required** |
+| `max` | `number` | `5` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `spacing` | `'tight' \| 'normal' \| 'loose'` | `'normal'` |
+| `showTooltip` | `boolean` | `true` |
+
+### AvatarItem
+
+| Field | Type |
+|-------|------|
+| `name` | `string` |
+| `src` | `string` (optional) |
+| `color` | `'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple' \| 'black' \| 'default'` |

@@ -1,0 +1,23 @@
+# Banner
+
+Full-width site-top announcement banner with dismiss support. Renders above page content as a top bar.
+
+## Usage
+
+```tsx
+import { Banner } from '@fxui/core';
+
+<Banner variant="warning" icon="⚠️" closeable>
+  Your trial expires in 3 days.
+</Banner>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'default' \| 'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple' \| 'warning' \| 'error' \| 'success' \| 'info'` | `'default'` |
+| `icon` | `React.ReactNode` | auto by variant |
+| `action` | `React.ReactNode` | — |
+| `closeable` | `boolean` | `false` |
+| `onClose` | `() => void` | — |

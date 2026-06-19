@@ -1,0 +1,32 @@
+# ConfirmDialog
+
+Alert dialog built on `@radix-ui/react-alert-dialog`. Focuses the confirm button and traps keyboard focus for accessibility.
+
+## Usage
+
+```tsx
+import { ConfirmDialog } from '@fxui/core';
+
+<ConfirmDialog
+  title="Delete File?"
+  description="This cannot be undone."
+  confirmLabel="Delete"
+  onConfirm={() => deleteFile()}
+  destructive
+  trigger={<button>Delete</button>}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `title` | `string` | **required** |
+| `description` | `string` | — |
+| `confirmLabel` | `string` | `'Confirm'` |
+| `cancelLabel` | `string` | `'Cancel'` |
+| `onConfirm` | `() => void` | **required** |
+| `destructive` | `boolean` | `false` |
+| `isLoading` | `boolean` | `false` |
+| `open` | `boolean` | — |
+| `trigger` | `React.ReactNode` | — |

@@ -1,0 +1,59 @@
+# Label
+
+Form label with optional required (`*`) and optional indicators. Renders a semantic `<label>` element with `htmlFor` support.
+
+## Usage
+
+```tsx
+import { Label } from '@fxui/core';
+
+<Label htmlFor="email">Email address</Label>
+<input id="email" type="email" />
+```
+
+## Required
+
+```tsx
+<Label required htmlFor="email">Email address</Label>
+```
+
+Appends a red `*` after the label text. The asterisk has `aria-hidden="true"` — mark the input `required` separately for accessibility.
+
+## Optional
+
+```tsx
+<Label optional htmlFor="bio">Bio</Label>
+```
+
+Appends a grey `(optional)` hint.
+
+## Sizes
+
+```tsx
+<Label size="sm">Small label</Label>
+<Label size="md">Medium label</Label>   {/* default */}
+<Label size="lg">Large label</Label>
+```
+
+## In a Form
+
+```tsx
+<div className="space-y-1.5">
+  <Label required htmlFor="name">Full name</Label>
+  <Input id="name" placeholder="Alice Johnson" />
+</div>
+
+<div className="space-y-1.5">
+  <Label optional htmlFor="phone">Phone</Label>
+  <Input id="phone" placeholder="+1 (555) 000-0000" />
+</div>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `required` | `boolean` | `false` |
+| `optional` | `boolean` | `false` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `htmlFor` | `string` | — |

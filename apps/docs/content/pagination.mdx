@@ -1,0 +1,51 @@
+# Pagination
+
+Page navigation with smart ellipsis, prev/next, and optional first/last buttons.
+
+## Import
+
+```tsx
+import { Pagination } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+const [page, setPage] = React.useState(1);
+
+<Pagination
+  page={page}
+  totalPages={20}
+  onPageChange={setPage}
+/>
+```
+
+## With First/Last Buttons
+
+```tsx
+<Pagination
+  page={page}
+  totalPages={50}
+  onPageChange={setPage}
+  showFirstLast
+/>
+```
+
+## Sibling Count
+
+Controls how many pages appear on each side of the current page before the ellipsis.
+
+```tsx
+<Pagination page={page} totalPages={30} onPageChange={setPage} siblingCount={2} />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `page` | `number` | — | Current page (1-indexed) |
+| `totalPages` | `number` | — | Total number of pages |
+| `onPageChange` | `(page: number) => void` | — | Called when user changes page |
+| `siblingCount` | `number` | `1` | Pages shown on each side of current |
+| `showFirstLast` | `boolean` | `false` | Show « / » jump buttons |
+| `className` | `string` | — | Additional Tailwind classes |

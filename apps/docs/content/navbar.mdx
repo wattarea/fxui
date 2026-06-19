@@ -1,0 +1,33 @@
+# Navbar
+
+Top navigation bar with logo slot, nav items, and actions slot. Supports sticky positioning, 4 color variants, and 3 sizes.
+
+## Usage
+
+```tsx
+import { Navbar, NavbarItem } from '@fxui/core';
+
+<Navbar
+  logo={<span className="font-display font-black">FXUI</span>}
+  actions={<button>Get Started</button>}
+  sticky
+>
+  <NavbarItem href="/" active>Home</NavbarItem>
+  <NavbarItem href="/docs">Docs</NavbarItem>
+  <NavbarItem href="/blog">Blog</NavbarItem>
+</Navbar>
+```
+
+## Variants
+
+`default` · `black` · `yellow` · `blur`
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `string` | `'default'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `sticky` | `boolean` | `false` |
+| `logo` | `React.ReactNode` | — |
+| `actions` | `React.ReactNode` | — |

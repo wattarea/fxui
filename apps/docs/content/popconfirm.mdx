@@ -1,0 +1,71 @@
+# Popconfirm
+
+A lightweight inline confirmation popup, lighter than `ConfirmDialog`. Built on Radix UI Popover — no backdrop, no modal, opens next to the trigger.
+
+## Import
+
+```tsx
+import { Popconfirm } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Popconfirm
+  title="Are you sure?"
+  onConfirm={() => deleteItem()}
+  trigger={<Button variant="danger">Delete</Button>}
+/>
+```
+
+## Variants
+
+```tsx
+<Popconfirm variant="default" title="Confirm" trigger={<Button>Default</Button>} />
+<Popconfirm variant="danger"  title="Delete?" trigger={<Button>Danger</Button>} />
+<Popconfirm variant="warning" title="Leave?"  trigger={<Button>Warning</Button>} />
+```
+
+## With Description
+
+```tsx
+<Popconfirm
+  variant="danger"
+  title="Delete account?"
+  description="All your data will be permanently removed."
+  confirmText="Delete"
+  cancelText="Cancel"
+  onConfirm={handleDelete}
+  trigger={<Button>Delete account</Button>}
+/>
+```
+
+## Placement
+
+```tsx
+<Popconfirm title="Confirm" side="top"    trigger={<Button>Top</Button>} />
+<Popconfirm title="Confirm" side="bottom" trigger={<Button>Bottom</Button>} />
+<Popconfirm title="Confirm" side="left"   trigger={<Button>Left</Button>} />
+<Popconfirm title="Confirm" side="right"  trigger={<Button>Right</Button>} />
+```
+
+## Disabled
+
+```tsx
+<Popconfirm title="Won't open" disabled trigger={<Button>Disabled</Button>} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `trigger` | `ReactNode` | **required** |
+| `title` | `string` | **required** |
+| `description` | `string` | — |
+| `variant` | `'default' \| 'danger' \| 'warning'` | `'default'` |
+| `confirmText` | `string` | `'Confirm'` |
+| `cancelText` | `string` | `'Cancel'` |
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` |
+| `disabled` | `boolean` | `false` |
+| `onConfirm` | `() => void` | — |
+| `onCancel` | `() => void` | — |

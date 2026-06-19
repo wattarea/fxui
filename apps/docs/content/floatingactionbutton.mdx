@@ -1,0 +1,48 @@
+# FloatingActionButton
+
+Fixed-position primary action button. Supports circle, pill, and square shapes with fixed corner positioning or static placement.
+
+## Usage
+
+```tsx
+import { FloatingActionButton } from '@fxui/core';
+
+// Fixed to bottom-right (default usage)
+<FloatingActionButton
+  icon="+"
+  label="Add item"
+  position="bottom-right"
+/>
+```
+
+## Pill with Label
+
+```tsx
+<FloatingActionButton
+  icon="✎"
+  label="Edit Mode"
+  shape="pill"
+  variant="yellow"
+  position="bottom-right"
+/>
+```
+
+## Variants
+
+`default` (black) · `yellow` · `pink` · `green` · `blue` · `purple` · `white`
+
+## Shapes
+
+`circle` · `pill` · `square`
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `icon` | `React.ReactNode` | **required** |
+| `label` | `string` | — |
+| `variant` | `string` | `'default'` |
+| `shape` | `'circle' \| 'pill' \| 'square'` | `'circle'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `position` | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left' \| 'static'` | `'static'` |
+| `offset` | `number` | `24` |

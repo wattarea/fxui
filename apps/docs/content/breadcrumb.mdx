@@ -1,0 +1,46 @@
+# Breadcrumb
+
+A navigation trail showing the current page location. The last item is the current page (no link).
+
+## Import
+
+```tsx
+import { Breadcrumb } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Breadcrumb
+  items={[
+    { label: 'Home', href: '/' },
+    { label: 'Docs', href: '/docs' },
+    { label: 'Button' },
+  ]}
+/>
+```
+
+## Custom Separator
+
+```tsx
+<Breadcrumb items={items} separator="›" />
+<Breadcrumb items={items} separator="→" />
+<Breadcrumb items={items} separator="/" />   {/* default */}
+```
+
+## API Reference
+
+### Breadcrumb
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `BreadcrumbItem[]` | — | Array of breadcrumb items |
+| `separator` | `ReactNode` | `'/'` | Separator between items |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### BreadcrumbItem
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `label` | `string` | Display text |
+| `href` | `string` | Link URL — omit for the current (last) page |

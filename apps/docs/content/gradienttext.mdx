@@ -1,0 +1,45 @@
+# GradientText
+
+Gradient-filled text using FXUI color tokens. Renders with `bg-clip-text` and any heading or inline element. Supports 7 gradient presets.
+
+## Usage
+
+```tsx
+import { GradientText } from '@fxui/core';
+
+<GradientText gradient="neon" as="h1" className="text-6xl font-black font-display">
+  Build Brutally Beautiful
+</GradientText>
+```
+
+## Inline in Prose
+
+```tsx
+<p className="text-xl font-sans">
+  Over{' '}
+  <GradientText gradient="electric" className="font-bold">
+    100 components
+  </GradientText>{' '}
+  in one library.
+</p>
+```
+
+## Gradients
+
+| Name | Colors |
+|------|--------|
+| `neon` | yellow → pink → purple |
+| `sunset` | yellow → pink → blue |
+| `ocean` | green → blue → purple |
+| `fire` | yellow → pink |
+| `electric` | blue → purple |
+| `lime` | green → yellow |
+| `candy` | pink → purple |
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `gradient` | `string` | `'neon'` |
+| `as` | `'span' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'p'` | `'span'` |
+| `animate` | `boolean` | `false` |

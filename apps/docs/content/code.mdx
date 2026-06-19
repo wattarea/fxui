@@ -1,0 +1,67 @@
+# Code
+
+Inline `<code>` element and block `<pre><code>` wrapper with semantic variant colors for documentation, error messages, and highlight callouts.
+
+## Usage
+
+```tsx
+import { Code } from '@fxui/core';
+
+<p>
+  Import using <Code>import {'{ Button }'} from '@fxui/core'</Code>.
+</p>
+```
+
+## Variants
+
+```tsx
+<Code variant="default">default</Code>
+<Code variant="highlight">highlight</Code>
+<Code variant="error">error message</Code>
+<Code variant="success">success output</Code>
+```
+
+- `default` — light gray background
+- `highlight` — yellow tint for callouts
+- `error` — red tint for error output
+- `success` — green tint for success output
+
+## Sizes
+
+```tsx
+<Code size="sm">small</Code>
+<Code size="md">medium</Code>  {/* default */}
+<Code size="lg">large</Code>
+```
+
+## Block Mode
+
+Use `block` for multiline code snippets:
+
+```tsx
+<Code block>
+{`import { Button } from '@fxui/core';
+
+export function App() {
+  return <Button variant="neon">Hello</Button>;
+}`}
+</Code>
+```
+
+## In Prose
+
+```tsx
+<p>
+  Run <Code>pnpm install</Code> to install dependencies.
+  If you see <Code variant="error">MODULE_NOT_FOUND</Code>,
+  try <Code variant="highlight">node --version</Code> first.
+</p>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'default' \| 'highlight' \| 'error' \| 'success'` | `'default'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `block` | `boolean` | `false` |

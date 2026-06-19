@@ -1,0 +1,92 @@
+# ComboBox
+
+Searchable select with a live-filter input inside the popover. Supports option groups, clearable selection, and controlled mode. Built on `@radix-ui/react-popover`.
+
+## Usage
+
+```tsx
+import { ComboBox } from '@fxui/core';
+
+<ComboBox
+  label="Framework"
+  options={[
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'svelte', label: 'Svelte' },
+  ]}
+  placeholder="Select framework…"
+/>
+```
+
+## Option Groups
+
+Add a `group` string to options:
+
+```tsx
+const options = [
+  { value: 'tr', label: 'Turkey',         group: 'Asia' },
+  { value: 'jp', label: 'Japan',          group: 'Asia' },
+  { value: 'de', label: 'Germany',        group: 'Europe' },
+  { value: 'fr', label: 'France',         group: 'Europe' },
+];
+
+<ComboBox label="Country" options={options} placeholder="Select country…" />
+```
+
+## Controlled
+
+```tsx
+const [value, setValue] = React.useState<string | null>(null);
+
+<ComboBox
+  options={options}
+  value={value}
+  onChange={setValue}
+  clearable
+/>
+```
+
+## Clearable
+
+```tsx
+<ComboBox options={options} defaultValue="react" clearable />
+```
+
+Clicking the × in the trigger clears the selection, calling `onChange(null)`.
+
+## Disabled Options
+
+```tsx
+const options = [
+  { value: 'a', label: 'Available' },
+  { value: 'b', label: 'Unavailable', disabled: true },
+];
+```
+
+## Props
+
+### ComboBoxOption
+
+| Field | Type | Default |
+|-------|------|---------|
+| `value` | `string` | **required** |
+| `label` | `string` | **required** |
+| `group` | `string` | — |
+| `disabled` | `boolean` | `false` |
+
+### ComboBox
+
+| Prop | Type | Default |
+|------|------|---------|
+| `options` | `ComboBoxOption[]` | **required** |
+| `value` | `string \| null` | — |
+| `defaultValue` | `string` | — |
+| `onChange` | `(value: string \| null) => void` | — |
+| `placeholder` | `string` | `'Select…'` |
+| `searchPlaceholder` | `string` | `'Search…'` |
+| `clearable` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |
+| `invalid` | `boolean` | `false` |
+| `label` | `string` | — |
+| `hint` | `string` | — |
+| `error` | `string` | — |

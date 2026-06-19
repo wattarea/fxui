@@ -1,0 +1,87 @@
+# NumberInput
+
+A numeric input with increment/decrement buttons. Supports min, max, step, label, error, and hint.
+
+## Import
+
+```tsx
+import { NumberInput } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<NumberInput label="Quantity" defaultValue={1} min={0} max={99} />
+```
+
+## With Min, Max & Step
+
+```tsx
+<NumberInput
+  label="Score"
+  defaultValue={50}
+  min={0}
+  max={100}
+  step={5}
+  hint="Adjusts in steps of 5."
+/>
+```
+
+## Decimal Step
+
+```tsx
+<NumberInput
+  label="Price"
+  defaultValue={9.99}
+  step={0.01}
+  min={0}
+/>
+```
+
+## Error
+
+```tsx
+<NumberInput
+  label="Age"
+  defaultValue={0}
+  min={18}
+  error="You must be at least 18."
+/>
+```
+
+## Controlled
+
+```tsx
+const [qty, setQty] = React.useState(1);
+
+<NumberInput
+  label="Quantity"
+  value={qty}
+  onChange={setQty}
+  min={1}
+  max={10}
+/>
+```
+
+## Disabled
+
+```tsx
+<NumberInput label="Seats" defaultValue={2} disabled />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Label above the input |
+| `error` | `string` | — | Error message |
+| `hint` | `string` | — | Helper text |
+| `value` | `number` | — | Controlled value |
+| `defaultValue` | `number` | `0` | Uncontrolled initial value |
+| `min` | `number` | — | Minimum allowed value |
+| `max` | `number` | — | Maximum allowed value |
+| `step` | `number` | `1` | Increment/decrement amount |
+| `onChange` | `(value: number) => void` | — | Called on value change |
+| `disabled` | `boolean` | `false` | Disables the input and buttons |
+
+Extends all native `<input>` HTML attributes except `type`, `value`, and `onChange`.

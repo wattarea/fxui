@@ -1,0 +1,89 @@
+# TypewriterText
+
+Cycles through an array of strings with a typewriter effect. Types forward, pauses, then deletes — then moves to the next string.
+
+## Import
+
+```tsx
+import { TypewriterText } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<TypewriterText
+  texts={['Hello, World!', 'Welcome to FXUI.', 'Build faster.']}
+  className="font-bold text-2xl"
+/>
+```
+
+## Custom Speed
+
+```tsx
+<TypewriterText
+  texts={['Fast typing...']}
+  speed={30}
+  deleteSpeed={15}
+/>
+```
+
+## Pause Duration
+
+```tsx
+{/* Pause for 3 seconds after finishing each string */}
+<TypewriterText
+  texts={['One', 'Two', 'Three']}
+  pauseMs={3000}
+/>
+```
+
+## Custom Cursor
+
+```tsx
+<TypewriterText texts={['Hello']} cursorChar="_" />
+<TypewriterText texts={['Hello']} cursorChar="▌" />
+<TypewriterText texts={['Hello']} cursorChar="●" />
+```
+
+## No Cursor
+
+```tsx
+<TypewriterText texts={['Hello']} cursor={false} />
+```
+
+## No Loop (type once)
+
+```tsx
+<TypewriterText
+  texts={['This types once and stops.']}
+  loop={false}
+  onComplete={() => console.log('done')}
+/>
+```
+
+## Hero Heading Pattern
+
+```tsx
+<h1 className="font-display font-black text-5xl">
+  Build with{' '}
+  <TypewriterText
+    texts={['speed.', 'confidence.', 'FXUI.']}
+    className="text-fx-pink"
+    cursorClassName="text-fx-pink"
+  />
+</h1>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `texts` | `string[]` | **required** |
+| `speed` | `number` (ms/char) | `60` |
+| `deleteSpeed` | `number` (ms/char) | `35` |
+| `pauseMs` | `number` | `1800` |
+| `loop` | `boolean` | `true` |
+| `cursor` | `boolean` | `true` |
+| `cursorChar` | `string` | `'\|'` |
+| `cursorClassName` | `string` | — |
+| `onComplete` | `() => void` | — |

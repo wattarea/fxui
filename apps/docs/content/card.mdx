@@ -1,0 +1,62 @@
+# Card
+
+A compound component for containing related content with optional header and footer sections.
+
+## Import
+
+```tsx
+import { Card } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Card>
+  <Card.Header>Title</Card.Header>
+  <Card.Body>Content goes here</Card.Body>
+  <Card.Footer>
+    <Button size="sm">Action</Button>
+  </Card.Footer>
+</Card>
+```
+
+## Variants
+
+```tsx
+<Card variant="default">Default — white bg with border</Card>
+<Card variant="bordered">Bordered — transparent bg</Card>
+<Card variant="elevated">Elevated — white bg + shadow</Card>
+<Card variant="neon">Neon — yellow bg</Card>
+```
+
+## Without Subcomponents
+
+You can use `Card` as a simple container:
+
+```tsx
+<Card className="p-6">
+  <h2 className="font-bold text-xl">Plain Card</h2>
+  <p>Any content works here.</p>
+</Card>
+```
+
+## API Reference
+
+### Card
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'bordered' \| 'elevated' \| 'neon'` | `'default'` | Visual style |
+| `className` | `string` | — | Additional classes |
+
+### Card.Header
+
+Renders a `<div>` with bottom border. Extends `React.HTMLAttributes<HTMLDivElement>`.
+
+### Card.Body
+
+Renders a `<div>` with standard padding. Extends `React.HTMLAttributes<HTMLDivElement>`.
+
+### Card.Footer
+
+Renders a `<div>` with top border and flex row layout. Extends `React.HTMLAttributes<HTMLDivElement>`.

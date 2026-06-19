@@ -1,0 +1,82 @@
+# InlineEdit
+
+Click-to-edit text. Shows a dashed underline and pencil icon on hover, switches to an input/textarea on click. Press **Enter** to save or **Escape** to cancel.
+
+## Import
+
+```tsx
+import { InlineEdit } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+const [value, setValue] = React.useState('Click to edit');
+
+<InlineEdit value={value} onSave={setValue} />
+```
+
+## Uncontrolled
+
+```tsx
+<InlineEdit defaultValue="Default text" onSave={(val) => console.log(val)} />
+```
+
+## Empty State
+
+```tsx
+<InlineEdit defaultValue="" emptyLabel="Add a description…" />
+```
+
+## Number Type
+
+```tsx
+<InlineEdit type="number" defaultValue="42" onSave={handleSave} />
+```
+
+## Textarea Type
+
+```tsx
+<InlineEdit
+  type="textarea"
+  defaultValue="Longer multiline content here."
+  rows={3}
+  onSave={handleSave}
+/>
+```
+
+## Keyboard
+
+- **Enter** — save (also `⌘Enter` in textarea mode)
+- **Escape** — cancel and revert
+
+## Disabled / Read-Only
+
+```tsx
+<InlineEdit defaultValue="Cannot edit" disabled />
+<InlineEdit defaultValue="No edit indicator" readOnly />
+```
+
+## Custom Styling
+
+```tsx
+<InlineEdit
+  defaultValue="Big heading"
+  className="font-display font-black text-3xl"
+  onSave={handleSave}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` | — |
+| `defaultValue` | `string` | `''` |
+| `onSave` | `(value: string) => void` | — |
+| `onCancel` | `() => void` | — |
+| `type` | `'text' \| 'number' \| 'textarea'` | `'text'` |
+| `rows` | `number` | `3` (textarea) |
+| `emptyLabel` | `string` | `'Click to edit'` |
+| `disabled` | `boolean` | `false` |
+| `readOnly` | `boolean` | `false` |

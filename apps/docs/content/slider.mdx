@@ -1,0 +1,88 @@
+# Slider
+
+A range input built on Radix UI Slider. Supports single value, range (two thumbs), steps, and custom value formatting.
+
+## Import
+
+```tsx
+import { Slider } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Slider label="Volume" defaultValue={[40]} showValue />
+```
+
+## Range (Two Thumbs)
+
+```tsx
+<Slider
+  label="Price range"
+  defaultValue={[20, 80]}
+  showValue
+  formatValue={(v) => `$${v}`}
+/>
+```
+
+## Custom Step
+
+```tsx
+<Slider
+  label="Rating"
+  defaultValue={[3]}
+  min={1}
+  max={5}
+  step={1}
+  showValue
+/>
+```
+
+## Custom Format
+
+```tsx
+<Slider
+  label="Brightness"
+  defaultValue={[70]}
+  showValue
+  formatValue={(v) => `${v}%`}
+  hint="Adjust display brightness."
+/>
+```
+
+## Controlled
+
+```tsx
+const [value, setValue] = React.useState([50]);
+
+<Slider
+  label="Value"
+  value={value}
+  onValueChange={setValue}
+  showValue
+/>
+```
+
+## Disabled
+
+```tsx
+<Slider label="Locked" defaultValue={[50]} disabled />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Label above the slider |
+| `hint` | `string` | — | Helper text below |
+| `showValue` | `boolean` | `false` | Show current value badge |
+| `formatValue` | `(v: number) => string` | `String` | Value display formatter |
+| `value` | `number[]` | — | Controlled value |
+| `defaultValue` | `number[]` | `[min]` | Uncontrolled initial value |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step size |
+| `onValueChange` | `(value: number[]) => void` | — | Called on change |
+| `disabled` | `boolean` | `false` | Disables the slider |
+
+Extends `@radix-ui/react-slider` Root props.

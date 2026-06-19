@@ -1,0 +1,30 @@
+# TreeView
+
+File-explorer-style collapsible tree with keyboard navigation, selection, and custom icons. Accessible via `role="tree"` / `role="treeitem"`.
+
+## Usage
+
+```tsx
+import { TreeView } from '@fxui/core';
+
+<TreeView
+  nodes={[
+    { id: 'src', label: 'src', children: [
+      { id: 'index.ts', label: 'index.ts' },
+    ]},
+  ]}
+  defaultExpanded={['src']}
+  onSelect={(id, node) => console.log(id)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `nodes` | `TreeViewNode[]` | **required** |
+| `defaultExpanded` | `string[]` | `[]` |
+| `defaultSelected` | `string` | — |
+| `onSelect` | `(id, node) => void` | — |
+| `onExpand` | `(id, expanded) => void` | — |
+| `selectable` | `boolean` | `true` |

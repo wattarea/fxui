@@ -1,0 +1,112 @@
+# ThemeProvider
+
+Manages dark mode and CSS token overrides for your entire app. Wraps children in a div that carries the `dark` class, activating all `dark:` Tailwind utilities.
+
+## Import
+
+```tsx
+import { ThemeProvider, useTheme } from '@fxui/core';
+```
+
+## Setup
+
+Wrap your app root (e.g. `layout.tsx`) with `ThemeProvider`:
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <ThemeProvider defaultColorMode="system">
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+## useTheme Hook
+
+```tsx
+function Header() {
+  const { isDark, toggleColorMode, colorMode } = useTheme();
+
+  return (
+    <button onClick={toggleColorMode}>
+      {isDark ? '☀️ Light' : '🌙 Dark'}
+    </button>
+  );
+}
+```
+
+## Color Modes
+
+```tsx
+<ThemeProvider defaultColorMode="light" />
+<ThemeProvider defaultColorMode="dark" />
+<ThemeProvider defaultColorMode="system" />  {/* follows OS preference */}
+```
+
+## Controlled Mode
+
+```tsx
+const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+
+<ThemeProvider colorMode={mode} onColorModeChange={setMode}>
+  {children}
+</ThemeProvider>
+```
+
+## Token Overrides
+
+Override CSS custom properties at runtime:
+
+```tsx
+<ThemeProvider
+  theme={{
+    colors: {
+      yellow: '#FF6B35',
+      pink: '#FF006E',
+    },
+  }}
+>
+  {children}
+</ThemeProvider>
+```
+
+The following CSS variables are set on the wrapper div:
+
+| Variable | Default |
+|----------|---------|
+| `--fx-color-yellow` | `#FFE500` |
+| `--fx-color-pink` | `#FF2D78` |
+| `--fx-color-green` | `#00FF94` |
+| `--fx-color-blue` | `#0066FF` |
+| `--fx-color-purple` | `#7C3AED` |
+| `--fx-color-black` | `#0a0a0a` |
+| `--fx-color-white` | `#fafafa` |
+
+## useTheme Return Value
+
+```tsx
+const {
+  colorMode,       // 'light' | 'dark' | 'system'
+  setColorMode,    // (mode: ColorMode) => void
+  toggleColorMode, // () => void
+  isDark,          // boolean — resolved value
+  tokens,          // FxTokens — current overrides
+  setTokens,       // (tokens: FxTokens) => void
+} = useTheme();
+```
+
+## ThemeProvider Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `defaultColorMode` | `'light' \| 'dark' \| 'system'` | `'system'` |
+| `colorMode` | `'light' \| 'dark' \| 'system'` | — |
+| `onColorModeChange` | `(mode: ColorMode) => void` | — |
+| `theme` | `FxTokens` | `{}` |
+| `className` | `string` | — |

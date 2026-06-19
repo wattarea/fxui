@@ -1,0 +1,59 @@
+# Spinner
+
+An animated loading indicator. Use inside buttons, overlays, or standalone loading states.
+
+## Import
+
+```tsx
+import { Spinner } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Spinner />
+```
+
+## Sizes
+
+```tsx
+<Spinner size="xs" />
+<Spinner size="sm" />
+<Spinner size="md" />   {/* default */}
+<Spinner size="lg" />
+<Spinner size="xl" />
+```
+
+## Variants
+
+```tsx
+<Spinner variant="default" />   {/* black / white in dark mode */}
+<Spinner variant="white" />     {/* for dark backgrounds */}
+<Spinner variant="neon" />      {/* fx-yellow */}
+<Spinner variant="primary" />   {/* fx-blue */}
+```
+
+## Inside a Button
+
+```tsx
+<Button disabled>
+  <Spinner size="sm" variant="white" />
+  Saving...
+</Button>
+```
+
+## Custom Label
+
+```tsx
+<Spinner label="Uploading file..." />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Spinner dimensions |
+| `variant` | `'default' \| 'white' \| 'neon' \| 'primary'` | `'default'` | Color |
+| `label` | `string` | `'Loading...'` | `aria-label` for screen readers |
+
+Extends all native `<svg>` attributes.

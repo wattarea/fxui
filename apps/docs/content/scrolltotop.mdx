@@ -1,0 +1,89 @@
+# ScrollToTop
+
+A floating button that appears after scrolling past a threshold and scrolls the page (or a container) back to the top.
+
+## Import
+
+```tsx
+import { ScrollToTop } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+{/* Place anywhere in your layout — fixed positioning handles the rest */}
+<ScrollToTop />
+```
+
+## Threshold
+
+```tsx
+{/* Show after scrolling 300px */}
+<ScrollToTop threshold={300} />
+```
+
+## Position
+
+```tsx
+<ScrollToTop position="bottom-right" />  {/* default */}
+<ScrollToTop position="bottom-left" />
+<ScrollToTop position="bottom-center" />
+```
+
+## Shape
+
+```tsx
+<ScrollToTop shape="circle" />  {/* default */}
+<ScrollToTop shape="square" />
+```
+
+## Size
+
+```tsx
+<ScrollToTop size="sm" />
+<ScrollToTop size="md" />  {/* default */}
+<ScrollToTop size="lg" />
+```
+
+## With Label
+
+```tsx
+<ScrollToTop showLabel />
+```
+
+## Custom Icon
+
+```tsx
+<ScrollToTop label={<span className="font-black text-xs">↑ TOP</span>} shape="square" />
+```
+
+## Scroll Container
+
+```tsx
+{/* For pages where the scroll container is not window */}
+const ref = React.useRef<HTMLDivElement>(null);
+
+<div ref={ref} className="overflow-y-auto h-screen">
+  <content />
+  <ScrollToTop scrollTarget={ref} threshold={80} />
+</div>
+```
+
+## Smooth Scroll
+
+```tsx
+<ScrollToTop smooth={false} />  {/* instant jump */}
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `threshold` | `number` (px) | `200` |
+| `smooth` | `boolean` | `true` |
+| `position` | `'bottom-right' \| 'bottom-left' \| 'bottom-center'` | `'bottom-right'` |
+| `shape` | `'circle' \| 'square'` | `'circle'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `showLabel` | `boolean` | `false` |
+| `label` | `ReactNode` | arrow icon |
+| `scrollTarget` | `RefObject<HTMLElement>` | `window` |

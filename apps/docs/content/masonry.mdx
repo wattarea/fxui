@@ -1,0 +1,30 @@
+# Masonry
+
+CSS columns-based masonry grid. Items flow into columns of equal width, packing vertically. Supports numeric `columns` or a responsive breakpoint object.
+
+## Usage
+
+```tsx
+import { Masonry } from '@fxui/core';
+
+<Masonry columns={3} gap={16}>
+  <Card>...</Card>
+  <Card>...</Card>
+  <Card>...</Card>
+</Masonry>
+```
+
+## Responsive Columns
+
+```tsx
+<Masonry columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap={20}>
+  {items.map(item => <Card key={item.id}>{item.content}</Card>)}
+</Masonry>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `columns` | `number \| { sm?, md?, lg?, xl? }` | `3` |
+| `gap` | `number` (px) | `16` |

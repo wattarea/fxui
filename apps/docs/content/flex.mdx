@@ -1,0 +1,71 @@
+# Flex
+
+Low-level flexbox primitive exposing direction, wrap, alignment, justification, and gap as props. Use `Stack` for common patterns; use `Flex` when you need full control.
+
+## Usage
+
+```tsx
+import { Flex } from '@fxui/core';
+
+<Flex direction="row" align="center" justify="between" gap="4">
+  <Logo />
+  <Nav />
+</Flex>
+```
+
+## Direction
+
+```tsx
+<Flex direction="row" />          {/* default */}
+<Flex direction="col" />
+<Flex direction="row-reverse" />
+<Flex direction="col-reverse" />
+```
+
+## Alignment
+
+```tsx
+<Flex align="start" />       {/* items-start */}
+<Flex align="center" />      {/* items-center */}
+<Flex align="end" />         {/* items-end */}
+<Flex align="stretch" />     {/* items-stretch */}
+<Flex align="baseline" />    {/* items-baseline */}
+```
+
+## Justification
+
+```tsx
+<Flex justify="start" />     {/* justify-start (default) */}
+<Flex justify="center" />
+<Flex justify="end" />
+<Flex justify="between" />   {/* justify-between */}
+<Flex justify="around" />
+<Flex justify="evenly" />
+```
+
+## Wrap
+
+```tsx
+<Flex wrap="wrap">
+  {items.map(i => <Tag key={i}>{i}</Tag>)}
+</Flex>
+```
+
+## Inline
+
+```tsx
+<Flex inline gap="2">
+  <Kbd>⌘</Kbd><Kbd>K</Kbd>
+</Flex>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `direction` | `'row' \| 'col' \| 'row-reverse' \| 'col-reverse'` | `'row'` |
+| `wrap` | `'wrap' \| 'nowrap' \| 'wrap-reverse'` | `'nowrap'` |
+| `align` | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | `'start'` |
+| `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | `'start'` |
+| `gap` | `'0'–'12'` | `'0'` |
+| `inline` | `boolean` | `false` |

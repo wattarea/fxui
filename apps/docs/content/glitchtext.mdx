@@ -1,0 +1,72 @@
+# GlitchText
+
+CSS glitch animation using pseudo-elements. Each instance gets a scoped `<style>` injection with unique keyframes — multiple instances animate independently.
+
+## Import
+
+```tsx
+import { GlitchText } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<GlitchText
+  text="GLITCH"
+  className="font-display font-black text-6xl text-fx-black"
+/>
+```
+
+## Colors
+
+```tsx
+<GlitchText text="FXUI" color="pink" />    {/* default */}
+<GlitchText text="FXUI" color="yellow" />
+<GlitchText text="FXUI" color="green" />
+<GlitchText text="FXUI" color="blue" />
+<GlitchText text="FXUI" color="purple" />
+```
+
+## Intensities
+
+```tsx
+<GlitchText text="LOW"    intensity="low" />
+<GlitchText text="MEDIUM" intensity="medium" />  {/* default */}
+<GlitchText text="HIGH"   intensity="high" />
+```
+
+## Trigger on Hover
+
+```tsx
+{/* Only glitches when hovered */}
+<GlitchText text="HOVER ME" triggerOnHover className="cursor-pointer" />
+```
+
+## As Heading
+
+```tsx
+<GlitchText
+  as="h1"
+  text="ERROR_404"
+  color="pink"
+  intensity="high"
+  className="font-display font-black text-8xl text-white"
+/>
+```
+
+## Paused
+
+```tsx
+<GlitchText text="STATIC" paused />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `text` | `string` | **required** |
+| `as` | `'span' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'p' \| 'div'` | `'span'` |
+| `color` | `'pink' \| 'yellow' \| 'green' \| 'blue' \| 'purple'` | `'pink'` |
+| `intensity` | `'low' \| 'medium' \| 'high'` | `'medium'` |
+| `paused` | `boolean` | `false` |
+| `triggerOnHover` | `boolean` | `false` |

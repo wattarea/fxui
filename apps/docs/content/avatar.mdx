@@ -1,0 +1,68 @@
+# Avatar
+
+Displays a user's profile image with a text fallback showing initials. Supports size variants, circle or square shapes, and stacked groups with overflow count.
+
+## Usage
+
+```tsx
+import { Avatar } from '@fxui/core';
+
+<Avatar src="/photo.jpg" alt="Alice" fallback="Alice Johnson" />
+```
+
+If the image fails to load (or no `src` is provided), initials are extracted from the `fallback` string.
+
+## Sizes
+
+```tsx
+<Avatar size="xs" fallback="AJ" />
+<Avatar size="sm" fallback="AJ" />
+<Avatar size="md" fallback="AJ" />
+<Avatar size="lg" fallback="AJ" />
+<Avatar size="xl" fallback="AJ" />
+<Avatar size="2xl" fallback="AJ" />
+```
+
+Available sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`.
+
+## Shapes
+
+```tsx
+<Avatar shape="circle" fallback="AJ" />   {/* default */}
+<Avatar shape="square" fallback="AJ" />
+```
+
+## Avatar Group
+
+Stack multiple avatars with a `max` to show overflow.
+
+```tsx
+<Avatar.Group max={3}>
+  <Avatar fallback="Alice" />
+  <Avatar fallback="Bob" />
+  <Avatar fallback="Carol" />
+  <Avatar fallback="David" />
+  <Avatar fallback="Eve" />
+</Avatar.Group>
+```
+
+When the list exceeds `max`, a `+N` badge appears at the end.
+
+## Props
+
+### Avatar
+
+| Prop | Type | Default |
+|------|------|---------|
+| `src` | `string` | — |
+| `alt` | `string` | `''` |
+| `fallback` | `string` | `'?'` |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| `shape` | `'circle' \| 'square'` | `'circle'` |
+
+### Avatar.Group
+
+| Prop | Type | Default |
+|------|------|---------|
+| `max` | `number` | — |
+| `size` | same as Avatar size | `'md'` |

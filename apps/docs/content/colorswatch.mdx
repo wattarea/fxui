@@ -1,0 +1,65 @@
+# ColorSwatch
+
+Visual color preview tile for design system documentation. Displays the color block with an optional name and hex/CSS value label. Supports square and circle shapes in three sizes.
+
+## Usage
+
+```tsx
+import { ColorSwatch } from '@fxui/core';
+
+<ColorSwatch color="#FFE500" name="FX Yellow" />
+```
+
+## FXUI Palette
+
+```tsx
+<div className="flex flex-wrap gap-4">
+  <ColorSwatch color="#0a0a0a" name="FX Black" />
+  <ColorSwatch color="#fafafa" name="FX White" />
+  <ColorSwatch color="#FFE500" name="FX Yellow" />
+  <ColorSwatch color="#FF2D78" name="FX Pink" />
+  <ColorSwatch color="#00FF94" name="FX Green" />
+  <ColorSwatch color="#0066FF" name="FX Blue" />
+  <ColorSwatch color="#7C3AED" name="FX Purple" />
+</div>
+```
+
+## Sizes
+
+```tsx
+<ColorSwatch color="#FFE500" name="Yellow" size="sm" />
+<ColorSwatch color="#FF2D78" name="Pink" size="md" />
+<ColorSwatch color="#0066FF" name="Blue" size="lg" />
+```
+
+## Circle Shape
+
+```tsx
+<ColorSwatch color="#FFE500" shape="circle" size="md" />
+```
+
+Circle mode renders just the colored disc without a label block — useful for compact palettes.
+
+## Hide Hex
+
+```tsx
+<ColorSwatch color="#0066FF" name="Blue" showHex={false} />
+```
+
+## Any CSS Color
+
+```tsx
+<ColorSwatch color="oklch(70% 0.2 140)" name="OKLCH" />
+<ColorSwatch color="hsl(45, 100%, 50%)" name="HSL" />
+<ColorSwatch color="rgba(255,100,0,0.5)" name="RGBA" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `color` | `string` | **required** |
+| `name` | `string` | — |
+| `showHex` | `boolean` | `true` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `shape` | `'square' \| 'circle'` | `'square'` |

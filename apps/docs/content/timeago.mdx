@@ -1,0 +1,66 @@
+# TimeAgo
+
+Renders a relative time string ("3 minutes ago", "yesterday") using `Intl.RelativeTimeFormat`. Auto-refreshes every 60 seconds by default. Zero dependencies.
+
+## Import
+
+```tsx
+import { TimeAgo } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<TimeAgo date={new Date('2024-01-15T10:30:00')} />
+```
+
+## With String Date
+
+```tsx
+<TimeAgo date="2024-06-01" />
+```
+
+## Custom Refresh Interval
+
+```tsx
+{/* Refresh every 30 seconds */}
+<TimeAgo date={postDate} refreshInterval={30000} />
+
+{/* Never refresh */}
+<TimeAgo date={postDate} refreshInterval={0} />
+```
+
+## Show Absolute Date
+
+```tsx
+{/* Falls back to full date when the date is old */}
+<TimeAgo date={ancientDate} showAbsolute />
+```
+
+## Custom Locale
+
+```tsx
+<TimeAgo date={new Date()} locale="tr" />
+<TimeAgo date={new Date()} locale="de" />
+<TimeAgo date={new Date()} locale="ja" />
+```
+
+## In a Feed
+
+```tsx
+{posts.map(post => (
+  <article key={post.id}>
+    <h3>{post.title}</h3>
+    <TimeAgo date={post.createdAt} className="text-xs text-gray-400" />
+  </article>
+))}
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `date` | `Date \| string \| number` | **required** |
+| `locale` | `string` | browser locale |
+| `refreshInterval` | `number` (ms) | `60000` |
+| `showAbsolute` | `boolean` | `false` |

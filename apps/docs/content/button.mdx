@@ -1,0 +1,67 @@
+# Button
+
+A Neo-brutalist button component with multiple variants, sizes, and states.
+
+## Import
+
+```tsx
+import { Button } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Button>Click me</Button>
+```
+
+## Variants
+
+```tsx
+<Button variant="default">Default</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="neon">Neon</Button>
+```
+
+## Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+<Button size="icon" aria-label="Star">★</Button>
+```
+
+## Loading State
+
+```tsx
+<Button isLoading>Saving...</Button>
+```
+
+## With Icons
+
+```tsx
+<Button leftIcon={<ArrowLeftIcon />}>Back</Button>
+<Button rightIcon={<ArrowRightIcon />}>Next</Button>
+```
+
+## Disabled
+
+```tsx
+<Button disabled>Disabled</Button>
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'outline' \| 'ghost' \| 'destructive' \| 'neon'` | `'default'` | Visual style |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'icon'` | `'md'` | Button size |
+| `isLoading` | `boolean` | `false` | Shows spinner, disables interaction |
+| `leftIcon` | `ReactNode` | — | Icon rendered before label |
+| `rightIcon` | `ReactNode` | — | Icon rendered after label |
+| `disabled` | `boolean` | `false` | Disables the button |
+| `className` | `string` | — | Additional Tailwind classes |
+
+Extends all native `<button>` HTML attributes.

@@ -1,0 +1,66 @@
+# Heading
+
+Semantic heading component with 7 size scales (display → h6), 7 color variants, and an optional yellow highlight underlay. Renders the correct HTML tag by default based on `size`, or override with `as`.
+
+## Usage
+
+```tsx
+import { Heading } from '@fxui/core';
+
+<Heading size="h1">Building a Design System</Heading>
+```
+
+## Sizes
+
+```tsx
+<Heading size="display">Display</Heading>   {/* font-display, ~7rem */}
+<Heading size="h1">Heading 1</Heading>
+<Heading size="h2">Heading 2</Heading>      {/* default */}
+<Heading size="h3">Heading 3</Heading>
+<Heading size="h4">Heading 4</Heading>
+<Heading size="h5">Heading 5</Heading>
+<Heading size="h6">Heading 6</Heading>
+```
+
+`display`, `h1`, `h2` use `font-display` (Archivo Black). `h3`–`h6` use `font-sans` (Space Grotesk).
+
+## Colors
+
+```tsx
+<Heading size="h3" color="default">Default</Heading>
+<Heading size="h3" color="muted">Muted</Heading>
+<Heading size="h3" color="blue">Blue</Heading>
+<Heading size="h3" color="yellow">Yellow</Heading>
+```
+
+Available: `default`, `muted`, `yellow`, `pink`, `green`, `blue`, `purple`.
+
+## Highlight
+
+Adds a yellow underlay behind the text — useful for hero callouts:
+
+```tsx
+<Heading size="h1" highlight>
+  Brutal by design.
+</Heading>
+```
+
+## Custom Tag
+
+Override the rendered element with `as`:
+
+```tsx
+<Heading size="h1" as="h2">Visually h1, semantically h2</Heading>
+<Heading size="h3" as="p">Styled like h3, rendered as p</Heading>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `size` | `'display' \| 'h1'–'h6'` | `'h2'` |
+| `color` | `'default' \| 'muted' \| 'yellow' \| 'pink' \| 'green' \| 'blue' \| 'purple'` | `'default'` |
+| `align` | `'left' \| 'center' \| 'right'` | `'left'` |
+| `truncate` | `boolean` | `false` |
+| `highlight` | `boolean` | `false` |
+| `as` | `'h1'–'h6' \| 'p' \| 'div' \| 'span'` | size-based |

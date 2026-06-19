@@ -1,0 +1,62 @@
+# DonutChart
+
+Donut or pie chart with optional center label, legend, and per-slice percentage tooltip. Built on [recharts](https://recharts.org).
+
+## Usage
+
+```tsx
+import { DonutChart } from '@fxui/core';
+
+const data = [
+  { label: 'Direct', value: 4200, color: '#0066FF' },
+  { label: 'Organic', value: 3100, color: '#FFE500' },
+  { label: 'Social', value: 1800, color: '#FF2D78' },
+];
+
+<DonutChart data={data} />
+```
+
+## With Center Label
+
+```tsx
+<DonutChart
+  data={data}
+  centerValue="11K"
+  centerLabel="Total visits"
+/>
+```
+
+## Pie Variant
+
+```tsx
+<DonutChart data={data} variant="pie" />
+```
+
+## With Percentage Labels
+
+```tsx
+<DonutChart data={data} variant="pie" showLabels showLegend={false} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `data` | `DonutChartItem[]` | **required** |
+| `variant` | `'donut' \| 'pie'` | `'donut'` |
+| `height` | `number` | `300` |
+| `centerLabel` | `string` | — |
+| `centerValue` | `string \| number` | — |
+| `showLegend` | `boolean` | `true` |
+| `showTooltip` | `boolean` | `true` |
+| `showLabels` | `boolean` | `false` |
+| `innerRadius` | `number \| string` | `'55%'` |
+| `outerRadius` | `number \| string` | `'80%'` |
+
+```ts
+interface DonutChartItem {
+  label: string;
+  value: number;
+  color?: string;
+}
+```

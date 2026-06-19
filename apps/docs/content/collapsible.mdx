@@ -1,0 +1,83 @@
+# Collapsible
+
+A single expandable/collapsible section. Unlike `Accordion`, it stands alone without siblings. Animated with a CSS `grid-template-rows` trick — no Radix dependency.
+
+## Import
+
+```tsx
+import { Collapsible } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Collapsible title="What is FXUI?">
+  A neo-brutalist React component library with 100+ components.
+</Collapsible>
+```
+
+## Default Open
+
+```tsx
+<Collapsible title="Expanded by default" defaultOpen>
+  This panel starts open.
+</Collapsible>
+```
+
+## Variants
+
+```tsx
+<Collapsible variant="default" title="Default">...</Collapsible>
+<Collapsible variant="filled"  title="Filled" >...</Collapsible>
+<Collapsible variant="ghost"   title="Ghost"  >...</Collapsible>
+```
+
+## With Icon
+
+```tsx
+<Collapsible icon="⚙️" title="Settings">
+  Your settings content here.
+</Collapsible>
+```
+
+## With Action Button
+
+```tsx
+<Collapsible
+  title="Team Members"
+  actions={<Button size="sm">+ Add</Button>}
+>
+  <MemberList />
+</Collapsible>
+```
+
+## Controlled
+
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<Collapsible title="Controlled" open={open} onOpenChange={setOpen}>
+  Controlled externally.
+</Collapsible>
+```
+
+## Disabled
+
+```tsx
+<Collapsible title="Cannot toggle" disabled>
+  Content not accessible.
+</Collapsible>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `title` | `ReactNode` | **required** |
+| `variant` | `'default' \| 'filled' \| 'ghost'` | `'default'` |
+| `defaultOpen` | `boolean` | `false` |
+| `open` | `boolean` | — |
+| `onOpenChange` | `(open: boolean) => void` | — |
+| `icon` | `ReactNode` | — |
+| `actions` | `ReactNode` | — |
+| `disabled` | `boolean` | `false` |

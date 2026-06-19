@@ -1,0 +1,84 @@
+# Toast
+
+Context-based notification system built on Radix UI Toast. Wrap your app with `ToastProvider`, then call `useToast()` anywhere.
+
+## Setup
+
+```tsx
+// app/layout.tsx
+import { ToastProvider } from '@fxui/core';
+
+export default function Layout({ children }) {
+  return <ToastProvider>{children}</ToastProvider>;
+}
+```
+
+## Usage
+
+```tsx
+import { useToast } from '@fxui/core';
+
+function MyComponent() {
+  const { toast } = useToast();
+
+  return (
+    <Button onClick={() => toast({ title: 'Saved!', variant: 'success' })}>
+      Save
+    </Button>
+  );
+}
+```
+
+## Variants
+
+```tsx
+toast({ title: 'Default notification' });
+toast({ variant: 'success', title: 'Saved!', description: 'Your changes were saved.' });
+toast({ variant: 'error', title: 'Error', description: 'Something went wrong.' });
+toast({ variant: 'warning', title: 'Warning', description: 'Disk space running low.' });
+toast({ variant: 'info', title: 'Update available', description: 'v2.0 is ready.' });
+```
+
+## With Action
+
+```tsx
+toast({
+  title: 'File deleted',
+  description: 'report.pdf was moved to trash.',
+  action: {
+    label: 'Undo',
+    onClick: () => restoreFile(),
+  },
+});
+```
+
+## Custom Duration
+
+```tsx
+toast({ title: 'Quick flash', duration: 1500 });
+toast({ title: 'Read this carefully', duration: 8000 });
+```
+
+## API Reference
+
+### ToastProvider
+
+Wraps the app. Renders the `Toaster` viewport at `bottom-right`.
+
+### useToast()
+
+Returns `{ toast, dismiss }`.
+
+#### toast(options)
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `title` | `string` | — | Bold heading |
+| `description` | `string` | — | Supporting text |
+| `variant` | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | Color scheme |
+| `duration` | `number` | `4000` | Auto-dismiss delay in ms |
+| `action` | `{ label: string; onClick: () => void }` | — | Optional inline action |
+
+#### dismiss(id)
+
+Programmatically closes a toast by its returned id.

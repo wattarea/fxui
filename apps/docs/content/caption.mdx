@@ -1,0 +1,59 @@
+# Caption
+
+Small helper text for form hints, validation messages, and image captions. Renders as `<p>` by default; switch to `<figcaption>` or `<small>` via `as`.
+
+## Usage
+
+```tsx
+import { Caption } from '@fxui/core';
+
+<Caption>Maximum 200 characters.</Caption>
+```
+
+## Variants
+
+```tsx
+<Caption variant="default">Helper text</Caption>
+<Caption variant="muted">Very subtle hint</Caption>
+<Caption variant="error">Email is already taken</Caption>
+<Caption variant="success">Username is available</Caption>
+<Caption variant="warning">This action cannot be undone</Caption>
+```
+
+## With Icon
+
+```tsx
+<Caption icon="ℹ️">Maximum 200 characters</Caption>
+<Caption variant="error" icon="✕">Email is already taken</Caption>
+<Caption variant="success" icon="✓">Password strength: strong</Caption>
+```
+
+## Below Inputs
+
+```tsx
+<div className="space-y-1.5">
+  <Label htmlFor="username">Username</Label>
+  <Input id="username" />
+  <Caption variant="success" icon="✓">Username is available</Caption>
+</div>
+```
+
+## As Figcaption
+
+```tsx
+<figure>
+  <img src="..." alt="..." />
+  <Caption as="figcaption" align="center">
+    Fig. 1 — Component example from FXUI
+  </Caption>
+</figure>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'default' \| 'muted' \| 'error' \| 'success' \| 'warning'` | `'default'` |
+| `align` | `'left' \| 'center' \| 'right'` | `'left'` |
+| `icon` | `React.ReactNode` | — |
+| `as` | `'p' \| 'span' \| 'figcaption' \| 'small'` | `'p'` |

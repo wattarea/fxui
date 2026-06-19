@@ -1,0 +1,51 @@
+# VideoPlayer
+
+Custom HTML5 video player with neo-brutalist controls: play/pause overlay, seek bar, volume slider, time display, and auto-hide controls on playback.
+
+## Usage
+
+```tsx
+import { VideoPlayer } from '@fxui/core';
+
+<VideoPlayer src="/videos/intro.mp4" />
+```
+
+## With Poster and Caption
+
+```tsx
+<VideoPlayer
+  src="/videos/demo.mp4"
+  poster="/images/video-thumb.jpg"
+  caption="Product walkthrough — 2 min"
+/>
+```
+
+## Muted AutoPlay (e.g. hero video)
+
+```tsx
+<VideoPlayer
+  src="/videos/hero.mp4"
+  autoPlay
+  muted
+  loop
+/>
+```
+
+## Controls Behavior
+
+- **Hover** over the player to reveal controls
+- Controls **auto-hide** after 2.5 seconds while playing
+- Click the video or the play button to toggle playback
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `src` | `string` | **required** |
+| `poster` | `string` | — |
+| `autoPlay` | `boolean` | `false` |
+| `loop` | `boolean` | `false` |
+| `muted` | `boolean` | `false` |
+| `caption` | `string` | — |
+
+All other `div` HTML attributes are forwarded to the wrapper element.

@@ -1,0 +1,60 @@
+# AspectRatio
+
+Maintains a fixed aspect ratio for its child element using the padding-bottom trick. Works with images, videos, iframes, and any block content.
+
+## Usage
+
+```tsx
+import { AspectRatio } from '@fxui/core';
+
+<AspectRatio ratio="video">
+  <img src="..." className="w-full h-full object-cover" />
+</AspectRatio>
+```
+
+## Presets
+
+```tsx
+<AspectRatio ratio="square" />    {/* 1:1     */}
+<AspectRatio ratio="video" />     {/* 16:9    (default) */}
+<AspectRatio ratio="photo" />     {/* 4:3     */}
+<AspectRatio ratio="wide" />      {/* 21:9    */}
+<AspectRatio ratio="portrait" />  {/* 3:4     */}
+<AspectRatio ratio="golden" />    {/* 1.618:1 */}
+```
+
+## Custom Ratio
+
+Pass any numeric value (width ÷ height):
+
+```tsx
+<AspectRatio ratio={16 / 9}>...</AspectRatio>
+<AspectRatio ratio={2.35}>...</AspectRatio>   {/* cinemascope */}
+<AspectRatio ratio={1}>...</AspectRatio>      {/* square */}
+```
+
+## With Image
+
+```tsx
+<AspectRatio ratio="photo" className="rounded-[4px] overflow-hidden border-2 border-fx-black shadow-fx">
+  <img src="/photo.jpg" alt="..." className="w-full h-full object-cover" />
+</AspectRatio>
+```
+
+## With Video / Iframe
+
+```tsx
+<AspectRatio ratio="video">
+  <iframe
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    className="w-full h-full"
+    allowFullScreen
+  />
+</AspectRatio>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `ratio` | `number \| 'square' \| 'video' \| 'photo' \| 'wide' \| 'portrait' \| 'golden'` | `'video'` |

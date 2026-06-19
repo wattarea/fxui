@@ -1,0 +1,63 @@
+# LineChart
+
+Responsive line chart with multiple series, custom neo-brutalist tooltip, grid, legend, and optional dot markers. Built on [recharts](https://recharts.org).
+
+## Usage
+
+```tsx
+import { LineChart } from '@fxui/core';
+
+const data = [
+  { label: 'Jan', revenue: 4200, profit: 1800 },
+  { label: 'Feb', revenue: 3800, profit: 1500 },
+  { label: 'Mar', revenue: 5100, profit: 2300 },
+];
+
+<LineChart
+  data={data}
+  series={[
+    { key: 'revenue', label: 'Revenue' },
+    { key: 'profit', label: 'Profit' },
+  ]}
+/>
+```
+
+## Curved Lines
+
+```tsx
+<LineChart data={data} series={series} curved />
+```
+
+## Custom Colors
+
+```tsx
+<LineChart
+  data={data}
+  series={[
+    { key: 'revenue', label: 'Revenue', color: '#FFE500' },
+    { key: 'profit', label: 'Profit', color: '#00FF94' },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `data` | `Record<string, string \| number>[]` | **required** |
+| `series` | `ChartSeries[]` | **required** |
+| `xKey` | `string` | `'label'` |
+| `height` | `number` | `300` |
+| `curved` | `boolean` | `false` |
+| `showDots` | `boolean` | `true` |
+| `showGrid` | `boolean` | `true` |
+| `showLegend` | `boolean` | `true` |
+| `showTooltip` | `boolean` | `true` |
+
+```ts
+interface ChartSeries {
+  key: string;
+  label?: string;
+  color?: string;
+}
+```

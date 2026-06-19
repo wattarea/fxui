@@ -1,0 +1,70 @@
+# Tag
+
+Compact label component for categories, statuses, and filter chips. Supports four visual variants, five neon color modes, optional left icon, and a removable close button.
+
+## Usage
+
+```tsx
+import { Tag } from '@fxui/core';
+
+<Tag>React</Tag>
+<Tag variant="outline" onClose={() => remove('React')}>React</Tag>
+```
+
+## Variants
+
+```tsx
+<Tag variant="default">Default</Tag>
+<Tag variant="outline">Outline</Tag>
+<Tag variant="neon">Neon</Tag>
+<Tag variant="ghost">Ghost</Tag>
+```
+
+## Neon Colors
+
+The `neon` variant supports semantic color modes:
+
+```tsx
+<Tag variant="neon" color="default">default</Tag>
+<Tag variant="neon" color="success">success</Tag>
+<Tag variant="neon" color="warning">warning</Tag>
+<Tag variant="neon" color="error">error</Tag>
+<Tag variant="neon" color="info">info</Tag>
+```
+
+## Sizes
+
+```tsx
+<Tag size="sm">Small</Tag>
+<Tag size="md">Medium</Tag>
+```
+
+## With Icon
+
+```tsx
+<Tag leftIcon="🚀" variant="neon">New feature</Tag>
+<Tag leftIcon="✓" variant="default">Done</Tag>
+```
+
+## Removable Tags
+
+```tsx
+const [tags, setTags] = React.useState(['React', 'TypeScript', 'Tailwind']);
+
+{tags.map(tag => (
+  <Tag key={tag} variant="outline" onClose={() => setTags(t => t.filter(x => x !== tag))}>
+    {tag}
+  </Tag>
+))}
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `'default' \| 'outline' \| 'neon' \| 'ghost'` | `'default'` |
+| `color` | `'default' \| 'success' \| 'warning' \| 'error' \| 'info'` | `'default'` |
+| `size` | `'sm' \| 'md'` | `'md'` |
+| `leftIcon` | `React.ReactNode` | — |
+| `onClose` | `() => void` | — |
+| `closeable` | `boolean` | `!!onClose` |

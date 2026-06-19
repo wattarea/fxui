@@ -1,0 +1,25 @@
+# LoadingOverlay
+
+Absolute-positioned overlay with spinner and message. Wrap any content container — the overlay fills it while loading.
+
+## Usage
+
+```tsx
+import { LoadingOverlay } from '@fxui/core';
+
+<LoadingOverlay visible={isLoading} message="Saving...">
+  <YourContent />
+</LoadingOverlay>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `visible` | `boolean` | `true` |
+| `message` | `string` | — |
+| `blur` | `boolean` | `false` |
+| `color` | `'black' \| 'white' \| 'yellow'` | `'black'` |
+| `fullScreen` | `boolean` | `false` |
+
+When `fullScreen={true}`, renders as `position: fixed` (no wrapper needed).

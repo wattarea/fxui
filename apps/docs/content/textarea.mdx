@@ -1,0 +1,71 @@
+# Textarea
+
+A multi-line text input with label, error, hint, character count, and resize control.
+
+## Import
+
+```tsx
+import { Textarea } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Textarea label="Message" placeholder="Type your message..." rows={4} />
+```
+
+## Variants
+
+```tsx
+<Textarea variant="default" placeholder="Default" />
+<Textarea variant="filled" placeholder="Filled" />
+<Textarea variant="flushed" placeholder="Flushed" />
+```
+
+## Error & Hint
+
+```tsx
+<Textarea label="Bio" error="Bio must be at least 20 characters." />
+<Textarea label="Description" hint="Briefly describe the project." />
+```
+
+## Character Count
+
+```tsx
+<Textarea
+  label="Tweet"
+  placeholder="What's happening?"
+  showCount
+  maxLength={280}
+  rows={4}
+/>
+```
+
+## Resize Control
+
+```tsx
+<Textarea resize="none" placeholder="Fixed size" />
+<Textarea resize="vertical" placeholder="Vertical only (default)" />
+<Textarea resize="both" placeholder="Both directions" />
+```
+
+## Disabled
+
+```tsx
+<Textarea disabled placeholder="Read-only" />
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'filled' \| 'flushed'` | `'default'` | Visual style |
+| `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Resize direction |
+| `label` | `string` | — | Label above the textarea |
+| `error` | `string` | — | Error message |
+| `hint` | `string` | — | Helper text |
+| `showCount` | `boolean` | `false` | Show character count (requires `maxLength`) |
+| `maxLength` | `number` | — | Max characters |
+| `rows` | `number` | — | Visible row count |
+
+Extends all native `<textarea>` HTML attributes.

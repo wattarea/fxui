@@ -1,0 +1,73 @@
+# NoiseBg
+
+Adds an SVG `feTurbulence` noise texture overlay to any container. Zero dependencies — all SVG generated inline.
+
+## Import
+
+```tsx
+import { NoiseBg } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<NoiseBg className="bg-fx-yellow p-8 rounded-[4px]">
+  <h2 className="font-display font-black text-4xl">FXUI</h2>
+</NoiseBg>
+```
+
+## Opacity
+
+```tsx
+<NoiseBg opacity={0.1}>...</NoiseBg>   {/* subtle */}
+<NoiseBg opacity={0.3}>...</NoiseBg>   {/* visible */}
+<NoiseBg opacity={0.6}>...</NoiseBg>   {/* heavy grain */}
+```
+
+## Base Frequency (grain size)
+
+```tsx
+<NoiseBg baseFrequency={0.2}>...</NoiseBg>   {/* coarse */}
+<NoiseBg baseFrequency={0.65}>...</NoiseBg>  {/* default */}
+<NoiseBg baseFrequency={1.6}>...</NoiseBg>   {/* fine */}
+```
+
+## Blend Modes
+
+```tsx
+<NoiseBg blendMode="normal">...</NoiseBg>     {/* default — overlays noise directly */}
+<NoiseBg blendMode="multiply">...</NoiseBg>   {/* darkens, good on light backgrounds */}
+<NoiseBg blendMode="screen">...</NoiseBg>     {/* lightens, good on dark backgrounds */}
+<NoiseBg blendMode="overlay">...</NoiseBg>    {/* increases contrast */}
+```
+
+## Animated Pulse
+
+```tsx
+<NoiseBg animated opacity={0.4} className="bg-fx-purple">
+  <span className="font-display text-3xl text-white">PULSE</span>
+</NoiseBg>
+```
+
+## Dark Card Pattern
+
+```tsx
+<NoiseBg
+  opacity={0.15}
+  blendMode="screen"
+  className="bg-fx-black border-2 border-fx-black rounded-[4px] shadow-fx-xl p-8"
+>
+  <h2 className="font-display font-black text-4xl text-fx-white">PRO</h2>
+</NoiseBg>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `opacity` | `number` | `0.15` |
+| `baseFrequency` | `number` | `0.65` |
+| `numOctaves` | `number` | `4` |
+| `blendMode` | `NoiseBlendMode` | `'multiply'` |
+| `animated` | `boolean` | `false` |
+| `noiseClassName` | `string` | — |

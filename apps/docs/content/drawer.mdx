@@ -1,0 +1,85 @@
+# Drawer
+
+A slide-in panel built on Radix UI Dialog. Supports all four sides. Compound component pattern.
+
+## Import
+
+```tsx
+import { Drawer } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Drawer>
+  <Drawer.Trigger>
+    <Button>Open Drawer</Button>
+  </Drawer.Trigger>
+  <Drawer.Content>
+    <Drawer.Header>Settings</Drawer.Header>
+    <Drawer.Body>
+      <p>Drawer content here.</p>
+    </Drawer.Body>
+    <Drawer.Footer>
+      <Button variant="outline">Cancel</Button>
+      <Button>Save</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer>
+```
+
+## Placements
+
+```tsx
+<Drawer.Content placement="right">...</Drawer.Content>   {/* default */}
+<Drawer.Content placement="left">...</Drawer.Content>
+<Drawer.Content placement="top">...</Drawer.Content>
+<Drawer.Content placement="bottom">...</Drawer.Content>
+```
+
+## Controlled
+
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<Drawer open={open} onOpenChange={setOpen}>
+  <Drawer.Trigger><Button>Open</Button></Drawer.Trigger>
+  <Drawer.Content>
+    <Drawer.Header>Title</Drawer.Header>
+    <Drawer.Body>...</Drawer.Body>
+  </Drawer.Content>
+</Drawer>
+```
+
+## Navigation Drawer
+
+```tsx
+<Drawer>
+  <Drawer.Trigger><Button>☰ Menu</Button></Drawer.Trigger>
+  <Drawer.Content placement="left">
+    <Drawer.Header>FXUI</Drawer.Header>
+    <Drawer.Body>
+      <nav>
+        <a href="/docs/button">Button</a>
+        <a href="/docs/card">Card</a>
+      </nav>
+    </Drawer.Body>
+  </Drawer.Content>
+</Drawer>
+```
+
+## API Reference
+
+### Drawer
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Called on state change |
+
+### Drawer.Content
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placement` | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Slide-in direction |
+| `className` | `string` | — | Additional Tailwind classes |

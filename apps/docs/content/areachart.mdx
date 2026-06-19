@@ -1,0 +1,43 @@
+# AreaChart
+
+Filled area chart with gradient fills, multiple series, stacked mode, and curved/linear interpolation. Built on [recharts](https://recharts.org).
+
+## Usage
+
+```tsx
+import { AreaChart } from '@fxui/core';
+
+const data = [
+  { label: 'Jan', web: 4200, mobile: 2400 },
+  { label: 'Feb', web: 3800, mobile: 2800 },
+];
+
+<AreaChart
+  data={data}
+  series={[
+    { key: 'web', label: 'Web' },
+    { key: 'mobile', label: 'Mobile' },
+  ]}
+/>
+```
+
+## Stacked
+
+```tsx
+<AreaChart data={data} series={series} stacked fillOpacity={0.4} />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `data` | `Record<string, string \| number>[]` | **required** |
+| `series` | `ChartSeries[]` | **required** |
+| `xKey` | `string` | `'label'` |
+| `height` | `number` | `300` |
+| `curved` | `boolean` | `true` |
+| `stacked` | `boolean` | `false` |
+| `fillOpacity` | `number` | `0.15` |
+| `showGrid` | `boolean` | `true` |
+| `showLegend` | `boolean` | `true` |
+| `showTooltip` | `boolean` | `true` |

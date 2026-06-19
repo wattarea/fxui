@@ -1,0 +1,22 @@
+# MaskInput
+
+Formatted text input using a `9`-based mask pattern. Built-in presets: `phone-us`, `phone-tr`, `credit-card`, `date`, `time`, `ssn`, `zip`.
+
+## Usage
+
+```tsx
+import { MaskInput } from '@fxui/core';
+
+<MaskInput label="Card Number" preset="credit-card" />
+<MaskInput label="Custom" mask="99/99/9999" placeholder="DD/MM/YYYY" />
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `preset` | `MaskInputPreset` | — |
+| `mask` | `string` (`9` = digit, rest literal) | — |
+| `onChange` | `(raw: string, formatted: string) => void` | — |
+| `label` | `string` | — |
+| `error` | `string` | — |

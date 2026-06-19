@@ -1,0 +1,55 @@
+# Alert
+
+A static inline banner for feedback messages. Use for persistent context — use Toast for transient notifications.
+
+## Import
+
+```tsx
+import { Alert } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Alert title="Heads up!" variant="info">
+  You can change your email in account settings.
+</Alert>
+```
+
+## Variants
+
+```tsx
+<Alert variant="default" title="Default">Something to know about.</Alert>
+<Alert variant="info" title="Info">Your session expires in 10 minutes.</Alert>
+<Alert variant="success" title="Success!">Profile updated.</Alert>
+<Alert variant="warning" title="Warning">Disk space running low.</Alert>
+<Alert variant="error" title="Error">Failed to connect to server.</Alert>
+```
+
+## Dismissible
+
+```tsx
+const [visible, setVisible] = React.useState(true);
+
+{visible && (
+  <Alert variant="warning" title="Unsaved changes" onClose={() => setVisible(false)}>
+    Your changes will be lost if you navigate away.
+  </Alert>
+)}
+```
+
+## Description Only
+
+```tsx
+<Alert variant="success">Profile saved successfully.</Alert>
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Color scheme |
+| `title` | `string` | — | Bold heading |
+| `onClose` | `() => void` | — | Shows ✕ button and calls this on click |
+| `children` | `ReactNode` | — | Description content |
+| `className` | `string` | — | Additional Tailwind classes |

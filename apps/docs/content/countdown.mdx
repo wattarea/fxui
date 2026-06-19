@@ -1,0 +1,86 @@
+# Countdown
+
+A countdown timer that counts down to a target date or from a duration. Available in `default`, `card`, and `minimal` variants.
+
+## Import
+
+```tsx
+import { Countdown } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+{/* Count down to a specific date */}
+<Countdown targetDate={new Date('2025-01-01')} />
+```
+
+## From Seconds
+
+```tsx
+{/* 90-second countdown */}
+<Countdown seconds={90} />
+```
+
+## Variants
+
+```tsx
+<Countdown targetDate={launchDate} variant="default" />
+<Countdown targetDate={launchDate} variant="card" />
+<Countdown targetDate={launchDate} variant="minimal" />
+```
+
+## Card Variant
+
+```tsx
+<Countdown
+  targetDate={new Date('2025-12-31T23:59:59')}
+  variant="card"
+  size="lg"
+/>
+```
+
+## Show/Hide Units
+
+```tsx
+<Countdown
+  seconds={3600}
+  showDays={false}
+  showHours={false}
+/>
+```
+
+## Pause / Resume
+
+```tsx
+const [paused, setPaused] = React.useState(false);
+
+<Countdown seconds={60} paused={paused} />
+<Button onClick={() => setPaused(p => !p)}>
+  {paused ? 'Resume' : 'Pause'}
+</Button>
+```
+
+## On Complete Callback
+
+```tsx
+<Countdown
+  seconds={5}
+  onComplete={() => alert('Time is up!')}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `targetDate` | `Date` | — |
+| `seconds` | `number` | — |
+| `variant` | `'default' \| 'card' \| 'minimal'` | `'default'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `showDays` | `boolean` | `true` |
+| `showHours` | `boolean` | `true` |
+| `showMinutes` | `boolean` | `true` |
+| `showSeconds` | `boolean` | `true` |
+| `paused` | `boolean` | `false` |
+| `onComplete` | `() => void` | — |

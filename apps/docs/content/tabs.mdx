@@ -1,0 +1,61 @@
+# Tabs
+
+A tabbed interface built on Radix UI Tabs. Three variants: default (underline), boxed, pills.
+
+## Import
+
+```tsx
+import { Tabs } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Tabs defaultValue="overview">
+  <Tabs.List>
+    <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+    <Tabs.Trigger value="components">Components</Tabs.Trigger>
+    <Tabs.Trigger value="tokens">Tokens</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="overview">Overview content here.</Tabs.Content>
+  <Tabs.Content value="components">Components content here.</Tabs.Content>
+  <Tabs.Content value="tokens">Tokens content here.</Tabs.Content>
+</Tabs>
+```
+
+## Variants
+
+```tsx
+<Tabs variant="default">...</Tabs>   {/* underline — default */}
+<Tabs variant="boxed">...</Tabs>     {/* segmented control */}
+<Tabs variant="pills">...</Tabs>     {/* brutalist pill buttons */}
+```
+
+## Controlled
+
+```tsx
+const [tab, setTab] = React.useState('overview');
+
+<Tabs value={tab} onValueChange={setTab}>
+  ...
+</Tabs>
+```
+
+## Disabled Tab
+
+```tsx
+<Tabs.Trigger value="pro" disabled>Pro only ★</Tabs.Trigger>
+```
+
+## API Reference
+
+### Tabs
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'boxed' \| 'pills'` | `'default'` | Visual style |
+| `value` | `string` | — | Controlled active tab |
+| `defaultValue` | `string` | — | Uncontrolled initial tab |
+| `onValueChange` | `(value: string) => void` | — | Called on tab change |
+
+`Tabs.List`, `Tabs.Trigger`, `Tabs.Content` extend their Radix UI counterpart props.

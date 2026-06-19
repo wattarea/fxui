@@ -1,0 +1,95 @@
+# Select
+
+A dropdown built on Radix UI Select. Supports groups, separators, label, error, and hint.
+
+## Import
+
+```tsx
+import { Select } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Select label="Fruit" placeholder="Select a fruit...">
+  <Select.Item value="apple">Apple</Select.Item>
+  <Select.Item value="banana">Banana</Select.Item>
+  <Select.Item value="cherry">Cherry</Select.Item>
+</Select>
+```
+
+## Sizes
+
+```tsx
+<Select placeholder="Small" size="sm">...</Select>
+<Select placeholder="Medium" size="md">...</Select>
+<Select placeholder="Large" size="lg">...</Select>
+```
+
+## With Groups & Separator
+
+```tsx
+<Select label="Location" placeholder="Select location...">
+  <Select.Group label="Europe">
+    <Select.Item value="tr">Turkey</Select.Item>
+    <Select.Item value="de">Germany</Select.Item>
+  </Select.Group>
+  <Select.Separator />
+  <Select.Group label="Asia">
+    <Select.Item value="jp">Japan</Select.Item>
+  </Select.Group>
+</Select>
+```
+
+## Error & Hint
+
+```tsx
+<Select label="Category" placeholder="Select..." error="Please select a category." />
+<Select label="Plan" placeholder="Select..." hint="You can change this later.">...</Select>
+```
+
+## Disabled
+
+```tsx
+<Select placeholder="Disabled" disabled>...</Select>
+<Select.Item value="x" disabled>Unavailable option</Select.Item>
+```
+
+## Controlled
+
+```tsx
+const [value, setValue] = React.useState('');
+
+<Select value={value} onValueChange={setValue} placeholder="Select...">
+  <Select.Item value="a">Option A</Select.Item>
+</Select>
+```
+
+## API Reference
+
+### Select
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Label above the trigger |
+| `placeholder` | `string` | — | Placeholder text when no value is selected |
+| `error` | `string` | — | Error message (turns border red) |
+| `hint` | `string` | — | Helper text (hidden when error is set) |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Trigger height |
+| `value` | `string` | — | Controlled value |
+| `defaultValue` | `string` | — | Uncontrolled initial value |
+| `onValueChange` | `(value: string) => void` | — | Called on selection |
+| `disabled` | `boolean` | `false` | Disables the select |
+
+### Select.Item
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | The option value |
+| `disabled` | `boolean` | `false` | Disables this option |
+
+### Select.Group
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Group heading text |

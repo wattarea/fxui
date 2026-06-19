@@ -1,0 +1,90 @@
+# Modal
+
+An animated dialog built on Radix UI Dialog. Closes on ESC and overlay click.
+
+## Import
+
+```tsx
+import { Modal } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Modal>
+  <Modal.Trigger>
+    <Button>Open Modal</Button>
+  </Modal.Trigger>
+  <Modal.Content>
+    <Modal.Header>Title</Modal.Header>
+    <Modal.Body>Content goes here.</Modal.Body>
+    <Modal.Footer>
+      <Button>Confirm</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal>
+```
+
+## Sizes
+
+```tsx
+<Modal.Content size="sm">...</Modal.Content>
+<Modal.Content size="md">...</Modal.Content>  {/* default */}
+<Modal.Content size="lg">...</Modal.Content>
+<Modal.Content size="full">...</Modal.Content>
+```
+
+## Controlled
+
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<Modal open={open} onOpenChange={setOpen}>
+  <Modal.Trigger>
+    <Button onClick={() => setOpen(true)}>Open</Button>
+  </Modal.Trigger>
+  <Modal.Content>
+    <Modal.Header>Controlled Modal</Modal.Header>
+    <Modal.Body>...</Modal.Body>
+    <Modal.Footer>
+      <Button onClick={() => setOpen(false)}>Close</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal>
+```
+
+## Destructive Confirm
+
+```tsx
+<Modal>
+  <Modal.Trigger>
+    <Button variant="destructive">Delete</Button>
+  </Modal.Trigger>
+  <Modal.Content size="sm">
+    <Modal.Header>Confirm Delete</Modal.Header>
+    <Modal.Body>This action cannot be undone.</Modal.Body>
+    <Modal.Footer>
+      <Button variant="outline">Cancel</Button>
+      <Button variant="destructive">Delete</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal>
+```
+
+## API Reference
+
+### Modal
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Called when open state changes |
+
+### Modal.Content
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg' \| 'full'` | `'md'` | Max width of the dialog |
+| `className` | `string` | — | Additional Tailwind classes |
+
+`Modal.Trigger`, `Modal.Header`, `Modal.Body`, `Modal.Footer` extend their respective HTML element attributes.

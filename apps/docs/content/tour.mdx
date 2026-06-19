@@ -1,0 +1,77 @@
+# Tour
+
+Multi-step onboarding tour with element spotlight, positioned tooltip, progress dots, and keyboard-accessible navigation.
+
+## Setup with Provider
+
+```tsx
+import { Tour, TourProvider, useTour } from '@fxui/core';
+
+// Wrap your app
+<TourProvider>
+  <App />
+</TourProvider>
+
+// Inside any child:
+function Navbar() {
+  const { start } = useTour();
+  return <Button onClick={start}>Take a Tour</Button>;
+}
+
+// Render Tour once at layout level:
+const steps = [
+  { target: '#sidebar', title: 'Navigation', content: 'Browse all components here.', placement: 'right' },
+  { target: '#preview', title: 'Live Preview', content: 'See the component in action.', placement: 'bottom' },
+  { title: 'Done!', content: 'You\'re all set.' },  // no target = centered
+];
+
+<Tour steps={steps} showProgress showSkip />
+```
+
+## Controlled Mode
+
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<Tour
+  steps={steps}
+  open={open}
+  onOpenChange={setOpen}
+  onComplete={() => markTourSeen()}
+/>
+```
+
+## TourStep Type
+
+```ts
+interface TourStep {
+  target?: string;        // CSS selector — omit for centered modal
+  title: string;
+  content: React.ReactNode;
+  placement?: 'top' | 'bottom' | 'left' | 'right';
+}
+```
+
+## Props
+
+### TourProvider
+
+No props — provides `useTour()` context to children.
+
+### useTour()
+
+```ts
+const { start, stop, isOpen } = useTour();
+```
+
+### Tour
+
+| Prop | Type | Default |
+|------|------|---------|
+| `steps` | `TourStep[]` | **required** |
+| `open` | `boolean` | — |
+| `onOpenChange` | `(open: boolean) => void` | — |
+| `onComplete` | `() => void` | — |
+| `showProgress` | `boolean` | `true` |
+| `showSkip` | `boolean` | `true` |
+| `spotlightPadding` | `number` | `8` |

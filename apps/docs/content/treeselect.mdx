@@ -1,0 +1,31 @@
+# TreeSelect
+
+Dropdown selector with hierarchical expand/collapse tree. Supports infinite nesting, disabled nodes, and controlled/uncontrolled modes.
+
+## Usage
+
+```tsx
+import { TreeSelect } from '@fxui/core';
+
+<TreeSelect
+  label="Category"
+  options={[
+    { value: 'tech', label: 'Technology', children: [
+      { value: 'frontend', label: 'Frontend' },
+      { value: 'backend', label: 'Backend' },
+    ]},
+  ]}
+  onChange={(value, node) => setCategory(value)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `options` | `TreeSelectNode[]` | **required** |
+| `value` | `string` | — |
+| `onChange` | `(value, node) => void` | — |
+| `placeholder` | `string` | `'Select...'` |
+| `label` | `string` | — |
+| `error` | `string` | — |

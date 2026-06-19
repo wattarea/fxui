@@ -1,0 +1,31 @@
+# SwitchGroup
+
+A grouped list of toggles rendered as a bordered card with dividers. Ideal for settings panels.
+
+## Usage
+
+```tsx
+import { SwitchGroup } from '@fxui/core';
+
+<SwitchGroup
+  label="Notifications"
+  options={[
+    { value: 'email', label: 'Email alerts', description: 'Receive email updates' },
+    { value: 'push', label: 'Push notifications' },
+  ]}
+  defaultValue={['email']}
+  onChange={(val) => console.log(val)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `options` | `SwitchGroupOption[]` | **required** |
+| `value` | `string[]` | — |
+| `defaultValue` | `string[]` | `[]` |
+| `onChange` | `(value: string[]) => void` | — |
+| `label` | `string` | — |
+| `hint` | `string` | — |
+| `disabled` | `boolean` | `false` |

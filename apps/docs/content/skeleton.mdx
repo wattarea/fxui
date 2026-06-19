@@ -1,0 +1,68 @@
+# Skeleton
+
+Loading placeholder with shimmer animation. Use while content is being fetched.
+
+## Import
+
+```tsx
+import { Skeleton } from '@fxui/core';
+```
+
+## Usage
+
+```tsx
+<Skeleton className="h-40 w-full" />
+```
+
+## Shapes
+
+```tsx
+<Skeleton shape="rect" className="h-40 w-full" />   {/* default */}
+<Skeleton shape="circle" className="h-12 w-12" />   {/* avatar */}
+<Skeleton shape="text" className="w-3/4" />          {/* single line */}
+```
+
+## Text Lines
+
+```tsx
+<Skeleton.Text lines={3} lastLineWidth="60%" />
+```
+
+## Card Skeleton
+
+```tsx
+<div className="border-2 border-fx-black rounded-[4px] p-4 flex flex-col gap-4">
+  <Skeleton className="h-40 w-full" />
+  <Skeleton.Text lines={1} />
+  <Skeleton.Text lines={3} lastLineWidth="70%" />
+  <div className="flex gap-3">
+    <Skeleton className="h-10 w-24" />
+    <Skeleton className="h-10 w-24" />
+  </div>
+</div>
+```
+
+## Avatar with Text
+
+```tsx
+<div className="flex items-center gap-3">
+  <Skeleton shape="circle" className="h-10 w-10 shrink-0" />
+  <Skeleton.Text lines={2} lastLineWidth="60%" className="flex-1" />
+</div>
+```
+
+## API Reference
+
+### Skeleton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `shape` | `'rect' \| 'circle' \| 'text'` | `'rect'` | Border radius style |
+| `className` | `string` | — | Width, height, and other Tailwind classes |
+
+### Skeleton.Text
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `lines` | `number` | `3` | Number of text lines |
+| `lastLineWidth` | `string` | `'60%'` | Width of the last line (shorter = more natural) |

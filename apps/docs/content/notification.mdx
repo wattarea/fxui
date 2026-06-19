@@ -1,0 +1,30 @@
+# Notification
+
+Individual notification item with icon, title, description, timestamp, actions, and unread indicator.
+
+## Usage
+
+```tsx
+import { Notification } from '@fxui/core';
+
+<Notification
+  title="Build complete"
+  description="Production build finished in 12s"
+  variant="success"
+  timestamp="2 min ago"
+  closeable
+  onClose={() => dismiss(id)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `title` | `string` | **required** |
+| `description` | `string` | — |
+| `variant` | `'default' \| 'success' \| 'warning' \| 'error' \| 'info'` | `'default'` |
+| `timestamp` | `string` | — |
+| `actions` | `NotificationAction[]` | — |
+| `closeable` | `boolean` | `false` |
+| `unread` | `boolean` | `false` |

@@ -1,0 +1,28 @@
+# List
+
+Styled list component with neo-brutalist variants. Supports bullet, numbered, checkmark, and neo card-row styles.
+
+## Usage
+
+```tsx
+import { List } from '@fxui/core';
+
+<List variant="bullet" items={['Item one', 'Item two', 'Item three']} />
+<List variant="check" items={['TypeScript', 'Tailwind', 'Radix UI']} />
+<List variant="neo" items={[
+  { children: 'First', description: 'Description text', icon: '⚡' },
+]} />
+```
+
+## Variants
+
+`bullet` · `numbered` · `check` · `neo` · `none`
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `string` | `'bullet'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `items` | `(string \| ListItemProps)[]` | — |
+| `type` | `'ul' \| 'ol'` | `'ul'` |

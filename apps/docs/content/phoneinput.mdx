@@ -1,0 +1,27 @@
+# PhoneInput
+
+International phone input with a country flag/dial-code selector dropdown and a number field.
+
+## Usage
+
+```tsx
+import { PhoneInput } from '@fxui/core';
+
+<PhoneInput
+  label="Mobile"
+  defaultCountry="US"
+  onChange={(full, dial, num) => setValue(full)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` | — |
+| `defaultCountry` | `string` (ISO code) | `'TR'` |
+| `countries` | `CountryCode[]` | 17 built-in |
+| `onChange` | `(full, dial, num) => void` | — |
+| `label` | `string` | — |
+| `error` | `string` | — |
+| `hint` | `string` | — |

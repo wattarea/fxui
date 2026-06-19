@@ -1,0 +1,21 @@
+# ReadMore
+
+Truncated text with a "Read more" / "Show less" toggle button. Use `maxChars` to set the character limit.
+
+## Usage
+
+```tsx
+import { ReadMore } from '@fxui/core';
+
+<ReadMore maxChars={150}>
+  {longText}
+</ReadMore>
+```
+
+## Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `maxChars` | `number` | — |
+| `moreLabel` | `string` | `'Read more'` |
+| `lessLabel` | `string` | `'Show less'` |
