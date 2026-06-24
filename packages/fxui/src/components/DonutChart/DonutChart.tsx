@@ -77,7 +77,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
       <div
         ref={ref}
         className={cn(
-          'border-2 border-fx-black dark:border-fx-white rounded-[4px] shadow-fx bg-fx-white dark:bg-fx-black p-4',
+          'relative border-2 border-fx-black dark:border-fx-white rounded-[4px] shadow-fx bg-fx-white dark:bg-fx-black p-4',
           className
         )}
         {...props}
