@@ -8,6 +8,7 @@ const navigation = [
     section: 'GETTING STARTED',
     items: [
       { label: 'Installation', href: '/docs/getting-started' },
+      { label: 'Showcase ↗', href: '/showcase' },
     ],
   },
   {
