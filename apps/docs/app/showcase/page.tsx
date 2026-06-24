@@ -531,9 +531,7 @@ export default function ShowcasePage() {
         </DemoCard>
 
         <DemoCard name="InputGroup">
-          <InputGroup prefix="https://" suffix=".com" className="w-full">
-            <Input placeholder="yoursite" />
-          </InputGroup>
+          <InputGroup prefix="https://" suffix=".com" placeholder="yoursite" className="w-full" />
         </DemoCard>
       </div>
 
