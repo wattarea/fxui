@@ -50,9 +50,9 @@ export default async function DocsPage({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  return [
-    { slug: 'getting-started' },
-    { slug: 'button' },
-    { slug: 'card' },
-  ];
+  const { readdir } = await import('fs/promises');
+  const files = await readdir(path.join(process.cwd(), 'content'));
+  return files
+    .filter((f) => f.endsWith('.mdx'))
+    .map((f) => ({ slug: f.replace('.mdx', '') }));
 }
