@@ -21,7 +21,7 @@ import {
   DonutChart, SparkLine, ProgressRing, AnimatedCounter,
   CopyButton, ColorSwatch, Marquee, ReadMore, HighlightText,
   ScrollToTop, QRCode, ClipboardInput,
-  GlitchText, TypewriterText, NoiseBg, BrutalistCard,
+  GlitchText, TypewriterText, NoiseBg, BrutalistCard, type NoiseBlendMode,
   ThemeProvider, Accordion, Tour,
   useToast,
 } from '@fxui/core';
@@ -1939,19 +1939,72 @@ export default function ShowcasePage() {
           </div>
         </Row>
 
-        <Row name="NoiseBg" wide>
-          <div className="grid grid-cols-5 gap-3">
+        <Row name="NoiseBg — blend modes" wide>
+          <div className="grid grid-cols-4 gap-3">
             {([
-              ['bg-fx-yellow', 'text-fx-black'],
-              ['bg-fx-pink', 'text-white'],
-              ['bg-fx-green', 'text-fx-black'],
-              ['bg-fx-blue', 'text-white'],
-              ['bg-fx-purple', 'text-white'],
-            ] as const).map(([bg, text], i) => (
-              <NoiseBg key={i} className={`${bg} ${text} border-2 border-fx-black rounded-[4px] h-20 flex items-center justify-center`}>
-                <span className="font-black text-sm">Noise {i+1}</span>
-              </NoiseBg>
+              ['overlay', 'bg-fx-yellow', 'text-fx-black'],
+              ['soft-light', 'bg-fx-pink', 'text-white'],
+              ['multiply', 'bg-fx-green', 'text-fx-black'],
+              ['screen', 'bg-fx-black', 'text-white'],
+            ] as [NoiseBlendMode, string, string][]).map(([mode, bg, text]) => (
+              <div key={mode}>
+                <p className="text-[10px] font-mono text-gray-400 mb-1">{mode}</p>
+                <NoiseBg blendMode={mode} opacity={0.6} className={`${bg} ${text} border-2 border-fx-black rounded-[4px] h-24 flex items-center justify-center`}>
+                  <span className="font-display font-black text-base uppercase">{mode}</span>
+                </NoiseBg>
+              </div>
             ))}
+          </div>
+        </Row>
+
+        <Row name="NoiseBg — frequency" wide>
+          <div className="grid grid-cols-4 gap-3">
+            {([
+              [0.2, 'Coarse'],
+              [0.45, 'Medium'],
+              [0.65, 'Fine'],
+              [1.2, 'Micro'],
+            ] as [number, string][]).map(([freq, label]) => (
+              <div key={freq}>
+                <p className="text-[10px] font-mono text-gray-400 mb-1">baseFrequency={freq}</p>
+                <NoiseBg baseFrequency={freq} opacity={0.6} blendMode="overlay" className="bg-fx-blue text-white border-2 border-fx-black rounded-[4px] h-24 flex items-center justify-center">
+                  <span className="font-display font-black text-base">{label}</span>
+                </NoiseBg>
+              </div>
+            ))}
+          </div>
+        </Row>
+
+        <Row name="NoiseBg — opacity + animated" wide>
+          <div className="grid grid-cols-5 gap-3">
+            {([0.1, 0.25, 0.5, 0.75, 1] as number[]).map((op) => (
+              <div key={op}>
+                <p className="text-[10px] font-mono text-gray-400 mb-1">opacity={op}</p>
+                <NoiseBg opacity={op} blendMode="overlay" className="bg-fx-purple text-white border-2 border-fx-black rounded-[4px] h-20 flex items-center justify-center">
+                  <span className="font-display font-black text-sm">{op}</span>
+                </NoiseBg>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-3 gap-3 mt-3">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">animated (pulsing noise)</p>
+              <NoiseBg animated opacity={0.6} blendMode="overlay" className="bg-fx-yellow text-fx-black border-2 border-fx-black rounded-[4px] h-24 flex items-center justify-center">
+                <span className="font-display font-black text-base">Animated</span>
+              </NoiseBg>
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">hard-light on dark</p>
+              <NoiseBg blendMode="hard-light" opacity={0.7} numOctaves={6} className="bg-fx-black text-white border-2 border-fx-black rounded-[4px] h-24 flex items-center justify-center">
+                <span className="font-display font-black text-base text-fx-yellow">Hard-light</span>
+              </NoiseBg>
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">normal — raw grayscale noise</p>
+              <NoiseBg blendMode="normal" opacity={0.8} className="bg-fx-pink text-white border-2 border-fx-black rounded-[4px] h-24 flex items-center justify-center">
+                <span className="font-display font-black text-base">Normal</span>
+              </NoiseBg>
+            </div>
           </div>
         </Row>
 
