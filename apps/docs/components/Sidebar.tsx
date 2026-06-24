@@ -253,7 +253,7 @@ export function Sidebar() {
       {/* Footer */}
       <div className="fixed bottom-0 left-0 w-64 p-4 border-t-2 border-fx-black dark:border-fx-white bg-fx-white dark:bg-fx-black">
         <p className="text-xs text-gray-400 font-sans text-center">
-          v1.0.0 · MIT License · 117 components
+          v2.0.0 · MIT License · 117 components
         </p>
       </div>
     </aside>
