@@ -75,7 +75,7 @@ const AvatarRoot = React.forwardRef<HTMLSpanElement, AvatarProps>(
 );
 AvatarRoot.displayName = 'Avatar';
 
-export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   max?: number;
   size?: VariantProps<typeof avatarVariants>['size'];
   children: React.ReactNode;

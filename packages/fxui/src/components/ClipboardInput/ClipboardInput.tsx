@@ -34,7 +34,7 @@ const CheckIcon = () => (
 );
 
 export interface ClipboardInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'defaultValue'>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'defaultValue' | 'prefix'>,
     VariantProps<typeof clipboardInputVariants> {
   value: string;
   label?: string;

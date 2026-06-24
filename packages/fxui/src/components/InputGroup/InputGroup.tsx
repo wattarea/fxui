@@ -57,7 +57,7 @@ const InputGroupAddon = ({ position, className, children, ...props }: InputGroup
 );
 
 export interface InputGroupProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'>,
     Omit<VariantProps<typeof inputGroupVariants>, 'disabled'> {
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
