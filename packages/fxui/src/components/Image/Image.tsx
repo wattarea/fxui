@@ -23,12 +23,23 @@ const FallbackIcon = () => (
 export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   src?: string;
   alt: string;
+  /** Aspect ratio preset or numeric ratio (width/height). */
   ratio?: number | AspectRatioPreset;
   objectFit?: ObjectFit;
   fallback?: React.ReactNode;
   caption?: string;
   bordered?: boolean;
   rounded?: boolean;
+  /** Drop shadow matching the neo-brutalist design system. */
+  shadow?: boolean;
+  /** Scale up on hover. */
+  zoom?: boolean;
+  /** Corner badge label (e.g. "New", "Sale"). */
+  badge?: string;
+  /** Content overlay rendered on top of the image. */
+  overlay?: React.ReactNode;
+  /** Dark gradient overlay always visible at the bottom. */
+  gradient?: boolean;
 }
 
 const Image = React.forwardRef<HTMLImageElement, ImageProps>(
@@ -42,6 +53,11 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
       caption,
       bordered = false,
       rounded = false,
+      shadow = false,
+      zoom = false,
+      badge,
+      overlay,
+      gradient = false,
       className,
       style,
       ...props
@@ -59,17 +75,17 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
 
     const wrapperClass = cn(
       'relative overflow-hidden bg-gray-100 dark:bg-gray-800',
-      bordered && 'border-2 border-fx-black dark:border-fx-white shadow-fx',
+      bordered && 'border-2 border-fx-black dark:border-fx-white',
       rounded && 'rounded-[4px]',
+      shadow && 'shadow-fx',
+      zoom && 'group/img',
     );
 
     const imgEl = (
       <>
-        {/* Placeholder while loading */}
         {status === 'loading' && (
-          <div className="absolute inset-0 animate-pulse bg-gray-200 dark:bg-gray-700" aria-hidden="true" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]" aria-hidden="true" />
         )}
-        {/* Error fallback */}
         {status === 'error' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800">
             {fallback ?? <FallbackIcon />}
@@ -85,15 +101,35 @@ const Image = React.forwardRef<HTMLImageElement, ImageProps>(
             onLoad={() => setStatus('loaded')}
             onError={() => setStatus('error')}
             className={cn(
-              'w-full transition-opacity duration-300',
+              'w-full transition-all duration-300',
               numericRatio ? 'absolute inset-0 h-full' : 'block',
               `object-${objectFit}`,
               status === 'loaded' ? 'opacity-100' : 'opacity-0',
+              zoom && 'group-hover/img:scale-105',
               !numericRatio && className,
             )}
             style={numericRatio ? undefined : style}
             {...props}
           />
+        )}
+
+        {/* Gradient overlay */}
+        {gradient && (
+          <div className="absolute inset-0 bg-gradient-to-t from-fx-black/70 via-transparent to-transparent pointer-events-none" />
+        )}
+
+        {/* Content overlay */}
+        {overlay && (
+          <div className="absolute inset-0 flex items-end p-3 pointer-events-none">
+            {overlay}
+          </div>
+        )}
+
+        {/* Corner badge */}
+        {badge && (
+          <div className="absolute top-2 right-2 z-10 bg-fx-yellow border-2 border-fx-black px-2 py-0.5 font-mono text-[11px] font-black uppercase tracking-wider shadow-fx-sm">
+            {badge}
+          </div>
         )}
       </>
     );

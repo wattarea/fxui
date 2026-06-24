@@ -1469,26 +1469,226 @@ export default function ShowcasePage() {
       {/* ═══════════════════════════════════════════════ MEDIA & CHART */}
       <Section title="Media & Chart" accent="purple">
 
-        <Row name="Image" wide>
-          <div className="grid grid-cols-3 gap-4">
-            <Image src="https://picsum.photos/seed/fx1/600/300" alt="Landscape" className="w-full rounded-[4px] border-2 border-fx-black" caption="Default image" />
-            <Image src="https://picsum.photos/seed/fx2/600/400" alt="Portrait" className="w-full rounded-[4px] border-2 border-fx-black" />
-            <Image src="https://picsum.photos/seed/fx3/600/300" alt="Wide" className="w-full rounded-[4px] border-2 border-fx-black shadow-fx" caption="With shadow-fx" />
+        {/* ── Image ───────────────────────────────────────── */}
+        <Row name="Image — ratios" wide>
+          <div className="grid grid-cols-5 gap-3">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">square</p>
+              <Image src="https://picsum.photos/seed/fxa/400/400" alt="Square" ratio="square" bordered rounded shadow />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">video (16/9)</p>
+              <Image src="https://picsum.photos/seed/fxb/600/340" alt="Video" ratio="video" bordered rounded shadow />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">photo (4/3)</p>
+              <Image src="https://picsum.photos/seed/fxc/400/300" alt="Photo" ratio="photo" bordered rounded shadow />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">wide (21/9)</p>
+              <Image src="https://picsum.photos/seed/fxd/600/260" alt="Wide" ratio="wide" bordered rounded shadow />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">portrait (3/4)</p>
+              <Image src="https://picsum.photos/seed/fxe/300/400" alt="Portrait" ratio="portrait" bordered rounded shadow />
+            </div>
           </div>
         </Row>
 
-        <Row name="Carousel" wide>
-          <Carousel className="w-full" items={[
-            <div key={1} className="h-36 bg-fx-yellow border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl">Slide 1</div>,
-            <div key={2} className="h-36 bg-fx-pink border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl text-white">Slide 2</div>,
-            <div key={3} className="h-36 bg-fx-green border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl">Slide 3</div>,
-            <div key={4} className="h-36 bg-fx-blue border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl text-white">Slide 4</div>,
-            <div key={5} className="h-36 bg-fx-purple border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl text-white">Slide 5</div>,
-          ]} />
+        <Row name="Image — effects" wide>
+          <div className="grid grid-cols-4 gap-4">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">zoom on hover</p>
+              <Image src="https://picsum.photos/seed/fxf/400/300" alt="Zoom" ratio="photo" bordered rounded zoom />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">badge corner</p>
+              <Image src="https://picsum.photos/seed/fxg/400/300" alt="Badge" ratio="photo" bordered rounded badge="NEW" />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">gradient overlay</p>
+              <Image
+                src="https://picsum.photos/seed/fxh/400/300" alt="Gradient" ratio="photo" bordered rounded gradient
+                overlay={<span className="text-fx-white font-display font-black text-lg leading-tight">Bold.<br/>Raw.</span>}
+              />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-1">error fallback</p>
+              <Image src="/broken-image.jpg" alt="Broken" ratio="photo" bordered rounded />
+            </div>
+          </div>
         </Row>
 
-        <Row name="VideoPlayer" wide>
-          <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" className="w-full max-w-xl" />
+        <Row name="Image — caption" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <Image src="https://picsum.photos/seed/fxi/600/350" alt="Caption example" ratio="video" bordered rounded shadow caption="Neo-brutalist design with a shadow-fx drop" />
+            <Image src="https://picsum.photos/seed/fxj/600/350" alt="Zoom + badge" ratio="video" bordered rounded shadow zoom badge="SALE" caption="Zoom on hover + corner badge" />
+            <Image src="https://picsum.photos/seed/fxk/600/350" alt="Gradient + overlay" ratio="video" bordered rounded shadow gradient
+              overlay={<div className="w-full"><span className="text-xs font-mono text-fx-white/60">FXUI</span><p className="text-fx-white font-display font-black text-xl">Component Library</p></div>}
+              caption="gradient + text overlay"
+            />
+          </div>
+        </Row>
+
+        {/* ── Carousel ─────────────────────────────────────── */}
+        <Row name="Carousel — dots (default)" wide>
+          <Carousel
+            ratio="16/9"
+            className="w-full border-2 border-fx-black rounded-[4px] shadow-fx overflow-hidden"
+            items={[
+              <div key={1} className="h-full min-h-[200px] bg-fx-yellow flex items-center justify-center font-display font-black text-4xl">Slide 01</div>,
+              <div key={2} className="h-full min-h-[200px] bg-fx-pink flex items-center justify-center font-display font-black text-4xl text-white">Slide 02</div>,
+              <div key={3} className="h-full min-h-[200px] bg-fx-green flex items-center justify-center font-display font-black text-4xl">Slide 03</div>,
+              <div key={4} className="h-full min-h-[200px] bg-fx-blue flex items-center justify-center font-display font-black text-4xl text-white">Slide 04</div>,
+            ]}
+          />
+        </Row>
+
+        <Row name="Carousel — nav variants" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">navVariant=&quot;pills&quot;</p>
+              <Carousel
+                navVariant="pills"
+                className="border-2 border-fx-black rounded-[4px] overflow-hidden"
+                items={[
+                  <div key={1} className="h-32 bg-fx-yellow flex items-center justify-center font-display font-black text-2xl">One</div>,
+                  <div key={2} className="h-32 bg-fx-pink flex items-center justify-center font-display font-black text-2xl text-white">Two</div>,
+                  <div key={3} className="h-32 bg-fx-green flex items-center justify-center font-display font-black text-2xl">Three</div>,
+                ]}
+              />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">navVariant=&quot;numbers&quot;</p>
+              <Carousel
+                navVariant="numbers"
+                className="border-2 border-fx-black rounded-[4px] overflow-hidden"
+                items={[
+                  <div key={1} className="h-32 bg-fx-blue flex items-center justify-center font-display font-black text-2xl text-white">One</div>,
+                  <div key={2} className="h-32 bg-fx-purple flex items-center justify-center font-display font-black text-2xl text-white">Two</div>,
+                  <div key={3} className="h-32 bg-fx-yellow flex items-center justify-center font-display font-black text-2xl">Three</div>,
+                ]}
+              />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">navVariant=&quot;bar&quot; (progress)</p>
+              <Carousel
+                navVariant="bar"
+                className="border-2 border-fx-black rounded-[4px] overflow-hidden"
+                items={[
+                  <div key={1} className="h-32 bg-fx-green flex items-center justify-center font-display font-black text-2xl">Step 1</div>,
+                  <div key={2} className="h-32 bg-fx-blue flex items-center justify-center font-display font-black text-2xl text-white">Step 2</div>,
+                  <div key={3} className="h-32 bg-fx-pink flex items-center justify-center font-display font-black text-2xl text-white">Step 3</div>,
+                  <div key={4} className="h-32 bg-fx-purple flex items-center justify-center font-display font-black text-2xl text-white">Step 4</div>,
+                ]}
+              />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">navVariant=&quot;none&quot; + text counter</p>
+              <Carousel
+                navVariant="none"
+                className="border-2 border-fx-black rounded-[4px] overflow-hidden"
+                items={[
+                  <div key={1} className="h-32 bg-fx-yellow flex items-center justify-center font-display font-black text-2xl">A</div>,
+                  <div key={2} className="h-32 bg-fx-pink flex items-center justify-center font-display font-black text-2xl text-white">B</div>,
+                  <div key={3} className="h-32 bg-fx-green flex items-center justify-center font-display font-black text-2xl">C</div>,
+                ]}
+              />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="Carousel — multi-slide" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">slidesToShow=2</p>
+              <Carousel
+                slidesToShow={2}
+                gap={12}
+                navVariant="pills"
+                className="border-2 border-fx-black rounded-[4px] overflow-hidden"
+                items={[
+                  <div key={1} className="h-28 bg-fx-yellow flex items-center justify-center font-display font-black text-xl border-r-2 border-fx-black">1</div>,
+                  <div key={2} className="h-28 bg-fx-pink flex items-center justify-center font-display font-black text-xl text-white border-r-2 border-fx-black">2</div>,
+                  <div key={3} className="h-28 bg-fx-green flex items-center justify-center font-display font-black text-xl border-r-2 border-fx-black">3</div>,
+                  <div key={4} className="h-28 bg-fx-blue flex items-center justify-center font-display font-black text-xl text-white border-r-2 border-fx-black">4</div>,
+                  <div key={5} className="h-28 bg-fx-purple flex items-center justify-center font-display font-black text-xl text-white">5</div>,
+                ]}
+              />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">slidesToShow=3</p>
+              <Carousel
+                slidesToShow={3}
+                gap={8}
+                navVariant="bar"
+                className="border-2 border-fx-black rounded-[4px] overflow-hidden"
+                items={[
+                  <div key={1} className="h-28 bg-fx-yellow flex items-center justify-center font-display font-black">A</div>,
+                  <div key={2} className="h-28 bg-fx-green flex items-center justify-center font-display font-black">B</div>,
+                  <div key={3} className="h-28 bg-fx-blue flex items-center justify-center font-display font-black text-white">C</div>,
+                  <div key={4} className="h-28 bg-fx-pink flex items-center justify-center font-display font-black text-white">D</div>,
+                  <div key={5} className="h-28 bg-fx-purple flex items-center justify-center font-display font-black text-white">E</div>,
+                  <div key={6} className="h-28 bg-fx-yellow flex items-center justify-center font-display font-black">F</div>,
+                ]}
+              />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="Carousel — thumbnails" wide>
+          <Carousel
+            thumbnails={[
+              'https://picsum.photos/seed/th1/200/150',
+              'https://picsum.photos/seed/th2/200/150',
+              'https://picsum.photos/seed/th3/200/150',
+              'https://picsum.photos/seed/th4/200/150',
+            ]}
+            navVariant="none"
+            showArrows={false}
+            className="border-2 border-fx-black rounded-[4px] overflow-visible shadow-fx"
+            items={[
+              <Image key={1} src="https://picsum.photos/seed/th1/800/450" alt="Slide 1" ratio="video" objectFit="cover" className="w-full" />,
+              <Image key={2} src="https://picsum.photos/seed/th2/800/450" alt="Slide 2" ratio="video" objectFit="cover" className="w-full" />,
+              <Image key={3} src="https://picsum.photos/seed/th3/800/450" alt="Slide 3" ratio="video" objectFit="cover" className="w-full" />,
+              <Image key={4} src="https://picsum.photos/seed/th4/800/450" alt="Slide 4" ratio="video" objectFit="cover" className="w-full" />,
+            ]}
+          />
+        </Row>
+
+        {/* ── VideoPlayer ──────────────────────────────────── */}
+        <Row name="VideoPlayer — themes" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">theme=&quot;yellow&quot; (default)</p>
+              <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="yellow" caption="Big Buck Bunny — yellow controls" />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">theme=&quot;pink&quot;</p>
+              <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="pink" caption="Pink accent controls" />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">theme=&quot;green&quot;</p>
+              <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="green" caption="Green accent controls" />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">theme=&quot;blue&quot;</p>
+              <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="blue" caption="Blue accent controls" />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="VideoPlayer — options" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">ratio=&quot;4/3&quot; + showShortcuts</p>
+              <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="yellow" ratio="4/3" showShortcuts caption="Focus the player and use Space/Arrow keys" />
+            </div>
+            <div>
+              <p className="text-[10px] font-mono text-gray-400 mb-2">loop + muted + autoPlay</p>
+              <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="green" loop muted autoPlay caption="Autoplays muted in a loop" />
+            </div>
+          </div>
         </Row>
 
         <Row name="LineChart" wide>
