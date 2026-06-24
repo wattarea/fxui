@@ -164,6 +164,11 @@ function CmdDemo() {
 // ── Main page ─────────────────────────────────────────────────────────────────
 
 export default function ShowcasePage() {
+  // mounted guard — prevents Date.now() hydration mismatch (#425)
+  const [mounted, setMounted] = useState(false);
+  const nowRef = React.useRef(0);
+  React.useEffect(() => { nowRef.current = Date.now(); setMounted(true); }, []);
+
   // shared state
   const [sliderVal, setSliderVal] = useState(65);
   const [checkA, setCheckA] = useState(true);
@@ -1024,11 +1029,15 @@ export default function ShowcasePage() {
 
         <Row name="TimeAgo">
           <div className="flex flex-wrap gap-4 text-sm font-sans text-gray-600">
-            <TimeAgo date={new Date(Date.now() - 30000)} />
-            <TimeAgo date={new Date(Date.now() - 3600000 * 2)} />
-            <TimeAgo date={new Date(Date.now() - 86400000 * 3)} />
-            <TimeAgo date={new Date(Date.now() - 86400000 * 30)} />
-            <TimeAgo date={new Date('2024-01-01')} />
+            {mounted && (
+              <>
+                <TimeAgo date={new Date(nowRef.current - 30000)} />
+                <TimeAgo date={new Date(nowRef.current - 3600000 * 2)} />
+                <TimeAgo date={new Date(nowRef.current - 86400000 * 3)} />
+                <TimeAgo date={new Date(nowRef.current - 86400000 * 30)} />
+                <TimeAgo date={new Date('2024-01-01')} />
+              </>
+            )}
           </div>
         </Row>
 
@@ -1036,11 +1045,11 @@ export default function ShowcasePage() {
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">7 days from now</p>
-              <Countdown targetDate={new Date(Date.now() + 86400000 * 7)} />
+              {mounted && <Countdown targetDate={new Date(nowRef.current + 86400000 * 7)} />}
             </div>
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">1 hour from now</p>
-              <Countdown targetDate={new Date(Date.now() + 3600000)} />
+              {mounted && <Countdown targetDate={new Date(nowRef.current + 3600000)} />}
             </div>
           </div>
         </Row>
@@ -1514,7 +1523,8 @@ export default function ShowcasePage() {
             </div>
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-1">error fallback</p>
-              <Image src="/broken-image.jpg" alt="Broken" ratio="photo" bordered rounded />
+              {/* data: URI triggers onError once — no network request, no retry loop */}
+              <Image src="data:image/jpeg,invalid" alt="Broken image demo" ratio="photo" bordered rounded />
             </div>
           </div>
         </Row>
