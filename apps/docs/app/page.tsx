@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ShowcaseSection } from '../components/ShowcaseSection';
 
 const categories = [
   {
@@ -297,6 +298,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Showcase ─────────────────────────────────────── */}
+      <ShowcaseSection />
 
       {/* ── Stats bar ────────────────────────────────────── */}
       <section className="border-y-2 border-fx-black bg-fx-black">
