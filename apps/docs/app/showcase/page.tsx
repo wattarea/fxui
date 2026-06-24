@@ -2,56 +2,39 @@
 
 import React, { useState } from 'react';
 import {
-  // CORE
   Button, Badge, Chip, Tag, Kbd, Divider, Spinner, FloatingActionButton,
-  // LAYOUT
   Container, Stack, Flex, Grid, AspectRatio, ScrollArea, SplitLayout, Masonry,
-  // TYPOGRAPHY
   Heading, Text, Label, Caption, Blockquote, Code, PullQuote, GradientText,
-  // FORM
   Input, PasswordInput, SearchInput, Textarea, Select, NumberInput,
   Slider, Checkbox, CheckboxGroup, Switch, SwitchGroup, RadioGroup,
   SegmentedControl, OTPInput, Rating, FormField, InputGroup,
-  // FORM ADVANCED
   DatePicker, TagInput, ComboBox, FileUpload, ColorPicker,
   MaskInput, TreeSelect, PinInput, AutoComplete,
-  // DATA DISPLAY
   Table, Card, Avatar, AvatarGroup, Stat, Timeline, Progress,
   Skeleton, TreeView, DataList, List, TimeAgo, Countdown,
-  // FEEDBACK
   Alert, EmptyState, Banner, ConfirmDialog, Notification, Callout, LoadingOverlay,
-  // NAVIGATION
   Tabs, Breadcrumb, Pagination, Stepper, Navbar, NavMenu, AppSidebar, ScrollProgress,
-  // OVERLAY
   Modal, Drawer, Tooltip, Popover, DropdownMenu, ContextMenu,
   CommandPalette, HoverCard, SheetDialog, Popconfirm,
-  // INTERACTION
   Collapsible, InlineEdit,
-  // MEDIA & CHART
   Image, Carousel, VideoPlayer, LineChart, BarChart, AreaChart,
   DonutChart, SparkLine, ProgressRing, AnimatedCounter,
-  // UTILITY
   CopyButton, ColorSwatch, Marquee, ReadMore, HighlightText,
   ScrollToTop, QRCode, ClipboardInput,
-  // SPECIAL
   GlitchText, TypewriterText, NoiseBg, BrutalistCard,
-  // THEME
-  ThemeProvider,
-  // MISC
-  Accordion, Tour,
-  // hooks
+  ThemeProvider, Accordion, Tour,
   useToast,
 } from '@fxui/core';
 
-// ── Shared sample data ───────────────────────────────────────────────────────
+// ── Data ─────────────────────────────────────────────────────────────────────
 
 const chartData = [
-  { month: 'Jan', revenue: 4200, users: 820 },
-  { month: 'Feb', revenue: 5800, users: 1100 },
-  { month: 'Mar', revenue: 4900, users: 960 },
-  { month: 'Apr', revenue: 7200, users: 1380 },
-  { month: 'May', revenue: 6500, users: 1250 },
-  { month: 'Jun', revenue: 8900, users: 1720 },
+  { month: 'Jan', revenue: 4200, users: 820, expenses: 3100 },
+  { month: 'Feb', revenue: 5800, users: 1100, expenses: 3600 },
+  { month: 'Mar', revenue: 4900, users: 960, expenses: 3400 },
+  { month: 'Apr', revenue: 7200, users: 1380, expenses: 4100 },
+  { month: 'May', revenue: 6500, users: 1250, expenses: 3900 },
+  { month: 'Jun', revenue: 8900, users: 1720, expenses: 4700 },
 ];
 
 const donutData = [
@@ -62,88 +45,106 @@ const donutData = [
 ];
 
 const tableData = [
-  { id: 1, name: 'Alice Park', role: 'Admin', status: 'Active' },
-  { id: 2, name: 'Bob Chen', role: 'Editor', status: 'Away' },
-  { id: 3, name: 'Carol Wu', role: 'Viewer', status: 'Offline' },
+  { id: 1, name: 'Alice Park', role: 'Admin', status: 'Active', joined: '2024-01' },
+  { id: 2, name: 'Bob Chen', role: 'Editor', status: 'Away', joined: '2024-03' },
+  { id: 3, name: 'Carol Wu', role: 'Viewer', status: 'Offline', joined: '2024-05' },
+  { id: 4, name: 'Dan Lee', role: 'Admin', status: 'Active', joined: '2023-11' },
 ];
 
 const treeNodes = [
-  { id: '1', label: 'src', children: [
-    { id: '1-1', label: 'components', children: [
-      { id: '1-1-1', label: 'Button.tsx' },
-      { id: '1-1-2', label: 'Badge.tsx' },
+  { id: '1', label: 'packages/', children: [
+    { id: '1-1', label: 'fxui/', children: [
+      { id: '1-1-1', label: 'src/', children: [
+        { id: '1-1-1-1', label: 'components/' },
+        { id: '1-1-1-2', label: 'index.ts' },
+      ]},
     ]},
-    { id: '1-2', label: 'index.ts' },
   ]},
-  { id: '2', label: 'package.json' },
+  { id: '2', label: 'apps/', children: [
+    { id: '2-1', label: 'docs/', children: [
+      { id: '2-1-1', label: 'app/' },
+    ]},
+  ]},
+  { id: '3', label: 'package.json' },
 ];
 
 const timelineItems = [
-  { title: 'Deployed v2.0', description: '117 components shipped', timestamp: 'Today', status: 'success' as const },
-  { title: 'Beta released', description: 'Public beta started', timestamp: '2 days ago', status: 'default' as const },
-  { title: 'Alpha build', description: 'Internal testing', timestamp: '1 week ago', status: 'default' as const },
+  { title: 'v2.0 shipped', description: '117 components, full TypeScript', timestamp: 'Today', status: 'success' as const },
+  { title: 'Beta released', description: 'Public testing phase', timestamp: '3 days ago', status: 'default' as const },
+  { title: 'Alpha build', description: 'Internal testing', timestamp: '2 weeks ago', status: 'default' as const },
+  { title: 'Project started', description: 'First commit', timestamp: '3 months ago', status: 'default' as const },
 ];
 
-// ── Demo card wrapper ────────────────────────────────────────────────────────
+// ── Layout primitives ─────────────────────────────────────────────────────────
 
-function DemoCard({ name, children }: { name: string; children: React.ReactNode }) {
+function Section({ title, accent = 'yellow', children }: {
+  title: string;
+  accent?: 'yellow' | 'pink' | 'green' | 'blue' | 'purple';
+  children: React.ReactNode;
+}) {
+  const accentMap = {
+    yellow: 'border-fx-yellow bg-fx-yellow',
+    pink: 'border-fx-pink bg-fx-pink',
+    green: 'border-fx-green bg-fx-green',
+    blue: 'border-fx-blue bg-fx-blue',
+    purple: 'border-fx-purple bg-fx-purple',
+  };
   return (
-    <div className="border-2 border-fx-black rounded-[4px] shadow-fx bg-white overflow-hidden">
-      <div className="px-4 py-2 border-b-2 border-fx-black bg-gray-50">
-        <span className="font-mono text-xs font-bold text-gray-500 uppercase tracking-widest">{name}</span>
+    <section className="mt-20 first:mt-0">
+      <div className="flex items-center gap-4 mb-8">
+        <div className={`h-5 w-5 border-2 border-fx-black rounded-[2px] shrink-0 ${accentMap[accent]}`} />
+        <h2 className="font-display font-black text-3xl text-fx-black uppercase tracking-wider">{title}</h2>
+        <div className="flex-1 border-t-2 border-fx-black opacity-10" />
       </div>
-      <div className="p-5 flex flex-col items-stretch gap-3 min-h-[80px] justify-center">
+      <div className="space-y-0">
         {children}
       </div>
-    </div>
+    </section>
   );
 }
 
-// ── Category header ──────────────────────────────────────────────────────────
-
-const catColors: Record<string, string> = {
-  CORE: 'bg-fx-yellow', LAYOUT: 'bg-fx-green', TYPOGRAPHY: 'bg-fx-blue',
-  FORM: 'bg-fx-pink', 'FORM ADVANCED': 'bg-fx-purple', 'DATA DISPLAY': 'bg-fx-green',
-  FEEDBACK: 'bg-fx-yellow', NAVIGATION: 'bg-fx-blue', OVERLAY: 'bg-fx-pink',
-  INTERACTION: 'bg-fx-green', 'MEDIA & CHART': 'bg-fx-purple',
-  UTILITY: 'bg-fx-yellow', SPECIAL: 'bg-fx-pink', THEME: 'bg-fx-purple', MISC: 'bg-fx-blue',
-};
-
-function CategoryHeader({ name, count }: { name: string; count: number }) {
+function Row({ name, wide, children }: {
+  name: string;
+  wide?: boolean;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="flex items-center gap-3 mb-5 mt-14 first:mt-0">
-      <span className={`h-4 w-4 rounded-[2px] border-2 border-fx-black ${catColors[name] ?? 'bg-gray-200'} shrink-0`} />
-      <h2 className="font-display font-black text-2xl text-fx-black uppercase tracking-wider">{name}</h2>
-      <span className="font-mono text-xs text-gray-400 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-[4px]">{count}</span>
-      <div className="flex-1 border-t-2 border-dashed border-gray-200" />
+    <div className={`group py-7 border-b border-gray-100 last:border-0 ${wide ? 'flex flex-col gap-4' : 'flex gap-8 items-start'}`}>
+      {wide ? (
+        <>
+          <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400">{name}</span>
+          <div className="w-full">{children}</div>
+        </>
+      ) : (
+        <>
+          <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400 w-44 shrink-0 pt-0.5">{name}</span>
+          <div className="flex-1 flex flex-wrap gap-3 items-center min-w-0">{children}</div>
+        </>
+      )}
     </div>
   );
 }
 
-// ── Toast demo ───────────────────────────────────────────────────────────────
+// ── Sub-component demos ───────────────────────────────────────────────────────
 
 function ToastDemo() {
   const { toast } = useToast();
   return (
     <div className="flex flex-wrap gap-2">
-      <Button size="sm" onClick={() => toast({ title: 'Saved!', variant: 'success', description: 'Changes saved.' })}>
-        Success toast
-      </Button>
-      <Button size="sm" variant="outline" onClick={() => toast({ title: 'Heads up', variant: 'warning', description: 'Review before publish.' })}>
-        Warning toast
-      </Button>
+      <Button size="sm" onClick={() => toast({ title: 'Saved!', variant: 'success', description: 'Your changes were saved.' })}>Success</Button>
+      <Button size="sm" variant="outline" onClick={() => toast({ title: 'Heads up', variant: 'warning', description: 'Review before publishing.' })}>Warning</Button>
+      <Button size="sm" variant="destructive" onClick={() => toast({ title: 'Error', variant: 'error', description: 'Something went wrong.' })}>Error</Button>
+      <Button size="sm" variant="ghost" onClick={() => toast({ title: 'FYI', description: 'Just letting you know.' })}>Default</Button>
     </div>
   );
 }
 
-// ── CommandPalette demo ───────────────────────────────────────────────────────
-
-function CommandPaletteDemo() {
+function CmdDemo() {
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <>
       <Button size="sm" variant="outline" onClick={() => setOpen(true)}>
-        <Kbd className="text-[10px] mr-1">⌘K</Kbd> Search
+        <Kbd className="text-[10px] mr-1.5">⌘K</Kbd> Open palette
       </Button>
       <CommandPalette
         open={open}
@@ -151,1130 +152,1688 @@ function CommandPaletteDemo() {
         items={[
           { id: '1', label: 'Button', group: 'Components', action: () => {} },
           { id: '2', label: 'Badge', group: 'Components', action: () => {} },
-          { id: '3', label: 'Showcase', group: 'Pages', action: () => {} },
+          { id: '3', label: 'LineChart', group: 'Charts', action: () => {} },
+          { id: '4', label: 'Go to Showcase', group: 'Pages', action: () => {} },
+          { id: '5', label: 'Toggle dark mode', group: 'Actions', action: () => {} },
         ]}
       />
-    </div>
+    </>
   );
 }
 
-// ── Main page ────────────────────────────────────────────────────────────────
+// ── Main page ─────────────────────────────────────────────────────────────────
 
 export default function ShowcasePage() {
+  // shared state
   const [sliderVal, setSliderVal] = useState(65);
-  const [checkVal, setCheckVal] = useState(true);
-  const [switchVal, setSwitchVal] = useState(true);
+  const [checkA, setCheckA] = useState(true);
+  const [checkB, setCheckB] = useState(false);
+  const [switchA, setSwitchA] = useState(true);
+  const [switchB, setSwitchB] = useState(false);
   const [ratingVal, setRatingVal] = useState(4);
-  const [radioVal, setRadioVal] = useState('a');
+  const [radioVal, setRadioVal] = useState('pro');
   const [segVal, setSegVal] = useState('preview');
   const [otpVal, setOtpVal] = useState('');
   const [pinVal, setPinVal] = useState('');
-  const [tagsVal, setTagsVal] = useState(['fxui', 'react']);
+  const [tagsVal, setTagsVal] = useState(['fxui', 'react', 'typescript']);
   const [comboVal, setComboVal] = useState<string | null>(null);
   const [colorVal, setColorVal] = useState('#FFE500');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(3);
   const [stepperStep, setStepperStep] = useState(1);
+  const [inlineVal, setInlineVal] = useState('Click to edit this text');
   const [tourOpen, setTourOpen] = useState(false);
 
   return (
-    <div className="max-w-7xl mx-auto px-8 py-16">
+    <div className="max-w-5xl mx-auto px-8 py-16">
 
-      {/* Header */}
-      <div className="mb-14">
-        <h1 className="font-display text-7xl font-black text-fx-black leading-none">Showcase</h1>
-        <p className="text-gray-500 font-sans mt-3 text-lg">All 117 components — live and interactive.</p>
+      {/* Hero */}
+      <div className="mb-20">
+        <div className="inline-block bg-fx-yellow border-2 border-fx-black px-3 py-0.5 font-mono text-xs font-black uppercase mb-4">
+          117 components · Live demos
+        </div>
+        <h1 className="font-display text-[88px] font-black text-fx-black leading-none tracking-tight">Showcase</h1>
+        <p className="text-gray-500 font-sans mt-4 text-xl max-w-lg">
+          Every FXUI component, all variants, fully interactive.
+        </p>
       </div>
 
-      {/* ── CORE ──────────────────────────────────────────────────── */}
-      <CategoryHeader name="CORE" count={8} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ══════════════════════════════════════════════════════════ CORE */}
+      <Section title="Core" accent="yellow">
 
-        <DemoCard name="Button">
-          <div className="flex flex-wrap gap-2">
-            <Button size="sm">Default</Button>
-            <Button size="sm" variant="outline">Outline</Button>
-            <Button size="sm" variant="neon">Neon</Button>
-            <Button size="sm" variant="destructive">Delete</Button>
-            <Button size="sm" isLoading>Loading</Button>
+        <Row name="Button">
+          <Button>Default</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="neon">Neon</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Button size="sm">sm</Button>
+          <Button size="md">md</Button>
+          <Button size="lg">lg</Button>
+          <Button size="icon">⚡</Button>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Button isLoading>Loading</Button>
+          <Button disabled>Disabled</Button>
+          <Button leftIcon={<span>⚡</span>}>With icon</Button>
+          <Button rightIcon={<span>→</span>}>Right icon</Button>
+        </Row>
+
+        <Row name="Badge">
+          <Badge>Default</Badge>
+          <Badge color="success">Success</Badge>
+          <Badge color="warning">Warning</Badge>
+          <Badge color="error">Error</Badge>
+          <Badge color="info">Info</Badge>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Badge variant="outline">Outline</Badge>
+          <Badge variant="outline" color="success">Outline success</Badge>
+          <Badge variant="outline" color="error">Outline error</Badge>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Badge variant="neon">Neon</Badge>
+          <Badge variant="neon" color="success">Neon success</Badge>
+          <Badge variant="neon" color="error">Neon error</Badge>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Badge size="sm">Small</Badge>
+          <Badge size="md">Medium</Badge>
+        </Row>
+
+        <Row name="Chip">
+          <Chip>Default</Chip>
+          <Chip variant="filled">Filled</Chip>
+          <Chip variant="yellow">Yellow</Chip>
+          <Chip variant="pink">Pink</Chip>
+          <Chip variant="green">Green</Chip>
+          <Chip variant="blue">Blue</Chip>
+          <Chip variant="purple">Purple</Chip>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Chip size="sm">Small</Chip>
+          <Chip size="md">Medium</Chip>
+          <Chip size="lg">Large</Chip>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Chip variant="yellow" onClose={() => {}}>Closeable</Chip>
+          <Chip variant="pink" onClose={() => {}} icon="🚀">With icon</Chip>
+        </Row>
+
+        <Row name="Tag">
+          <Tag>Default</Tag>
+          <Tag variant="outline">Outline</Tag>
+          <Tag variant="neon">Neon</Tag>
+          <Tag variant="ghost">Ghost</Tag>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Tag variant="outline" color="success">Success</Tag>
+          <Tag variant="outline" color="warning">Warning</Tag>
+          <Tag variant="outline" color="error">Error</Tag>
+          <Tag variant="outline" color="info">Info</Tag>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Tag size="sm" variant="outline">Small</Tag>
+          <Tag size="md" variant="outline">Medium</Tag>
+          <Divider orientation="vertical" className="h-6 mx-1" />
+          <Tag closeable onClose={() => {}}>Closeable</Tag>
+        </Row>
+
+        <Row name="Kbd">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex items-center gap-1"><Kbd>⌘</Kbd><Kbd>K</Kbd></div>
+            <div className="flex items-center gap-1"><Kbd>Ctrl</Kbd><span className="text-gray-400 text-xs">+</span><Kbd>Shift</Kbd><span className="text-gray-400 text-xs">+</span><Kbd>P</Kbd></div>
+            <div className="flex items-center gap-1"><Kbd>Alt</Kbd><span className="text-gray-400 text-xs">+</span><Kbd>F4</Kbd></div>
+            <div className="flex items-center gap-1"><Kbd size="sm">⌘</Kbd><Kbd size="sm">Z</Kbd></div>
+            <div className="flex items-center gap-1"><Kbd size="lg">Space</Kbd></div>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Badge">
-          <div className="flex flex-wrap gap-2">
-            <Badge>Default</Badge>
-            <Badge color="success">Success</Badge>
-            <Badge color="warning">Warning</Badge>
-            <Badge color="error">Error</Badge>
-            <Badge variant="outline" color="info">Info</Badge>
-            <Badge variant="neon">Neon</Badge>
-          </div>
-        </DemoCard>
-
-        <DemoCard name="Chip">
-          <div className="flex flex-wrap gap-2">
-            <Chip>Default</Chip>
-            <Chip variant="filled">Filled</Chip>
-            <Chip variant="yellow">Yellow</Chip>
-            <Chip variant="pink">Pink</Chip>
-            <Chip variant="green" onClose={() => {}}>Closeable</Chip>
-          </div>
-        </DemoCard>
-
-        <DemoCard name="Tag">
-          <div className="flex flex-wrap gap-2">
-            <Tag>Default</Tag>
-            <Tag variant="outline">Outline</Tag>
-            <Tag variant="neon">Neon</Tag>
-            <Tag variant="ghost">Ghost</Tag>
-            <Tag variant="outline" closeable onClose={() => {}}>Closeable</Tag>
-          </div>
-        </DemoCard>
-
-        <DemoCard name="Kbd">
-          <div className="flex flex-wrap gap-2 items-center">
-            <Kbd>⌘</Kbd><Kbd>K</Kbd>
-            <span className="text-gray-400 text-sm mx-1">or</span>
-            <Kbd>Ctrl</Kbd>
-            <span className="text-gray-400 text-sm">+</span>
-            <Kbd>Shift</Kbd>
-            <span className="text-gray-400 text-sm">+</span>
-            <Kbd>P</Kbd>
-          </div>
-        </DemoCard>
-
-        <DemoCard name="Divider">
-          <div className="w-full flex flex-col gap-3">
+        <Row name="Divider">
+          <div className="w-full space-y-4">
             <Divider />
             <Divider label="or continue with" />
-            <div className="flex gap-2 items-stretch h-8">
+            <Divider label="Section title" labelPlacement="start" />
+            <Divider label="Section title" labelPlacement="end" />
+            <Divider variant="dashed" />
+            <div className="flex gap-3 items-stretch h-10">
               <span className="text-sm text-gray-500 self-center">Left</span>
+              <Divider orientation="vertical" />
+              <span className="text-sm text-gray-500 self-center">Center</span>
               <Divider orientation="vertical" />
               <span className="text-sm text-gray-500 self-center">Right</span>
             </div>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Spinner">
-          <div className="flex items-center gap-4">
-            <Spinner size="sm" />
-            <Spinner size="md" />
-            <Spinner size="lg" variant="neon" />
-            <Spinner size="xl" variant="primary" />
+        <Row name="Spinner">
+          <Spinner size="xs" />
+          <Spinner size="sm" />
+          <Spinner size="md" />
+          <Spinner size="lg" />
+          <Spinner size="xl" />
+          <Divider orientation="vertical" className="h-8 mx-1" />
+          <Spinner variant="default" size="md" />
+          <Spinner variant="primary" size="md" />
+          <Spinner variant="neon" size="md" />
+          <span className="bg-fx-black rounded-full p-0.5"><Spinner variant="white" size="md" /></span>
+        </Row>
+
+        <Row name="FloatingActionButton">
+          <div className="relative h-28 w-72 border-2 border-dashed border-gray-300 rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
+            <span className="text-xs text-gray-400">Position demo</span>
+            <FloatingActionButton icon="+" label="Add item" position="bottom-right" style={{ position: 'absolute' }} />
+            <FloatingActionButton icon="★" label="Favourite" variant="yellow" position="bottom-left" style={{ position: 'absolute' }} />
+            <FloatingActionButton icon="↑" label="Scroll up" variant="default" position="top-right" style={{ position: 'absolute' }} />
           </div>
-        </DemoCard>
+        </Row>
+      </Section>
 
-        <DemoCard name="FloatingActionButton">
-          <div className="relative h-24 w-full border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-            <FloatingActionButton
-              icon="+"
-              label="Add"
-              position="bottom-right"
-              style={{ position: 'absolute' }}
-            />
-            <FloatingActionButton
-              icon="★"
-              label="Fav"
-              variant="yellow"
-              position="bottom-left"
-              style={{ position: 'absolute' }}
-            />
+      {/* ══════════════════════════════════════════════════════ TYPOGRAPHY */}
+      <Section title="Typography" accent="blue">
+
+        <Row name="Heading" wide>
+          <div className="space-y-2">
+            <Heading as="h1" size="display">Display heading</Heading>
+            <Heading as="h1" size="h1">H1 — Page title</Heading>
+            <Heading as="h2" size="h2">H2 — Section title</Heading>
+            <Heading as="h3" size="h3">H3 — Subsection</Heading>
+            <Heading as="h4" size="h4">H4 — Group label</Heading>
+            <Heading as="h5" size="h5">H5 — Small heading</Heading>
+            <Heading as="h6" size="h6" color="muted">H6 — Caption label</Heading>
           </div>
-        </DemoCard>
-      </div>
+        </Row>
 
-      {/* ── LAYOUT ────────────────────────────────────────────────── */}
-      <CategoryHeader name="LAYOUT" count={8} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <Row name="Text">
+          <Text size="xl" weight="black">Extra large black</Text>
+          <Text size="lg" weight="bold">Large bold</Text>
+          <Text size="base">Regular body text</Text>
+          <Text size="sm" color="muted">Small muted helper</Text>
+          <Text size="xs" color="muted" className="font-mono">xs monospace</Text>
+          <Divider orientation="vertical" className="h-8 mx-1" />
+          <Text className="italic">Italic text</Text>
+          <Text className="underline">Underlined</Text>
+          <Text className="line-through">Strikethrough</Text>
+        </Row>
 
-        <DemoCard name="Container">
-          <Container size="sm" className="border border-dashed border-fx-black p-2 w-full text-center">
-            <span className="text-xs font-mono text-gray-500">size=&quot;sm&quot;</span>
-          </Container>
-        </DemoCard>
+        <Row name="GradientText">
+          <GradientText gradient="sunset" as="p" className="font-black text-2xl">Sunset gradient</GradientText>
+          <GradientText gradient="ocean" as="p" className="font-black text-2xl">Ocean gradient</GradientText>
+          <GradientText gradient="neon" as="p" className="font-black text-2xl">Neon gradient</GradientText>
+          <GradientText gradient="fire" as="p" className="font-black text-2xl">Fire gradient</GradientText>
+          <GradientText gradient="electric" as="p" className="font-black text-2xl">Electric gradient</GradientText>
+        </Row>
 
-        <DemoCard name="Stack">
-          <Stack gap="2" className="w-full">
-            {['A', 'B', 'C'].map(l => (
-              <div key={l} className="bg-fx-yellow border-2 border-fx-black px-3 py-1 text-sm font-bold text-center">{l}</div>
+        <Row name="Label">
+          <Label>Default label</Label>
+          <Label required>Required *</Label>
+          <Label optional>Optional</Label>
+          <Label size="sm">Small</Label>
+          <Label size="lg">Large</Label>
+        </Row>
+
+        <Row name="Caption">
+          <Caption>Helper text</Caption>
+          <Caption variant="error">Email is invalid</Caption>
+          <Caption variant="success">Password strength: strong</Caption>
+          <Caption variant="warning">Too long, max 160 chars</Caption>
+        </Row>
+
+        <Row name="Blockquote" wide>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <Blockquote>Default blockquote with no variant.</Blockquote>
+            <Blockquote variant="yellow" author="FXUI">Neo-brutalism with zero apologies.</Blockquote>
+            <Blockquote variant="pink" author="Design">Bold. Raw. Unapologetic.</Blockquote>
+            <Blockquote variant="green" author="Dev">Ship with confidence.</Blockquote>
+          </div>
+        </Row>
+
+        <Row name="Code">
+          <div className="w-full space-y-3">
+            <p className="text-sm text-gray-600">
+              Install with <Code>pnpm add @fxui/core</Code> and import <Code>{'<Button />'}</Code> directly.
+            </p>
+            <Code block className="text-sm">{`import { Button, Badge, useToast } from '@fxui/core';\n\nexport default function App() {\n  const { toast } = useToast();\n  return <Button onClick={() => toast({ title: 'Hello!' })}>Click me</Button>;\n}`}</Code>
+          </div>
+        </Row>
+
+        <Row name="PullQuote" wide>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <PullQuote accent="yellow">"Bold. Raw. Unapologetically different."</PullQuote>
+            <PullQuote accent="pink" size="lg">"Ship fast, look good."</PullQuote>
+            <PullQuote accent="green" size="sm">"117 components. Zero compromises."</PullQuote>
+          </div>
+        </Row>
+      </Section>
+
+      {/* ══════════════════════════════════════════════════════════ LAYOUT */}
+      <Section title="Layout" accent="green">
+
+        <Row name="Stack" wide>
+          <div className="grid grid-cols-3 gap-6">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">direction=&quot;column&quot; gap=&quot;2&quot;</p>
+              <Stack gap="2">
+                {['A','B','C'].map(l => <div key={l} className="bg-fx-yellow border-2 border-fx-black px-3 py-1 text-sm font-bold text-center">{l}</div>)}
+              </Stack>
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">direction=&quot;row&quot; gap=&quot;3&quot;</p>
+              <Stack direction="row" gap="3">
+                {['X','Y','Z'].map(l => <div key={l} className="bg-fx-pink border-2 border-fx-black px-3 py-1 text-sm font-bold text-white">{l}</div>)}
+              </Stack>
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">align=&quot;center&quot; gap=&quot;4&quot;</p>
+              <Stack direction="row" gap="4" align="center">
+                <div className="bg-fx-green border-2 border-fx-black h-6 w-6" />
+                <div className="bg-fx-green border-2 border-fx-black h-10 w-10" />
+                <div className="bg-fx-green border-2 border-fx-black h-14 w-14" />
+              </Stack>
+            </div>
+          </div>
+        </Row>
+
+        <Row name="Grid" wide>
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">cols=&quot;4&quot; gap=&quot;3&quot;</p>
+              <Grid cols="4" gap="3">
+                {[1,2,3,4,5,6,7,8].map(n => <div key={n} className="bg-fx-blue border-2 border-fx-black h-10 flex items-center justify-center font-black text-white text-sm">{n}</div>)}
+              </Grid>
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">cols=&quot;3&quot; gap=&quot;2&quot;</p>
+              <Grid cols="3" gap="2">
+                {[1,2,3,4,5,6].map(n => <div key={n} className="bg-fx-purple border-2 border-fx-black h-8 flex items-center justify-center font-black text-white text-sm">{n}</div>)}
+              </Grid>
+            </div>
+          </div>
+        </Row>
+
+        <Row name="Flex" wide>
+          <div className="space-y-3">
+            {(['between','around','evenly','start','center','end'] as const).map(j => (
+              <div key={j}>
+                <p className="text-xs font-mono text-gray-400 mb-1">justify=&quot;{j}&quot;</p>
+                <Flex justify={j} className="bg-gray-50 border border-gray-200 rounded-[4px] p-2 w-full">
+                  {['■','●','▲'].map(s => <div key={s} className="bg-fx-black text-white text-xs w-8 h-8 flex items-center justify-center font-bold">{s}</div>)}
+                </Flex>
+              </div>
             ))}
-          </Stack>
-        </DemoCard>
+          </div>
+        </Row>
 
-        <DemoCard name="Flex">
-          <Flex justify="between" align="center" className="w-full">
-            {['1','2','3'].map(n => (
-              <div key={n} className="bg-fx-pink border-2 border-fx-black h-8 w-8 flex items-center justify-center font-bold text-white text-sm">{n}</div>
+        <Row name="AspectRatio" wide>
+          <div className="grid grid-cols-4 gap-4">
+            {(['square', 'video', 'portrait', 'wide'] as const).map(r => (
+              <div key={r}>
+                <p className="text-xs font-mono text-gray-400 mb-1">ratio=&quot;{r}&quot;</p>
+                <AspectRatio ratio={r} className="bg-fx-yellow border-2 border-fx-black">
+                  <div className="flex items-center justify-center h-full font-black text-xs">{r}</div>
+                </AspectRatio>
+              </div>
             ))}
-          </Flex>
-        </DemoCard>
+          </div>
+        </Row>
 
-        <DemoCard name="Grid">
-          <Grid cols="3" gap="2" className="w-full">
-            {[1,2,3,4,5,6].map(n => (
-              <div key={n} className="bg-fx-green border-2 border-fx-black h-8 flex items-center justify-center font-bold text-sm">{n}</div>
-            ))}
-          </Grid>
-        </DemoCard>
-
-        <DemoCard name="AspectRatio">
-          <AspectRatio ratio="video" className="bg-fx-blue border-2 border-fx-black w-full">
-            <div className="flex items-center justify-center h-full text-white font-bold text-xs">16:9</div>
-          </AspectRatio>
-        </DemoCard>
-
-        <DemoCard name="ScrollArea">
-          <ScrollArea className="h-24 w-full border-2 border-fx-black rounded-[4px]">
+        <Row name="ScrollArea">
+          <ScrollArea className="h-32 w-56 border-2 border-fx-black rounded-[4px]">
             <div className="p-3 space-y-2">
-              {Array.from({ length: 8 }, (_, i) => (
-                <div key={i} className="text-sm font-sans text-gray-600">Line {i + 1} of content</div>
+              {Array.from({ length: 12 }, (_, i) => (
+                <div key={i} className="text-sm font-sans text-gray-600 flex items-center gap-2">
+                  <span className="w-4 h-4 bg-fx-yellow border border-fx-black shrink-0 flex items-center justify-center text-[10px] font-black">{i+1}</span>
+                  Item {i + 1}
+                </div>
               ))}
             </div>
           </ScrollArea>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="SplitLayout">
-          <SplitLayout className="h-20 w-full border-2 border-fx-black rounded-[4px] overflow-hidden" defaultSplit={50}>
-            <div className="bg-fx-yellow h-full flex items-center justify-center text-xs font-bold">Left</div>
-            <div className="bg-fx-pink h-full flex items-center justify-center text-xs font-bold text-white">Right</div>
+        <Row name="SplitLayout" wide>
+          <SplitLayout className="h-24 w-full border-2 border-fx-black rounded-[4px] overflow-hidden" defaultSplit={40}>
+            <div className="bg-fx-yellow h-full flex items-center justify-center font-black text-sm">Left panel</div>
+            <div className="bg-fx-pink h-full flex items-center justify-center font-black text-sm text-white">Right panel — drag the divider</div>
           </SplitLayout>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Masonry">
-          <Masonry columns={3} gap={8} className="w-full">
-            {[40, 60, 32, 56, 44, 70].map((h, i) => (
-              <div key={i} className="bg-fx-purple border-2 border-fx-black rounded-[4px] mb-2" style={{ height: h }} />
+        <Row name="Masonry" wide>
+          <Masonry columns={5} gap={8} className="w-full">
+            {[70, 40, 90, 55, 35, 80, 50, 65, 45, 75].map((h, i) => (
+              <div key={i} className="border-2 border-fx-black rounded-[4px] mb-2 flex items-center justify-center font-black text-sm"
+                style={{ height: h, background: ['#FFE500','#FF2D78','#00FF94','#0066FF','#7C3AED'][i % 5] }}>
+                {i+1}
+              </div>
             ))}
           </Masonry>
-        </DemoCard>
-      </div>
+        </Row>
+      </Section>
 
-      {/* ── TYPOGRAPHY ────────────────────────────────────────────── */}
-      <CategoryHeader name="TYPOGRAPHY" count={8} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ════════════════════════════════════════════════════════════ FORM */}
+      <Section title="Form" accent="pink">
 
-        <DemoCard name="Heading">
-          <div className="space-y-1">
-            <Heading as="h1" size="h3">H3 Section</Heading>
-            <Heading as="h4" size="h5">H5 Subsection</Heading>
-            <Heading as="h6" size="h6" color="muted">H6 Label</Heading>
+        <Row name="Input" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <Input label="Default" placeholder="Enter text..." />
+            <Input label="With hint" placeholder="name@example.com" hint="We'll never share your email." />
+            <Input label="Error state" placeholder="Enter text..." error="This field is required." />
+            <Input label="Disabled" placeholder="Can't type here" disabled />
+            <Input label="Read only" defaultValue="Read only value" readOnly />
+            <Input label="Filled variant" variant="filled" placeholder="Filled style..." />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Text">
-          <div className="space-y-1">
-            <Text size="lg" weight="bold">Bold Large</Text>
-            <Text size="base">Regular body text here.</Text>
-            <Text size="sm" color="muted">Small muted helper text.</Text>
+        <Row name="PasswordInput" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <PasswordInput label="Password" placeholder="Enter password..." />
+            <PasswordInput label="With hint" placeholder="••••••••" hint="Min 8 characters" />
+            <PasswordInput label="Error" placeholder="••••••••" error="Password too short." />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Label">
-          <div className="space-y-1">
-            <Label required>Required field</Label>
-            <Label optional>Optional field</Label>
-            <Label>Plain label</Label>
+        <Row name="SearchInput" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <SearchInput placeholder="Search components..." />
+            <SearchInput placeholder="Filter results..." />
+            <SearchInput placeholder="Clearable..." defaultValue="some value" />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Caption">
-          <div className="space-y-1">
-            <Caption>Helper text</Caption>
-            <Caption variant="error">Something went wrong</Caption>
-            <Caption variant="success">Looks good!</Caption>
+        <Row name="Textarea" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <Textarea label="Default" placeholder="Write something..." rows={3} />
+            <Textarea label="Error state" placeholder="Write something..." rows={3} error="This field is required." />
+            <Textarea label="With counter" placeholder="Max 200 characters..." maxLength={200} showCount rows={3} />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Blockquote">
-          <Blockquote variant="yellow" author="FXUI">
-            Neo-brutalism with zero apologies.
-          </Blockquote>
-        </DemoCard>
-
-        <DemoCard name="Code">
-          <div className="space-y-2 w-full">
-            <p className="text-sm text-gray-600">Inline: <Code>{'<Button />'}</Code></p>
-            <Code block className="text-xs">{`import { Button } from '@fxui/core'`}</Code>
+        <Row name="Select" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <Select label="Framework" placeholder="Pick one">
+              <Select.Item value="next">Next.js</Select.Item>
+              <Select.Item value="remix">Remix</Select.Item>
+              <Select.Item value="astro">Astro</Select.Item>
+              <Select.Item value="vite">Vite</Select.Item>
+            </Select>
+            <Select label="With groups" placeholder="Select country">
+              <Select.Group label="Europe">
+                <Select.Item value="de">Germany</Select.Item>
+                <Select.Item value="fr">France</Select.Item>
+              </Select.Group>
+              <Select.Group label="Asia">
+                <Select.Item value="jp">Japan</Select.Item>
+                <Select.Item value="kr">Korea</Select.Item>
+              </Select.Group>
+            </Select>
+            <Select label="Disabled" placeholder="Can't select" disabled>
+              <Select.Item value="a">Option A</Select.Item>
+            </Select>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="PullQuote">
-          <PullQuote accent="pink" size="sm">
-            Bold. Raw. Unapologetically different.
-          </PullQuote>
-        </DemoCard>
-
-        <DemoCard name="GradientText">
-          <div className="space-y-1">
-            <GradientText gradient="sunset" as="p" className="font-black text-xl">Sunset</GradientText>
-            <GradientText gradient="ocean" as="p" className="font-black text-xl">Ocean</GradientText>
-            <GradientText gradient="neon" as="p" className="font-black text-xl">Neon</GradientText>
+        <Row name="NumberInput" wide>
+          <div className="grid grid-cols-4 gap-4">
+            <NumberInput label="Default" defaultValue={5} />
+            <NumberInput label="Min / Max" min={0} max={100} defaultValue={42} />
+            <NumberInput label="Step 5" step={5} defaultValue={20} />
+            <NumberInput label="Disabled" defaultValue={10} disabled />
           </div>
-        </DemoCard>
-      </div>
+        </Row>
 
-      {/* ── FORM ──────────────────────────────────────────────────── */}
-      <CategoryHeader name="FORM" count={17} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-
-        <DemoCard name="Input">
-          <Input label="Email" placeholder="you@example.com" className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="PasswordInput">
-          <PasswordInput label="Password" placeholder="••••••••" className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="SearchInput">
-          <SearchInput placeholder="Search components..." className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="Textarea">
-          <Textarea label="Notes" placeholder="Type here..." rows={3} className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="Select">
-          <Select label="Framework" placeholder="Pick one" className="w-full">
-            <Select.Item value="next">Next.js</Select.Item>
-            <Select.Item value="remix">Remix</Select.Item>
-            <Select.Item value="vite">Vite</Select.Item>
-          </Select>
-        </DemoCard>
-
-        <DemoCard name="NumberInput">
-          <NumberInput label="Quantity" min={0} max={100} defaultValue={5} className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="Slider">
-          <div className="w-full">
-            <p className="text-xs font-mono text-gray-500 mb-2">Value: {sliderVal}</p>
-            <Slider value={[sliderVal]} onValueChange={v => setSliderVal(v[0])} min={0} max={100} />
+        <Row name="Slider" wide>
+          <div className="space-y-6 w-full max-w-lg">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Value: {sliderVal}</p>
+              <Slider value={[sliderVal]} onValueChange={v => setSliderVal(v[0])} min={0} max={100} />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Range slider</p>
+              <Slider defaultValue={[20, 80]} min={0} max={100} />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Step 10</p>
+              <Slider defaultValue={[50]} min={0} max={100} step={10} />
+            </div>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Checkbox">
-          <div className="space-y-2">
-            <Checkbox label="Remember me" checked={checkVal} onCheckedChange={v => setCheckVal(Boolean(v))} />
-            <Checkbox label="Newsletter" defaultChecked />
-            <Checkbox label="Disabled" disabled />
-          </div>
-        </DemoCard>
+        <Row name="Checkbox">
+          <Checkbox label="Unchecked" />
+          <Checkbox label="Checked" checked={checkA} onCheckedChange={v => setCheckA(Boolean(v))} />
+          <Checkbox label="Indeterminate" checked="indeterminate" />
+          <Checkbox label="Disabled" disabled />
+          <Checkbox label="Disabled checked" checked disabled />
+        </Row>
 
-        <DemoCard name="CheckboxGroup">
-          <CheckboxGroup
-            label="Interests"
-            options={[
+        <Row name="CheckboxGroup" wide>
+          <div className="grid grid-cols-3 gap-6">
+            <CheckboxGroup label="Vertical (default)" options={[
               { value: 'ts', label: 'TypeScript' },
               { value: 'react', label: 'React' },
               { value: 'css', label: 'CSS' },
-            ]}
-            defaultValue={['ts', 'react']}
-          />
-        </DemoCard>
-
-        <DemoCard name="Switch">
-          <div className="space-y-2">
-            <Switch label="Dark mode" checked={switchVal} onCheckedChange={setSwitchVal} />
-            <Switch label="Notifications" defaultChecked />
-            <Switch label="Offline" disabled />
+            ]} defaultValue={['ts', 'react']} />
+            <CheckboxGroup label="More options" options={[
+              { value: 'a', label: 'Option A' },
+              { value: 'b', label: 'Option B' },
+              { value: 'c', label: 'Option C' },
+            ]} defaultValue={['a']} />
+            <CheckboxGroup label="With disabled" options={[
+              { value: 'x', label: 'Available' },
+              { value: 'y', label: 'Disabled option', disabled: true },
+              { value: 'z', label: 'Available too' },
+            ]} defaultValue={['x']} />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="SwitchGroup">
-          <SwitchGroup
-            label="Features"
-            options={[
-              { value: 'analytics', label: 'Analytics', disabled: false },
-              { value: 'notifs', label: 'Notifications', disabled: false },
-              { value: 'beta', label: 'Beta features', disabled: false },
-            ]}
-            defaultValue={['analytics', 'notifs']}
-          />
-        </DemoCard>
+        <Row name="Switch">
+          <Switch label="Off" checked={switchB} onCheckedChange={setSwitchB} />
+          <Switch label="On" checked={switchA} onCheckedChange={setSwitchA} />
+          <Switch label="Disabled off" disabled />
+          <Switch label="Disabled on" checked disabled />
+          <Divider orientation="vertical" className="h-8 mx-1" />
+          <Switch label="With description" defaultChecked description="Get notified via email" />
+        </Row>
 
-        <DemoCard name="RadioGroup">
-          <RadioGroup
-            label="Plan"
-            value={radioVal}
-            onValueChange={setRadioVal}
-            options={[
-              { value: 'a', label: 'Starter' },
-              { value: 'b', label: 'Pro' },
-              { value: 'c', label: 'Enterprise' },
-            ]}
-          />
-        </DemoCard>
+        <Row name="SwitchGroup" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <SwitchGroup label="Notification settings" options={[
+              { value: 'email', label: 'Email notifications' },
+              { value: 'sms', label: 'SMS alerts' },
+              { value: 'push', label: 'Push notifications' },
+              { value: 'marketing', label: 'Marketing emails' },
+            ]} defaultValue={['email', 'push']} />
+            <SwitchGroup label="Privacy controls" options={[
+              { value: 'profile', label: 'Public profile' },
+              { value: 'search', label: 'Searchable by email' },
+              { value: 'activity', label: 'Show activity status' },
+            ]} defaultValue={['profile']} />
+          </div>
+        </Row>
 
-        <DemoCard name="SegmentedControl">
-          <SegmentedControl
-            value={segVal}
-            onChange={setSegVal}
-            options={[
+        <Row name="RadioGroup" wide>
+          <div className="grid grid-cols-3 gap-6">
+            <RadioGroup label="Plan" value={radioVal} onValueChange={setRadioVal} options={[
+              { value: 'free', label: 'Free' },
+              { value: 'pro', label: 'Pro — $12/mo' },
+              { value: 'enterprise', label: 'Enterprise' },
+            ]} />
+            <RadioGroup label="Delivery" defaultValue="standard" options={[
+              { value: 'standard', label: 'Standard (5-7 days)' },
+              { value: 'express', label: 'Express (2-3 days)' },
+              { value: 'overnight', label: 'Overnight' },
+            ]} />
+            <RadioGroup label="Disabled option" defaultValue="a" options={[
+              { value: 'a', label: 'Available' },
+              { value: 'b', label: 'Unavailable', disabled: true },
+              { value: 'c', label: 'Available' },
+            ]} />
+          </div>
+        </Row>
+
+        <Row name="SegmentedControl" wide>
+          <div className="space-y-4">
+            <SegmentedControl value={segVal} onChange={setSegVal} options={[
               { value: 'preview', label: 'Preview' },
               { value: 'code', label: 'Code' },
               { value: 'api', label: 'API' },
-            ]}
-          />
-        </DemoCard>
+            ]} />
+            <SegmentedControl defaultValue="day" options={[
+              { value: 'day', label: 'Day' },
+              { value: 'week', label: 'Week' },
+              { value: 'month', label: 'Month' },
+              { value: 'year', label: 'Year' },
+            ]} />
+            <SegmentedControl defaultValue="md" size="sm" options={[
+              { value: 'sm', label: 'SM' },
+              { value: 'md', label: 'MD' },
+              { value: 'lg', label: 'LG' },
+              { value: 'xl', label: 'XL' },
+            ]} />
+          </div>
+        </Row>
 
-        <DemoCard name="OTPInput">
-          <OTPInput length={6} value={otpVal} onChange={setOtpVal} />
-        </DemoCard>
+        <Row name="OTPInput" wide>
+          <div className="space-y-4">
+            <OTPInput length={6} value={otpVal} onChange={setOtpVal} />
+            <OTPInput length={4} size="sm" />
+            <OTPInput length={6} size="lg" type="alphanumeric" />
+          </div>
+        </Row>
 
-        <DemoCard name="Rating">
+        <Row name="Rating">
           <Rating value={ratingVal} onChange={setRatingVal} max={5} />
-        </DemoCard>
+          <Rating defaultValue={3} max={5} />
+          <Rating defaultValue={4} max={10} size="sm" />
+          <Rating defaultValue={4} max={5} readOnly />
+          <Rating max={5} disabled />
+        </Row>
 
-        <DemoCard name="FormField">
-          <FormField label="Username" hint="3–20 characters" required className="w-full">
-            <Input placeholder="your_handle" />
-          </FormField>
-        </DemoCard>
+        <Row name="FormField" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <FormField label="Username" hint="3–20 characters, no spaces" required>
+              <Input placeholder="your_handle" />
+            </FormField>
+            <FormField label="Email" error="Not a valid email address">
+              <Input placeholder="name@example.com" error="Not a valid email address" />
+            </FormField>
+            <FormField label="Bio" hint="Tell us about yourself">
+              <Textarea placeholder="I love building UIs..." rows={2} />
+            </FormField>
+          </div>
+        </Row>
 
-        <DemoCard name="InputGroup">
-          <InputGroup prefix="https://" suffix=".com" placeholder="yoursite" className="w-full" />
-        </DemoCard>
-      </div>
+        <Row name="InputGroup" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <InputGroup prefix="https://" suffix=".com" placeholder="yoursite" />
+            <InputGroup prefix="$" placeholder="0.00" type="number" />
+            <InputGroup suffix="kg" placeholder="Weight" type="number" />
+          </div>
+        </Row>
+      </Section>
 
-      {/* ── FORM ADVANCED ─────────────────────────────────────────── */}
-      <CategoryHeader name="FORM ADVANCED" count={10} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ════════════════════════════════════════════════════ FORM ADVANCED */}
+      <Section title="Form Advanced" accent="purple">
 
-        <DemoCard name="DatePicker">
-          <DatePicker label="Launch date" placeholder="Pick a date" className="w-full" />
-        </DemoCard>
+        <Row name="DatePicker" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <DatePicker label="Single date" placeholder="Pick a date" />
+            <DatePicker label="With default" placeholder="Pick a date" />
+            <DatePicker label="Disabled" placeholder="Not available" disabled />
+          </div>
+        </Row>
 
-        <DemoCard name="TagInput">
-          <TagInput label="Skills" value={tagsVal} onChange={setTagsVal} placeholder="Add tag..." className="w-full" />
-        </DemoCard>
+        <Row name="TagInput" wide>
+          <div className="grid grid-cols-2 gap-4">
+            <TagInput label="Skills" value={tagsVal} onChange={setTagsVal} placeholder="Add a tag..." />
+            <TagInput label="Allowed tags only" placeholder="type: 'react' or 'vue'..." />
+          </div>
+        </Row>
 
-        <DemoCard name="ComboBox">
-          <ComboBox
-            label="Country"
-            placeholder="Search..."
-            value={comboVal}
-            onChange={setComboVal}
-            options={[
-              { value: 'tr', label: 'Turkey' },
-              { value: 'de', label: 'Germany' },
-              { value: 'us', label: 'United States' },
-              { value: 'jp', label: 'Japan' },
-            ]}
-            className="w-full"
-          />
-        </DemoCard>
-
-        <DemoCard name="FileUpload">
-          <FileUpload label="Upload" accept=".png,.jpg" className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="ColorPicker">
-          <ColorPicker label="Brand color" value={colorVal} onChange={setColorVal} />
-        </DemoCard>
-
-        <DemoCard name="MaskInput">
-          <MaskInput label="Phone" mask="(999) 999-9999" placeholder="(555) 000-0000" className="w-full" />
-        </DemoCard>
-
-        <DemoCard name="TreeSelect">
-          <TreeSelect
-            label="Location"
-            placeholder="Select..."
-            options={[
-              { value: 'eu', label: 'Europe', children: [
+        <Row name="ComboBox" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <ComboBox label="Country" placeholder="Search..." value={comboVal} onChange={setComboVal}
+              options={[
+                { value: 'tr', label: 'Turkey' },
                 { value: 'de', label: 'Germany' },
-                { value: 'fr', label: 'France' },
-              ]},
-              { value: 'as', label: 'Asia', children: [
+                { value: 'us', label: 'United States' },
                 { value: 'jp', label: 'Japan' },
-                { value: 'kr', label: 'Korea' },
-              ]},
-            ]}
-            className="w-full"
-          />
-        </DemoCard>
+                { value: 'au', label: 'Australia' },
+              ]}
+            />
+            <ComboBox label="Framework" placeholder="Select or type..."
+              options={[
+                { value: 'next', label: 'Next.js' },
+                { value: 'remix', label: 'Remix' },
+                { value: 'astro', label: 'Astro' },
+              ]}
+            />
+            <ComboBox label="Disabled" placeholder="Not available" disabled
+              options={[{ value: 'a', label: 'Option A' }]}
+            />
+          </div>
+        </Row>
 
-        <DemoCard name="PinInput">
-          <PinInput length={4} value={pinVal} onChange={v => setPinVal(v)} masked />
-        </DemoCard>
+        <Row name="FileUpload" wide>
+          <div className="grid grid-cols-2 gap-4">
+            <FileUpload label="Default" accept=".png,.jpg,.gif" />
+            <FileUpload label="Multiple files" multiple accept=".pdf,.doc,.docx" />
+          </div>
+        </Row>
 
-        <DemoCard name="AutoComplete">
-          <AutoComplete
-            placeholder="Type to search..."
-            options={[
-              { value: 'next', label: 'Next.js' },
-              { value: 'remix', label: 'Remix' },
-              { value: 'astro', label: 'Astro' },
-              { value: 'svelte', label: 'SvelteKit' },
-            ]}
-            className="w-full"
-          />
-        </DemoCard>
-      </div>
+        <Row name="ColorPicker">
+          <ColorPicker label="Brand color" value={colorVal} onChange={setColorVal} />
+          <ColorPicker label="Accent" defaultValue="#FF2D78" />
+          <ColorPicker label="Blue" defaultValue="#0066FF" />
+        </Row>
 
-      {/* ── DATA DISPLAY ──────────────────────────────────────────── */}
-      <CategoryHeader name="DATA DISPLAY" count={13} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <Row name="MaskInput" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <MaskInput label="Phone" mask="(999) 999-9999" placeholder="(555) 000-0000" />
+            <MaskInput label="Date" mask="99/99/9999" placeholder="MM/DD/YYYY" />
+            <MaskInput label="Credit card" mask="9999 9999 9999 9999" placeholder="1234 5678 9012 3456" />
+          </div>
+        </Row>
 
-        <DemoCard name="Table">
-          <Table className="w-full text-sm">
+        <Row name="TreeSelect" wide>
+          <div className="grid grid-cols-2 gap-4">
+            <TreeSelect label="Location" placeholder="Select region..."
+              options={[
+                { value: 'eu', label: 'Europe', children: [
+                  { value: 'de', label: 'Germany' },
+                  { value: 'fr', label: 'France' },
+                  { value: 'nl', label: 'Netherlands' },
+                ]},
+                { value: 'as', label: 'Asia', children: [
+                  { value: 'jp', label: 'Japan' },
+                  { value: 'kr', label: 'Korea' },
+                ]},
+              ]}
+            />
+            <TreeSelect label="Category" placeholder="Select category..."
+              options={[
+                { value: 'ui', label: 'UI Components', children: [
+                  { value: 'form', label: 'Form' },
+                  { value: 'data', label: 'Data Display' },
+                ]},
+                { value: 'util', label: 'Utilities' },
+              ]}
+            />
+          </div>
+        </Row>
+
+        <Row name="PinInput" wide>
+          <div className="space-y-4">
+            <div><p className="text-xs font-mono text-gray-400 mb-2">Regular</p><PinInput length={4} value={pinVal} onChange={setPinVal} /></div>
+            <div><p className="text-xs font-mono text-gray-400 mb-2">Masked</p><PinInput length={4} masked /></div>
+            <div><p className="text-xs font-mono text-gray-400 mb-2">Non-numeric · 6 digits</p><PinInput length={6} numeric={false} /></div>
+          </div>
+        </Row>
+
+        <Row name="AutoComplete" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <AutoComplete placeholder="Search frameworks..."
+              options={[
+                { value: 'next', label: 'Next.js' },
+                { value: 'remix', label: 'Remix' },
+                { value: 'astro', label: 'Astro' },
+                { value: 'svelte', label: 'SvelteKit' },
+                { value: 'nuxt', label: 'Nuxt' },
+              ]}
+            />
+            <AutoComplete placeholder="Search countries..."
+              options={[
+                { value: 'tr', label: 'Turkey' },
+                { value: 'de', label: 'Germany' },
+                { value: 'jp', label: 'Japan' },
+              ]}
+            />
+            <AutoComplete placeholder="Disabled" disabled
+              options={[{ value: 'a', label: 'Option' }]}
+            />
+          </div>
+        </Row>
+      </Section>
+
+      {/* ══════════════════════════════════════════════════ DATA DISPLAY */}
+      <Section title="Data Display" accent="green">
+
+        <Row name="Table" wide>
+          <Table className="w-full">
             <Table.Head>
               <Table.Row>
+                <Table.HeaderCell>#</Table.HeaderCell>
                 <Table.HeaderCell>Name</Table.HeaderCell>
                 <Table.HeaderCell>Role</Table.HeaderCell>
                 <Table.HeaderCell>Status</Table.HeaderCell>
+                <Table.HeaderCell>Joined</Table.HeaderCell>
               </Table.Row>
             </Table.Head>
             <Table.Body>
               {tableData.map(r => (
                 <Table.Row key={r.id}>
-                  <Table.Cell>{r.name}</Table.Cell>
+                  <Table.Cell>{r.id}</Table.Cell>
+                  <Table.Cell className="font-bold">{r.name}</Table.Cell>
                   <Table.Cell>{r.role}</Table.Cell>
-                  <Table.Cell>{r.status}</Table.Cell>
+                  <Table.Cell>
+                    <Badge color={r.status === 'Active' ? 'success' : r.status === 'Away' ? 'warning' : 'default'} size="sm">
+                      {r.status}
+                    </Badge>
+                  </Table.Cell>
+                  <Table.Cell className="font-mono text-xs text-gray-500">{r.joined}</Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
           </Table>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Card">
-          <Card className="w-full">
-            <Card.Header>
-              <p className="font-bold text-sm">Revenue</p>
-              <p className="text-xs text-gray-500">Last 30 days</p>
-            </Card.Header>
-            <Card.Body>
-              <p className="font-black font-display text-3xl">$48,250</p>
-            </Card.Body>
-            <Card.Footer>
-              <span className="text-xs text-gray-500">↑ 12% vs last month</span>
-            </Card.Footer>
-          </Card>
-        </DemoCard>
-
-        <DemoCard name="Avatar">
-          <div className="flex items-center gap-3">
-            <Avatar fallback="AB" size="sm" />
-            <Avatar fallback="CD" size="md" />
-            <Avatar fallback="EF" size="lg" />
+        <Row name="Card" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <Card>
+              <Card.Header><p className="font-bold">Simple card</p></Card.Header>
+              <Card.Body><p className="text-sm text-gray-600">Body content goes here.</p></Card.Body>
+            </Card>
+            <Card>
+              <Card.Header>
+                <p className="font-black text-lg">Revenue</p>
+                <p className="text-xs text-gray-500">Last 30 days</p>
+              </Card.Header>
+              <Card.Body>
+                <p className="font-display font-black text-4xl">$48,250</p>
+                <p className="text-sm text-green-600 font-bold mt-1">↑ 12% vs last month</p>
+              </Card.Body>
+              <Card.Footer><Button size="sm" variant="outline">View report</Button></Card.Footer>
+            </Card>
+            <Card variant="elevated">
+              <Card.Header><p className="font-bold">Elevated variant</p></Card.Header>
+              <Card.Body><p className="text-sm text-gray-600">Elevated shadow style.</p></Card.Body>
+            </Card>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="AvatarGroup">
-          <AvatarGroup
-            avatars={[
-              { name: 'Alice Park', color: 'yellow' },
-              { name: 'Bob Chen', color: 'pink' },
-              { name: 'Carol Wu', color: 'green' },
-              { name: 'Dan Lee', color: 'blue' },
-              { name: 'Eva Kim', color: 'purple' },
-            ]}
-            max={4}
-          />
-        </DemoCard>
+        <Row name="Avatar">
+          <Avatar size="xs" fallback="XS" />
+          <Avatar size="sm" fallback="SM" />
+          <Avatar size="md" fallback="MD" />
+          <Avatar size="lg" fallback="LG" />
+          <Avatar size="xl" fallback="XL" />
+          <Divider orientation="vertical" className="h-12 mx-2" />
+          <Avatar fallback="AP" color="yellow" />
+          <Avatar fallback="BC" color="pink" />
+          <Avatar fallback="CW" color="green" />
+          <Avatar fallback="DL" color="blue" />
+          <Avatar fallback="EK" color="purple" />
+          <Divider orientation="vertical" className="h-12 mx-2" />
+          <Avatar src="https://picsum.photos/seed/a1/100" alt="User" />
+          <Avatar src="https://picsum.photos/seed/a2/100" alt="User" shape="square" />
+        </Row>
 
-        <DemoCard name="Stat">
-          <div className="flex gap-3 flex-wrap">
+        <Row name="AvatarGroup">
+          <AvatarGroup avatars={[
+            { name: 'Alice Park', color: 'yellow' },
+            { name: 'Bob Chen', color: 'pink' },
+            { name: 'Carol Wu', color: 'green' },
+            { name: 'Dan Lee', color: 'blue' },
+            { name: 'Eva Kim', color: 'purple' },
+            { name: 'Frank Liu', color: 'yellow' },
+            { name: 'Grace Park', color: 'pink' },
+          ]} max={4} />
+          <AvatarGroup avatars={[
+            { name: 'Alice Park', color: 'yellow' },
+            { name: 'Bob Chen', color: 'pink' },
+            { name: 'Carol Wu', color: 'green' },
+          ]} size="lg" max={3} />
+          <AvatarGroup avatars={[
+            { name: 'Alice Park', color: 'yellow' },
+            { name: 'Bob Chen', color: 'pink' },
+          ]} size="sm" />
+        </Row>
+
+        <Row name="Stat" wide>
+          <div className="grid grid-cols-4 gap-4">
             <Stat label="Revenue" value="$48K" trend="up" change="+12%" />
-            <Stat label="Churn" value="2.4%" trend="down" change="-0.3%" />
+            <Stat label="Active users" value="1,720" trend="up" change="+8%" />
+            <Stat label="Churn rate" value="2.4%" trend="down" change="-0.3%" />
+            <Stat label="Errors" value="0" trend="neutral" change="±0" />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Timeline">
+        <Row name="Timeline" wide>
           <Timeline items={timelineItems} />
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Progress">
-          <div className="w-full space-y-2">
-            <Progress value={sliderVal} color="default" showValue />
-            <Progress value={72} color="success" showValue />
-            <Progress value={38} color="warning" showValue />
+        <Row name="Progress" wide>
+          <div className="space-y-3 w-full max-w-lg">
+            <Progress value={sliderVal} color="default" showValue label="Default" />
+            <Progress value={72} color="success" showValue label="Deployed" />
+            <Progress value={38} color="warning" showValue label="Quota" />
+            <Progress value={91} color="error" showValue label="Disk" />
+            <Progress value={55} color="info" showValue label="Download" />
+            <Progress value={80} size="sm" color="default" />
+            <Progress value={80} size="lg" color="success" showValue />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Skeleton">
-          <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
-            <Skeleton className="h-4 w-5/6" />
+        <Row name="Skeleton" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-3/4" />
+              <Skeleton className="h-4 w-1/2" />
+              <Skeleton className="h-4 w-5/6" />
+              <Skeleton className="h-4 w-2/3" />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <Skeleton className="h-10 w-10 rounded-full" />
+                <div className="space-y-1.5 flex-1">
+                  <Skeleton className="h-3 w-1/3" />
+                  <Skeleton className="h-3 w-1/2" />
+                </div>
+              </div>
+              <Skeleton className="h-24 w-full rounded-[4px]" />
+            </div>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="TreeView">
-          <TreeView nodes={treeNodes} selectable />
-        </DemoCard>
+        <Row name="TreeView" wide>
+          <div className="grid grid-cols-2 gap-4">
+            <TreeView nodes={treeNodes} selectable />
+            <TreeView nodes={treeNodes} defaultExpanded={['1', '1-1']} selectable />
+          </div>
+        </Row>
 
-        <DemoCard name="DataList">
-          <DataList
-            items={[
+        <Row name="DataList" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <DataList items={[
               { label: 'Version', value: '1.0.0' },
               { label: 'License', value: 'MIT' },
               { label: 'Components', value: '117' },
-            ]}
-          />
-        </DemoCard>
-
-        <DemoCard name="List">
-          <List variant="bullet" items={['TypeScript', 'Tailwind CSS', 'Radix UI']} />
-        </DemoCard>
-
-        <DemoCard name="TimeAgo">
-          <div className="space-y-1 text-sm font-sans text-gray-600">
-            <TimeAgo date={new Date(Date.now() - 60000)} />
-            <TimeAgo date={new Date(Date.now() - 3600000 * 3)} />
-            <TimeAgo date={new Date(Date.now() - 86400000 * 5)} />
+            ]} />
+            <DataList striped items={[
+              { label: 'Author', value: 'FXUI Team' },
+              { label: 'Updated', value: 'Jun 2026' },
+              { label: 'Bundle', value: '398 KB' },
+            ]} />
+            <DataList orientation="horizontal" items={[
+              { label: 'React', value: '18.x' },
+              { label: 'TypeScript', value: '5.x' },
+              { label: 'Tailwind', value: '3.x' },
+            ]} />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Countdown">
-          <Countdown targetDate={new Date(Date.now() + 86400000 * 7)} />
-        </DemoCard>
-      </div>
+        <Row name="List" wide>
+          <div className="grid grid-cols-4 gap-4">
+            <List variant="bullet" items={['TypeScript', 'Tailwind CSS', 'Radix UI', 'Storybook']} />
+            <List variant="numbered" items={['Install package', 'Add provider', 'Import components', 'Ship it']} />
+            <List variant="check" items={['forwardRef', 'Dark mode', 'Accessible', 'Typed']} />
+            <List variant="neo" items={['Button', 'Badge', 'Input', 'Modal']} />
+          </div>
+        </Row>
 
-      {/* ── FEEDBACK ──────────────────────────────────────────────── */}
-      <CategoryHeader name="FEEDBACK" count={8} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <Row name="TimeAgo">
+          <div className="flex flex-wrap gap-4 text-sm font-sans text-gray-600">
+            <TimeAgo date={new Date(Date.now() - 30000)} />
+            <TimeAgo date={new Date(Date.now() - 3600000 * 2)} />
+            <TimeAgo date={new Date(Date.now() - 86400000 * 3)} />
+            <TimeAgo date={new Date(Date.now() - 86400000 * 30)} />
+            <TimeAgo date={new Date('2024-01-01')} />
+          </div>
+        </Row>
 
-        <DemoCard name="Toast">
+        <Row name="Countdown" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">7 days from now</p>
+              <Countdown targetDate={new Date(Date.now() + 86400000 * 7)} />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">1 hour from now</p>
+              <Countdown targetDate={new Date(Date.now() + 3600000)} />
+            </div>
+          </div>
+        </Row>
+      </Section>
+
+      {/* ═══════════════════════════════════════════════════════ FEEDBACK */}
+      <Section title="Feedback" accent="yellow">
+
+        <Row name="Toast">
           <ToastDemo />
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Alert">
+        <Row name="Alert" wide>
           <div className="space-y-2 w-full">
-            <Alert variant="success" title="Deployed!">All systems green.</Alert>
-            <Alert variant="warning" title="Heads up">Review before publishing.</Alert>
+            <Alert variant="default" title="Note">Just so you know — this is a default alert.</Alert>
+            <Alert variant="info" title="Info">Your trial expires in 3 days. Upgrade to Pro to continue.</Alert>
+            <Alert variant="success" title="Deployed!">Your app is live at fxui-docs.vercel.app</Alert>
+            <Alert variant="warning" title="Heads up">You're approaching your monthly API limit.</Alert>
+            <Alert variant="error" title="Build failed">Check your TypeScript errors before deploying.</Alert>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="EmptyState">
-          <EmptyState
-            icon="📭"
-            title="No results"
-            description="Try a different search."
-            action={<Button size="sm">Clear filters</Button>}
-          />
-        </DemoCard>
+        <Row name="EmptyState" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <EmptyState icon="📭" title="No results" description="Try a different search term."
+              action={<Button size="sm">Clear filters</Button>} />
+            <EmptyState icon="🗂" title="No files" description="Upload your first file to get started."
+              action={<Button size="sm" variant="neon">Upload file</Button>} />
+            <EmptyState icon="✉️" title="Inbox zero" description="You're all caught up." />
+          </div>
+        </Row>
 
-        <DemoCard name="Banner">
-          <Banner variant="info" className="w-full">
-            v2.0 is available — <strong>update now</strong>.
-          </Banner>
-        </DemoCard>
+        <Row name="Banner" wide>
+          <div className="space-y-2 w-full">
+            <Banner variant="info">v2.0 is now available — <strong>see what's new</strong>.</Banner>
+            <Banner variant="success">Your plan was upgraded to Pro successfully.</Banner>
+            <Banner variant="warning">Scheduled maintenance on Saturday, June 28 at 2AM UTC.</Banner>
+          </div>
+        </Row>
 
-        <DemoCard name="ConfirmDialog">
-          <ConfirmDialog
-            title="Delete project?"
-            description="This action cannot be undone."
-            confirmLabel="Delete"
-            destructive
-            onConfirm={() => {}}
+        <Row name="ConfirmDialog">
+          <ConfirmDialog title="Delete project?" description="This action is permanent and cannot be undone."
+            confirmLabel="Delete" destructive onConfirm={() => {}}
             trigger={<Button variant="destructive" size="sm">Delete project</Button>}
           />
-        </DemoCard>
-
-        <DemoCard name="Notification">
-          <Notification
-            title="New message"
-            description="Alice sent you a file."
-            icon="💬"
-            timestamp="just now"
+          <ConfirmDialog title="Archive component?" description="You can restore it later from the archive."
+            confirmLabel="Archive" onConfirm={() => {}}
+            trigger={<Button variant="outline" size="sm">Archive</Button>}
           />
-        </DemoCard>
+          <ConfirmDialog title="Publish changes?" description="This will make your changes visible to everyone."
+            confirmLabel="Publish" onConfirm={() => {}}
+            trigger={<Button size="sm">Publish</Button>}
+          />
+        </Row>
 
-        <DemoCard name="Callout">
+        <Row name="Notification" wide>
+          <div className="grid grid-cols-2 gap-4">
+            <Notification title="New message" description="Alice sent you a file: design_system_v2.fig" icon="💬" timestamp="just now" />
+            <Notification title="Build succeeded" description="Your deployment to production is complete." icon="✅" timestamp="2m ago" variant="success" />
+            <Notification title="Payment received" description="$299 from Acme Inc." icon="💳" timestamp="1h ago" />
+            <Notification title="Error detected" description="API rate limit exceeded on /v2/components." icon="⚠️" timestamp="3h ago" variant="error" />
+          </div>
+        </Row>
+
+        <Row name="Callout" wide>
           <div className="space-y-2 w-full">
-            <Callout variant="tip">Use forwardRef on every component.</Callout>
-            <Callout variant="warning">Avoid using the any type.</Callout>
+            <Callout variant="tip">Use <Code>React.forwardRef</Code> on every component to enable ref forwarding.</Callout>
+            <Callout variant="info">All FXUI components support the <Code>className</Code> prop for style overrides.</Callout>
+            <Callout variant="warning">Avoid using the <Code>any</Code> type — FXUI ships with full TypeScript types.</Callout>
+            <Callout variant="danger">Never pass <Code>children</Code> to self-closing HTML elements like <Code>{'<input>'}</Code>.</Callout>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="LoadingOverlay">
-          <div className="relative h-24 w-full border-2 border-fx-black rounded-[4px] overflow-hidden">
-            <div className="p-4 text-sm text-gray-500">Content behind overlay</div>
-            <LoadingOverlay visible message="Processing..." />
+        <Row name="LoadingOverlay" wide>
+          <div className="grid grid-cols-3 gap-4">
+            {(['Processing…','Uploading…','Please wait…'] as const).map(msg => (
+              <div key={msg} className="relative h-24 border-2 border-fx-black rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
+                <p className="text-xs text-gray-400">{msg.replace('…','')}</p>
+                <LoadingOverlay visible message={msg} />
+              </div>
+            ))}
           </div>
-        </DemoCard>
-      </div>
+        </Row>
+      </Section>
 
-      {/* ── NAVIGATION ────────────────────────────────────────────── */}
-      <CategoryHeader name="NAVIGATION" count={8} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ═══════════════════════════════════════════════════ NAVIGATION */}
+      <Section title="Navigation" accent="blue">
 
-        <DemoCard name="Tabs">
-          <Tabs defaultValue="a" className="w-full">
-            <Tabs.List>
-              <Tabs.Trigger value="a">Overview</Tabs.Trigger>
-              <Tabs.Trigger value="b">Code</Tabs.Trigger>
-              <Tabs.Trigger value="c">API</Tabs.Trigger>
-            </Tabs.List>
-            <Tabs.Content value="a"><p className="text-sm text-gray-500 mt-2">Overview content.</p></Tabs.Content>
-            <Tabs.Content value="b"><p className="text-sm text-gray-500 mt-2">Code examples.</p></Tabs.Content>
-            <Tabs.Content value="c"><p className="text-sm text-gray-500 mt-2">API reference.</p></Tabs.Content>
-          </Tabs>
-        </DemoCard>
+        <Row name="Tabs" wide>
+          <div className="space-y-6">
+            <Tabs defaultValue="a">
+              <Tabs.List>
+                <Tabs.Trigger value="a">Overview</Tabs.Trigger>
+                <Tabs.Trigger value="b">Components</Tabs.Trigger>
+                <Tabs.Trigger value="c">API</Tabs.Trigger>
+                <Tabs.Trigger value="d" disabled>Disabled</Tabs.Trigger>
+              </Tabs.List>
+              <Tabs.Content value="a"><p className="text-sm text-gray-600 mt-3">Overview content. Switch tabs to explore.</p></Tabs.Content>
+              <Tabs.Content value="b"><p className="text-sm text-gray-600 mt-3">117 components across 15 categories.</p></Tabs.Content>
+              <Tabs.Content value="c"><p className="text-sm text-gray-600 mt-3">Full TypeScript API reference.</p></Tabs.Content>
+              <Tabs.Content value="d"><p className="text-sm text-gray-600 mt-3">Disabled.</p></Tabs.Content>
+            </Tabs>
+            <Tabs defaultValue="x" variant="pills">
+              <Tabs.List>
+                <Tabs.Trigger value="x">Pills</Tabs.Trigger>
+                <Tabs.Trigger value="y">Variant</Tabs.Trigger>
+                <Tabs.Trigger value="z">Tabs</Tabs.Trigger>
+              </Tabs.List>
+            </Tabs>
+          </div>
+        </Row>
 
-        <DemoCard name="Breadcrumb">
-          <Breadcrumb
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Components', href: '/showcase' },
-              { label: 'Breadcrumb' },
-            ]}
-          />
-        </DemoCard>
+        <Row name="Breadcrumb" wide>
+          <div className="space-y-3">
+            <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Components', href: '/showcase' }, { label: 'Breadcrumb' }]} />
+            <Breadcrumb separator="›" items={[{ label: 'Docs', href: '/' }, { label: 'Navigation', href: '#' }, { label: 'Breadcrumb' }]} />
+            <Breadcrumb separator="/" items={[{ label: 'root', href: '/' }, { label: 'apps', href: '#' }, { label: 'docs', href: '#' }, { label: 'page.tsx' }]} />
+          </div>
+        </Row>
 
-        <DemoCard name="Pagination">
-          <Pagination totalPages={10} page={page} onPageChange={setPage} />
-        </DemoCard>
+        <Row name="Pagination" wide>
+          <div className="space-y-4">
+            <Pagination totalPages={10} page={page} onPageChange={setPage} />
+            <Pagination totalPages={10} page={page} onPageChange={setPage} siblingCount={2} />
+            <Pagination totalPages={5} page={1} onPageChange={() => {}} showFirstLast />
+          </div>
+        </Row>
 
-        <DemoCard name="Stepper">
-          <div className="w-full">
-            <Stepper
-              currentStep={stepperStep}
-              steps={[
-                { title: 'Account', description: 'Create account' },
-                { title: 'Profile', description: 'Setup profile' },
-                { title: 'Done', description: 'All set!' },
-              ]}
-            />
-            <div className="flex gap-2 mt-3">
-              <Button size="sm" variant="outline" onClick={() => setStepperStep(s => Math.max(0, s - 1))}>Prev</Button>
-              <Button size="sm" onClick={() => setStepperStep(s => Math.min(2, s + 1))}>Next</Button>
+        <Row name="Stepper" wide>
+          <div className="space-y-6">
+            <div>
+              <Stepper currentStep={stepperStep} steps={[
+                { title: 'Account', description: 'Create your account' },
+                { title: 'Profile', description: 'Set up your profile' },
+                { title: 'Billing', description: 'Add payment method' },
+                { title: 'Done', description: 'Ready to ship!' },
+              ]} />
+              <div className="flex gap-2 mt-4">
+                <Button size="sm" variant="outline" onClick={() => setStepperStep(s => Math.max(0, s - 1))}>← Prev</Button>
+                <Button size="sm" onClick={() => setStepperStep(s => Math.min(3, s + 1))}>Next →</Button>
+              </div>
             </div>
+            <Stepper orientation="vertical" currentStep={1} steps={[
+              { title: 'Step 1', description: 'First step done' },
+              { title: 'Step 2', description: 'In progress...' },
+              { title: 'Step 3', description: 'Coming up' },
+            ]} />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="Navbar">
-          <div className="w-full border-2 border-fx-black rounded-[4px] overflow-hidden">
-            <Navbar logo={<span className="font-display font-black text-lg">FXUI</span>}>
-              <a href="#" className="text-sm font-bold px-3 py-1 rounded-[4px] hover:bg-gray-100">Docs</a>
-              <a href="#" className="text-sm font-bold px-3 py-1 rounded-[4px] bg-fx-black text-white">Showcase</a>
+        <Row name="Navbar" wide>
+          <div className="border-2 border-fx-black rounded-[4px] overflow-hidden">
+            <Navbar logo={<span className="font-display font-black text-xl">FXUI</span>}>
+              <a href="#" className="text-sm font-bold px-3 py-1.5 rounded-[4px] hover:bg-gray-100 transition-colors">Docs</a>
+              <a href="#" className="text-sm font-bold px-3 py-1.5 rounded-[4px] hover:bg-gray-100 transition-colors">Components</a>
+              <a href="#" className="text-sm font-bold px-3 py-1.5 bg-fx-black text-white rounded-[4px]">Showcase</a>
+              <Badge color="success" size="sm">v2.0</Badge>
             </Navbar>
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="ScrollProgress">
-          <div className="w-full space-y-2">
-            <p className="text-xs text-gray-500 font-mono">Fixed reading progress bar</p>
-            <div className="w-full h-2 bg-gray-100 border border-gray-200 rounded-full overflow-hidden">
-              <div className="h-full bg-fx-yellow transition-all" style={{ width: '65%' }} />
-            </div>
-            <ScrollProgress color="yellow" position="top" />
-          </div>
-        </DemoCard>
-
-        <DemoCard name="NavMenu">
-          <NavMenu
-            items={[
-              {
-                label: 'Products',
-                group: {
-                  trigger: 'Products',
-                  links: [
-                    { label: 'Components', href: '/showcase', description: '117 UI components' },
-                    { label: 'Docs', href: '/docs/getting-started', description: 'Getting started guide' },
-                  ],
-                },
-              },
-              { label: 'GitHub', href: '#' },
-            ]}
-          />
-        </DemoCard>
-
-        <DemoCard name="AppSidebar">
-          <div className="w-48 border-2 border-fx-black rounded-[4px] overflow-hidden">
-            <AppSidebar
-              sections={[{
-                items: [
-                  { label: 'Dashboard', icon: '⊞', href: '#', active: true },
-                  { label: 'Components', icon: '◈', href: '#', badge: '117' },
-                  { label: 'Settings', icon: '⚙', href: '#' },
+        <Row name="NavMenu" wide>
+          <NavMenu items={[
+            {
+              label: 'Products',
+              group: {
+                trigger: 'Products',
+                links: [
+                  { label: 'Components', href: '/showcase', description: '117 UI components' },
+                  { label: 'Documentation', href: '/docs/getting-started', description: 'Guides and API reference' },
                 ],
-              }]}
-            />
+              },
+            },
+            {
+              label: 'Resources',
+              group: {
+                trigger: 'Resources',
+                links: [
+                  { label: 'Storybook', href: '#', description: 'Interactive component explorer' },
+                  { label: 'GitHub', href: '#', description: 'Open source repository' },
+                ],
+              },
+            },
+            { label: 'Changelog', href: '#' },
+          ]} />
+        </Row>
+
+        <Row name="AppSidebar" wide>
+          <div className="w-52 border-2 border-fx-black rounded-[4px] overflow-hidden">
+            <AppSidebar sections={[
+              {
+                title: 'Getting Started',
+                items: [
+                  { label: 'Installation', icon: '⬇', href: '#' },
+                  { label: 'Showcase', icon: '◈', href: '#', active: true },
+                ],
+              },
+              {
+                title: 'Components',
+                items: [
+                  { label: 'Button', icon: '▣', href: '#' },
+                  { label: 'Badge', icon: '◉', href: '#' },
+                  { label: 'Input', icon: '▤', href: '#' },
+                ],
+              },
+            ]} />
           </div>
-        </DemoCard>
-      </div>
+        </Row>
 
-      {/* ── OVERLAY ───────────────────────────────────────────────── */}
-      <CategoryHeader name="OVERLAY" count={10} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <Row name="ScrollProgress">
+          <div className="space-y-2 w-full">
+            <p className="text-xs font-mono text-gray-400">Fixed reading progress — positioned at top of viewport.</p>
+            <ScrollProgress color="yellow" position="top" />
+            <div className="flex gap-2">
+              <Badge variant="neon">yellow</Badge>
+              <Badge variant="outline">blue</Badge>
+              <Badge variant="outline">pink</Badge>
+              <Badge variant="outline">green</Badge>
+            </div>
+          </div>
+        </Row>
+      </Section>
 
-        <DemoCard name="Modal">
+      {/* ═══════════════════════════════════════════════════════ OVERLAY */}
+      <Section title="Overlay" accent="pink">
+
+        <Row name="Modal">
           <Modal>
             <Modal.Trigger asChild>
-              <Button size="sm">Open Modal</Button>
+              <Button size="sm">Default modal</Button>
             </Modal.Trigger>
             <Modal.Content>
-              <Modal.Header>
-                <p className="font-black text-base">Confirm action</p>
-              </Modal.Header>
-              <Modal.Body>
-                <p className="text-sm text-gray-600">This is a modal dialog built on Radix UI.</p>
-              </Modal.Body>
+              <Modal.Header><p className="font-black text-lg">Confirm action</p></Modal.Header>
+              <Modal.Body><p className="text-sm text-gray-600">This modal is built on Radix UI Dialog. Accessible, keyboard navigable, focus trapped.</p></Modal.Body>
               <Modal.Footer>
                 <Button variant="outline" size="sm">Cancel</Button>
                 <Button size="sm">Confirm</Button>
               </Modal.Footer>
             </Modal.Content>
           </Modal>
-        </DemoCard>
+          <Modal>
+            <Modal.Trigger asChild><Button size="sm" variant="outline">Form modal</Button></Modal.Trigger>
+            <Modal.Content>
+              <Modal.Header><p className="font-black">Edit profile</p></Modal.Header>
+              <Modal.Body className="space-y-3">
+                <Input label="Name" placeholder="Your name" />
+                <Input label="Email" placeholder="name@example.com" />
+              </Modal.Body>
+              <Modal.Footer><Button size="sm">Save</Button></Modal.Footer>
+            </Modal.Content>
+          </Modal>
+        </Row>
 
-        <DemoCard name="Drawer">
-          <Drawer>
-            <Drawer.Trigger asChild>
-              <Button size="sm" variant="outline">Open Drawer</Button>
-            </Drawer.Trigger>
+        <Row name="Drawer">
+          <Drawer><Drawer.Trigger asChild><Button size="sm">Right drawer</Button></Drawer.Trigger>
             <Drawer.Content placement="right">
-              <Drawer.Header>
-                <p className="font-black text-base">Settings</p>
-              </Drawer.Header>
-              <Drawer.Body>
-                <p className="text-sm text-gray-600">Drawer content slides in from the right.</p>
-              </Drawer.Body>
+              <Drawer.Header><p className="font-black text-base">Settings</p></Drawer.Header>
+              <Drawer.Body><p className="text-sm text-gray-600">Slides in from the right.</p></Drawer.Body>
             </Drawer.Content>
           </Drawer>
-        </DemoCard>
+          <Drawer><Drawer.Trigger asChild><Button size="sm" variant="outline">Left drawer</Button></Drawer.Trigger>
+            <Drawer.Content placement="left">
+              <Drawer.Header><p className="font-black text-base">Navigation</p></Drawer.Header>
+              <Drawer.Body><p className="text-sm text-gray-600">Slides in from the left.</p></Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+          <Drawer><Drawer.Trigger asChild><Button size="sm" variant="outline">Bottom</Button></Drawer.Trigger>
+            <Drawer.Content placement="bottom">
+              <Drawer.Header><p className="font-black text-base">Sheet</p></Drawer.Header>
+              <Drawer.Body><p className="text-sm text-gray-600">Slides up from the bottom.</p></Drawer.Body>
+            </Drawer.Content>
+          </Drawer>
+        </Row>
 
-        <DemoCard name="Tooltip">
-          <div className="flex gap-3">
-            <Tooltip content="Top tooltip" placement="top">
-              <Button size="sm" variant="outline">Top</Button>
-            </Tooltip>
-            <Tooltip content="Bottom tooltip" placement="bottom">
-              <Button size="sm" variant="outline">Bottom</Button>
-            </Tooltip>
-          </div>
-        </DemoCard>
+        <Row name="Tooltip">
+          <Tooltip content="This tooltip appears on top" placement="top"><Button size="sm" variant="outline">Top</Button></Tooltip>
+          <Tooltip content="This tooltip appears on the right" placement="right"><Button size="sm" variant="outline">Right</Button></Tooltip>
+          <Tooltip content="Bottom tooltip" placement="bottom"><Button size="sm" variant="outline">Bottom</Button></Tooltip>
+          <Tooltip content="Left tooltip" placement="left"><Button size="sm" variant="outline">Left</Button></Tooltip>
+          <Tooltip content={<><strong>Rich content</strong><br />Tooltips support <em>JSX</em></>} placement="top">
+            <Button size="sm" variant="ghost">Rich tooltip</Button>
+          </Tooltip>
+        </Row>
 
-        <DemoCard name="Popover">
+        <Row name="Popover">
           <Popover>
-            <Popover.Trigger asChild>
-              <Button size="sm" variant="outline">Open popover</Button>
-            </Popover.Trigger>
+            <Popover.Trigger asChild><Button size="sm" variant="outline">Open popover</Button></Popover.Trigger>
             <Popover.Content>
-              <p className="text-sm font-sans text-gray-700">Floating panel with arrow.</p>
+              <p className="font-bold text-sm mb-1">Quick actions</p>
+              <p className="text-xs text-gray-500 mb-3">Choose an action to continue.</p>
+              <div className="flex gap-2">
+                <Button size="sm">Edit</Button>
+                <Button size="sm" variant="outline">Duplicate</Button>
+              </div>
             </Popover.Content>
           </Popover>
-        </DemoCard>
+          <Popover>
+            <Popover.Trigger asChild><Button size="sm" variant="ghost">Filter ▾</Button></Popover.Trigger>
+            <Popover.Content>
+              <CheckboxGroup label="Status" options={[
+                { value: 'active', label: 'Active' },
+                { value: 'away', label: 'Away' },
+                { value: 'offline', label: 'Offline' },
+              ]} defaultValue={['active']} />
+            </Popover.Content>
+          </Popover>
+        </Row>
 
-        <DemoCard name="DropdownMenu">
+        <Row name="DropdownMenu">
           <DropdownMenu>
-            <DropdownMenu.Trigger asChild>
-              <Button size="sm" variant="outline">Actions ▾</Button>
-            </DropdownMenu.Trigger>
+            <DropdownMenu.Trigger asChild><Button size="sm" variant="outline">File ▾</Button></DropdownMenu.Trigger>
             <DropdownMenu.Content>
-              <DropdownMenu.Item>Edit</DropdownMenu.Item>
-              <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+              <DropdownMenu.Item>New file</DropdownMenu.Item>
+              <DropdownMenu.Item>Open…</DropdownMenu.Item>
               <DropdownMenu.Separator />
-              <DropdownMenu.Item destructive>Delete</DropdownMenu.Item>
+              <DropdownMenu.Item>Save</DropdownMenu.Item>
+              <DropdownMenu.Item>Save As…</DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item destructive>Close</DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu>
-        </DemoCard>
+          <DropdownMenu>
+            <DropdownMenu.Trigger asChild><Button size="sm" variant="outline">With icons ▾</Button></DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Item icon="✏️">Edit</DropdownMenu.Item>
+              <DropdownMenu.Item icon="📋">Duplicate</DropdownMenu.Item>
+              <DropdownMenu.Item icon="🔗">Copy link</DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item icon="🗑" destructive>Delete</DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu>
+        </Row>
 
-        <DemoCard name="ContextMenu">
+        <Row name="ContextMenu">
           <ContextMenu>
             <ContextMenu.Trigger asChild>
-              <div className="border-2 border-dashed border-fx-black rounded-[4px] px-6 py-4 text-sm text-gray-500 cursor-default select-none">
-                Right-click here
+              <div className="border-2 border-dashed border-fx-black rounded-[4px] px-8 py-5 text-sm text-gray-500 cursor-default select-none hover:bg-gray-50 transition-colors">
+                Right-click anywhere in this area to open the context menu
               </div>
             </ContextMenu.Trigger>
             <ContextMenu.Content>
-              <ContextMenu.Item>Copy</ContextMenu.Item>
-              <ContextMenu.Item>Paste</ContextMenu.Item>
+              <ContextMenu.Item icon="✏️">Edit</ContextMenu.Item>
+              <ContextMenu.Item icon="📋">Copy</ContextMenu.Item>
+              <ContextMenu.Item icon="📌">Pin</ContextMenu.Item>
               <ContextMenu.Separator />
-              <ContextMenu.Item destructive>Delete</ContextMenu.Item>
+              <ContextMenu.Item icon="🗑" destructive>Delete</ContextMenu.Item>
             </ContextMenu.Content>
           </ContextMenu>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="CommandPalette">
-          <CommandPaletteDemo />
-        </DemoCard>
+        <Row name="CommandPalette">
+          <CmdDemo />
+        </Row>
 
-        <DemoCard name="HoverCard">
-          <HoverCard
-            trigger={<span className="font-bold underline cursor-pointer text-fx-blue">@fxui</span>}
-          >
+        <Row name="HoverCard">
+          <HoverCard trigger={<span className="font-bold underline cursor-pointer text-fx-blue">@fxui</span>}>
             <div className="space-y-1">
-              <p className="font-bold text-sm">FXUI</p>
-              <p className="text-xs text-gray-500">Neo-brutalist React UI. 117 components.</p>
+              <p className="font-black text-sm">FXUI</p>
+              <p className="text-xs text-gray-500">Neo-brutalist React UI library. 117 components.</p>
+              <div className="flex gap-2 mt-2">
+                <Badge size="sm" color="success">Open source</Badge>
+                <Badge size="sm" color="info">MIT</Badge>
+              </div>
             </div>
           </HoverCard>
-        </DemoCard>
+          <HoverCard trigger={<span className="font-bold underline cursor-pointer">Button component</span>}>
+            <div className="space-y-2">
+              <p className="font-black text-sm">Button</p>
+              <Code className="text-xs">{'import { Button } from \'@fxui/core\''}</Code>
+              <p className="text-xs text-gray-500">10 variants · 5 sizes · fully typed</p>
+            </div>
+          </HoverCard>
+        </Row>
 
-        <DemoCard name="SheetDialog">
-          <SheetDialog
-            trigger={<Button size="sm" variant="outline">Open Sheet</Button>}
-            title="Sheet panel"
-            description="Large sliding sheet panel content."
-          />
-        </DemoCard>
+        <Row name="SheetDialog">
+          <SheetDialog trigger={<Button size="sm" variant="outline">Right sheet</Button>} title="Sheet panel" description="Large sliding panel for complex forms or detail views." side="right" />
+          <SheetDialog trigger={<Button size="sm" variant="outline">Left sheet</Button>} title="Navigation" description="Navigation sheet from the left side." side="left" />
+          <SheetDialog trigger={<Button size="sm" variant="ghost">Bottom sheet</Button>} title="Quick actions" description="Actions sheet from the bottom." side="bottom" />
+        </Row>
 
-        <DemoCard name="Popconfirm">
-          <Popconfirm
-            title="Are you sure?"
-            description="This will delete the item."
-            onConfirm={() => {}}
-            trigger={<Button size="sm" variant="destructive">Delete</Button>}
-          />
-        </DemoCard>
-      </div>
+        <Row name="Popconfirm">
+          <Popconfirm title="Delete this item?" description="This action cannot be undone." onConfirm={() => {}}
+            trigger={<Button size="sm" variant="destructive">Delete</Button>} variant="danger" />
+          <Popconfirm title="Archive?" description="You can restore it later." onConfirm={() => {}}
+            trigger={<Button size="sm" variant="outline">Archive</Button>} />
+          <Popconfirm title="Submit?" description="Send this form to the server." onConfirm={() => {}} side="top"
+            trigger={<Button size="sm">Submit form</Button>} />
+        </Row>
+      </Section>
 
-      {/* ── INTERACTION ───────────────────────────────────────────── */}
-      <CategoryHeader name="INTERACTION" count={2} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ═══════════════════════════════════════════════════ INTERACTION */}
+      <Section title="Interaction" accent="green">
 
-        <DemoCard name="Collapsible">
-          <Collapsible title="What is FXUI?" defaultOpen className="w-full">
-            <p className="text-sm text-gray-600">A neo-brutalist React component library with 117 components.</p>
-          </Collapsible>
-        </DemoCard>
+        <Row name="Collapsible" wide>
+          <div className="space-y-2 w-full max-w-xl">
+            <Collapsible title="What is FXUI?" defaultOpen>
+              <p className="text-sm text-gray-600">A neo-brutalist React component library with 117 components, built with TypeScript, Tailwind CSS, and Radix UI.</p>
+            </Collapsible>
+            <Collapsible title="How many components?">
+              <p className="text-sm text-gray-600">117 components across 15 categories: Core, Layout, Typography, Form, Form Advanced, Data Display, Feedback, Navigation, Overlay, Interaction, Media & Chart, Utility, Special, Theme, and Misc.</p>
+            </Collapsible>
+            <Collapsible title="Is it accessible?">
+              <p className="text-sm text-gray-600">Yes. All interactive components use Radix UI primitives which are fully ARIA-compliant and keyboard navigable.</p>
+            </Collapsible>
+          </div>
+        </Row>
 
-        <DemoCard name="InlineEdit">
-          <InlineEdit defaultValue="Click to edit this text" onSave={() => {}} />
-        </DemoCard>
-      </div>
+        <Row name="InlineEdit" wide>
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-1">Click to edit</p>
+              <InlineEdit defaultValue={inlineVal} onSave={setInlineVal} />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-1">Heading style</p>
+              <InlineEdit defaultValue="Project title" onSave={() => {}} className="font-black text-2xl font-display" />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-1">Textarea mode</p>
+              <InlineEdit defaultValue="Multi-line editable text..." onSave={() => {}} />
+            </div>
+          </div>
+        </Row>
+      </Section>
 
-      {/* ── MEDIA & CHART ─────────────────────────────────────────── */}
-      <CategoryHeader name="MEDIA & CHART" count={10} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ═══════════════════════════════════════════════ MEDIA & CHART */}
+      <Section title="Media & Chart" accent="purple">
 
-        <DemoCard name="Image">
-          <Image
-            src="https://picsum.photos/seed/fxui/400/200"
-            alt="Sample"
-            className="w-full rounded-[4px] border-2 border-fx-black"
-            caption="A placeholder image"
-          />
-        </DemoCard>
+        <Row name="Image" wide>
+          <div className="grid grid-cols-3 gap-4">
+            <Image src="https://picsum.photos/seed/fx1/600/300" alt="Landscape" className="w-full rounded-[4px] border-2 border-fx-black" caption="Default image" />
+            <Image src="https://picsum.photos/seed/fx2/600/400" alt="Portrait" className="w-full rounded-[4px] border-2 border-fx-black" />
+            <Image src="https://picsum.photos/seed/fx3/600/300" alt="Wide" className="w-full rounded-[4px] border-2 border-fx-black shadow-fx" caption="With shadow-fx" />
+          </div>
+        </Row>
 
-        <DemoCard name="Carousel">
-          <Carousel
-            className="w-full"
-            items={['#FFE500','#FF2D78','#00FF94','#0066FF'].map((c, i) => (
-              <div key={i} className="h-24 flex items-center justify-center font-black text-fx-black border-2 border-fx-black" style={{ backgroundColor: c }}>
-                Slide {i + 1}
+        <Row name="Carousel" wide>
+          <Carousel className="w-full" items={[
+            <div key={1} className="h-36 bg-fx-yellow border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl">Slide 1</div>,
+            <div key={2} className="h-36 bg-fx-pink border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl text-white">Slide 2</div>,
+            <div key={3} className="h-36 bg-fx-green border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl">Slide 3</div>,
+            <div key={4} className="h-36 bg-fx-blue border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl text-white">Slide 4</div>,
+            <div key={5} className="h-36 bg-fx-purple border-2 border-fx-black flex items-center justify-center font-display font-black text-3xl text-white">Slide 5</div>,
+          ]} />
+        </Row>
+
+        <Row name="VideoPlayer" wide>
+          <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" className="w-full max-w-xl" />
+        </Row>
+
+        <Row name="LineChart" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Single series</p>
+              <LineChart data={chartData} xKey="month" height={200} showGrid showDots
+                series={[{ key: 'revenue', label: 'Revenue', color: '#0066FF' }]}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Multi series</p>
+              <LineChart data={chartData} xKey="month" height={200} showGrid curved
+                series={[
+                  { key: 'revenue', label: 'Revenue', color: '#0066FF' },
+                  { key: 'expenses', label: 'Expenses', color: '#FF2D78' },
+                ]}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="BarChart" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Single bar</p>
+              <BarChart data={chartData} xKey="month" height={200} showGrid radius={2}
+                series={[{ key: 'users', label: 'Users', color: '#FF2D78' }]}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Grouped bars</p>
+              <BarChart data={chartData} xKey="month" height={200} showGrid
+                series={[
+                  { key: 'revenue', label: 'Revenue', color: '#0066FF' },
+                  { key: 'users', label: 'Users', color: '#00FF94' },
+                ]}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="AreaChart" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Single area</p>
+              <AreaChart data={chartData} xKey="month" height={200} showGrid
+                series={[{ key: 'revenue', label: 'Revenue', color: '#00FF94' }]}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Stacked areas</p>
+              <AreaChart data={chartData} xKey="month" height={200} showGrid stacked
+                series={[
+                  { key: 'revenue', label: 'Revenue', color: '#0066FF' },
+                  { key: 'expenses', label: 'Expenses', color: '#FF2D78' },
+                ]}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="DonutChart" wide>
+          <div className="grid grid-cols-3 gap-6">
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Donut</p>
+              <DonutChart data={donutData} centerLabel="Stack" centerValue="4" height={200}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">Pie variant</p>
+              <DonutChart data={donutData} variant="pie" height={200}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-mono text-gray-400 mb-2">No legend</p>
+              <DonutChart data={donutData} showLegend={false} centerLabel="Total" centerValue="100" height={200}
+                className="!border-0 !shadow-none !p-0"
+              />
+            </div>
+          </div>
+        </Row>
+
+        <Row name="SparkLine" wide>
+          <div className="grid grid-cols-4 gap-6">
+            {[
+              { data: [3,7,2,9,5,8,4,11], trend: 'up' as const, label: 'Revenue up' },
+              { data: [11,8,6,9,4,7,3,5], trend: 'down' as const, label: 'Churn down' },
+              { data: [5,5,6,5,6,5,6,5], trend: 'neutral' as const, label: 'Stable' },
+              { data: [1,3,2,8,5,9,7,12], trend: 'up' as const, label: 'Users up' },
+            ].map(({ data, trend, label }) => (
+              <div key={label}>
+                <p className="text-xs font-mono text-gray-400 mb-2">{label}</p>
+                <SparkLine data={data} trend={trend} showTrend />
               </div>
             ))}
-          />
-        </DemoCard>
+          </div>
+        </Row>
 
-        <DemoCard name="VideoPlayer">
-          <VideoPlayer
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
-            className="w-full"
-          />
-        </DemoCard>
+        <Row name="ProgressRing" wide>
+          <div className="flex gap-8 flex-wrap">
+            {([
+              { value: 28, color: 'yellow', label: 'Q1' },
+              { value: 55, color: 'blue', label: 'Q2' },
+              { value: 72, color: 'green', label: 'Q3' },
+              { value: 90, color: 'pink', label: 'Q4' },
+              { value: 100, color: 'purple', label: 'Done' },
+            ] as const).map(({ value, color, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1">
+                <ProgressRing value={value} color={color} showValue size={72} />
+                <span className="text-xs font-mono text-gray-400">{label}</span>
+              </div>
+            ))}
+          </div>
+        </Row>
 
-        <DemoCard name="LineChart">
-          <LineChart
-            data={chartData}
-            series={[{ key: 'revenue', label: 'Revenue', color: '#0066FF' }]}
-            xKey="month"
-            height={140}
-            showGrid
-            showDots
-            showLegend={false}
-            className="w-full !border-0 !shadow-none !rounded-none !p-2"
-          />
-        </DemoCard>
+        <Row name="AnimatedCounter" wide>
+          <div className="grid grid-cols-4 gap-6">
+            {[
+              { value: 117, prefix: '', suffix: '', label: 'Components' },
+              { value: 48250, prefix: '$', suffix: '', label: 'Revenue' },
+              { value: 99.9, prefix: '', suffix: '%', label: 'Uptime' },
+              { value: 1720, prefix: '', suffix: ' users', label: 'Active' },
+            ].map(({ value, prefix, suffix, label }) => (
+              <div key={label} className="border-2 border-fx-black rounded-[4px] p-4 text-center">
+                <AnimatedCounter value={value} prefix={prefix} suffix={suffix} className="font-display font-black text-3xl text-fx-black block" />
+                <span className="text-xs font-mono text-gray-400 mt-1 block">{label}</span>
+              </div>
+            ))}
+          </div>
+        </Row>
+      </Section>
 
-        <DemoCard name="BarChart">
-          <BarChart
-            data={chartData}
-            series={[{ key: 'users', label: 'Users', color: '#FF2D78' }]}
-            xKey="month"
-            height={140}
-            showGrid
-            radius={2}
-            showLegend={false}
-            className="w-full !border-0 !shadow-none !rounded-none !p-2"
-          />
-        </DemoCard>
+      {/* ════════════════════════════════════════════════════════ UTILITY */}
+      <Section title="Utility" accent="yellow">
 
-        <DemoCard name="AreaChart">
-          <AreaChart
-            data={chartData}
-            series={[{ key: 'revenue', label: 'Revenue', color: '#00FF94' }]}
-            xKey="month"
-            height={140}
-            showGrid
-            showLegend={false}
-            className="w-full !border-0 !shadow-none !rounded-none !p-2"
-          />
-        </DemoCard>
+        <Row name="CopyButton">
+          <CopyButton value="pnpm add @fxui/core" label="Copy install command" />
+          <CopyButton value="pnpm add @fxui/core" iconOnly />
+          <CopyButton value="pnpm add @fxui/core" label="Copy" variant="ghost" />
+        </Row>
 
-        <DemoCard name="DonutChart">
-          <DonutChart
-            data={donutData}
-            centerLabel="Stack"
-            centerValue="4"
-            height={180}
-            showLegend={false}
-            className="w-full !border-0 !shadow-none !rounded-none !p-2"
-          />
-        </DemoCard>
+        <Row name="ColorSwatch" wide>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { color: '#FFE500', name: 'fx-yellow' },
+              { color: '#FF2D78', name: 'fx-pink' },
+              { color: '#00FF94', name: 'fx-green' },
+              { color: '#0066FF', name: 'fx-blue' },
+              { color: '#7C3AED', name: 'fx-purple' },
+              { color: '#0a0a0a', name: 'fx-black' },
+              { color: '#fafafa', name: 'fx-white' },
+            ].map(({ color, name }) => (
+              <ColorSwatch key={name} color={color} name={name} showHex size="md" />
+            ))}
+          </div>
+        </Row>
 
-        <DemoCard name="SparkLine">
+        <Row name="Marquee" wide>
+          <div className="space-y-3 w-full overflow-hidden">
+            <Marquee speed={40}>
+              {['FXUI','NEO-BRUTALISM','117 COMPONENTS','OPEN SOURCE','MIT LICENSE','TYPESCRIPT'].map(t => (
+                <span key={t} className="font-display font-black text-sm mx-6 text-fx-black">◆ {t}</span>
+              ))}
+            </Marquee>
+            <Marquee speed={25} direction="right">
+              {['Button','Badge','Input','Modal','Table','Chart','Avatar','Timeline'].map(t => (
+                <span key={t} className="font-mono text-xs mx-4 text-gray-500 border border-gray-200 px-2 py-0.5 rounded-[4px]">{t}</span>
+              ))}
+            </Marquee>
+          </div>
+        </Row>
+
+        <Row name="ReadMore" wide>
+          <div className="max-w-xl space-y-4">
+            <ReadMore maxLines={2} className="text-sm text-gray-600">
+              FXUI is a neo-brutalist React component library with 117 production-ready components built with TypeScript, Tailwind CSS, and Radix UI. Every component supports dark mode, forwardRef, and strict TypeScript types. The library ships with a fully typed API, Storybook stories, and MDX documentation for every component.
+            </ReadMore>
+            <ReadMore maxLines={3} className="text-sm text-gray-600">
+              The design system follows a consistent set of rules: border-2 border-fx-black, shadow-fx for depth, rounded-[4px] for corners, and transition-all duration-150 for interactions. These rules create a cohesive, recognizable visual language that stands out in any application.
+            </ReadMore>
+          </div>
+        </Row>
+
+        <Row name="HighlightText" wide>
           <div className="space-y-2">
-            <SparkLine data={[3,7,2,9,5,8,4,11]} trend="up" showTrend />
-            <SparkLine data={[11,8,6,9,4,7,3,5]} trend="down" showTrend color="#FF2D78" />
+            <HighlightText text="Neo-brutalist design system with 117 components" highlight="brutalist" className="text-base" />
+            <HighlightText text="Built with TypeScript, Tailwind CSS, and Radix UI" highlight={['TypeScript', 'Tailwind CSS', 'Radix UI']} className="text-base" />
+            <HighlightText text="Bold. Raw. Unapologetically different." highlight="different" className="text-base" />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="ProgressRing">
-          <div className="flex gap-4">
-            <ProgressRing value={75} color="blue" showValue size={64} />
-            <ProgressRing value={42} color="pink" showValue size={64} />
-            <ProgressRing value={90} color="green" showValue size={64} />
-          </div>
-        </DemoCard>
-
-        <DemoCard name="AnimatedCounter">
-          <div className="flex gap-6">
-            <AnimatedCounter value={117} suffix=" comp" className="font-display font-black text-3xl" />
-            <AnimatedCounter value={100} suffix="%" className="font-display font-black text-3xl text-fx-green" />
-          </div>
-        </DemoCard>
-      </div>
-
-      {/* ── UTILITY ───────────────────────────────────────────────── */}
-      <CategoryHeader name="UTILITY" count={8} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-
-        <DemoCard name="CopyButton">
-          <div className="flex gap-2 items-center">
-            <CopyButton value="pnpm add @fxui/core" label="Copy install" />
-            <CopyButton value="pnpm add @fxui/core" iconOnly />
-          </div>
-        </DemoCard>
-
-        <DemoCard name="ColorSwatch">
-          <div className="flex gap-2 flex-wrap">
-            <ColorSwatch color="#FFE500" name="Yellow" />
-            <ColorSwatch color="#FF2D78" name="Pink" />
-            <ColorSwatch color="#00FF94" name="Green" />
-            <ColorSwatch color="#0066FF" name="Blue" />
-          </div>
-        </DemoCard>
-
-        <DemoCard name="Marquee">
-          <Marquee className="w-full" speed={30}>
-            <span className="font-black text-sm mx-4">FXUI</span>
-            <span className="font-black text-sm mx-4">NEO-BRUTALISM</span>
-            <span className="font-black text-sm mx-4">117 COMPONENTS</span>
-            <span className="font-black text-sm mx-4">OPEN SOURCE</span>
-          </Marquee>
-        </DemoCard>
-
-        <DemoCard name="ReadMore">
-          <ReadMore maxLines={2} className="text-sm text-gray-600 w-full">
-            FXUI is a neo-brutalist React component library with 117 production-ready components built with TypeScript, Tailwind CSS, and Radix UI. Every component supports dark mode, forwardRef, and strict TypeScript types.
-          </ReadMore>
-        </DemoCard>
-
-        <DemoCard name="HighlightText">
-          <HighlightText text="Neo-brutalist design system with 117 components" highlight="brutalist" className="text-sm" />
-        </DemoCard>
-
-        <DemoCard name="ScrollToTop">
-          <div className="relative h-20 w-full border-2 border-fx-black rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
-            <span className="text-xs text-gray-400">Appears after scroll</span>
+        <Row name="ScrollToTop">
+          <div className="relative h-20 w-60 border-2 border-fx-black rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
+            <span className="text-xs text-gray-400">Appears after 200px scroll</span>
             <ScrollToTop threshold={0} style={{ position: 'absolute', bottom: 8, right: 8 }} />
           </div>
-        </DemoCard>
+        </Row>
 
-        <DemoCard name="QRCode">
-          <QRCode value="https://fxui-docs.vercel.app" size={80} />
-        </DemoCard>
+        <Row name="QRCode" wide>
+          <div className="flex gap-6">
+            <div className="text-center space-y-1">
+              <QRCode value="https://fxui-docs.vercel.app" size={80} />
+              <p className="text-xs font-mono text-gray-400">size=80</p>
+            </div>
+            <div className="text-center space-y-1">
+              <QRCode value="https://fxui-docs.vercel.app" size={120} />
+              <p className="text-xs font-mono text-gray-400">size=120</p>
+            </div>
+            <div className="text-center space-y-1">
+              <QRCode value="https://fxui-docs.vercel.app" size={160} />
+              <p className="text-xs font-mono text-gray-400">size=160</p>
+            </div>
+          </div>
+        </Row>
 
-        <DemoCard name="ClipboardInput">
-          <ClipboardInput value="pnpm add @fxui/core" label="Install" className="w-full" />
-        </DemoCard>
-      </div>
+        <Row name="ClipboardInput" wide>
+          <div className="grid grid-cols-2 gap-4 max-w-xl">
+            <ClipboardInput value="pnpm add @fxui/core" label="Install" />
+            <ClipboardInput value="import { Button } from '@fxui/core'" label="Import" />
+          </div>
+        </Row>
+      </Section>
 
-      {/* ── SPECIAL ───────────────────────────────────────────────── */}
-      <CategoryHeader name="SPECIAL" count={4} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ══════════════════════════════════════════════════════ SPECIAL */}
+      <Section title="Special" accent="pink">
 
-        <DemoCard name="GlitchText">
-          <GlitchText text="GLITCH" intensity="medium" className="font-display font-black text-3xl" />
-        </DemoCard>
+        <Row name="GlitchText" wide>
+          <div className="flex flex-wrap gap-10">
+            <GlitchText text="GLITCH" intensity="low" className="font-display font-black text-4xl" />
+            <GlitchText text="GLITCH" intensity="medium" className="font-display font-black text-4xl" />
+            <GlitchText text="GLITCH" intensity="high" className="font-display font-black text-4xl" />
+          </div>
+        </Row>
 
-        <DemoCard name="TypewriterText">
-          <TypewriterText
-            texts={['Neo-brutalist.', 'TypeScript first.', '117 components.']}
-            className="font-bold font-sans text-base"
-          />
-        </DemoCard>
+        <Row name="TypewriterText" wide>
+          <div className="space-y-3">
+            <TypewriterText texts={['Neo-brutalist.', 'TypeScript first.', '117 components.', 'Open source.']} className="font-bold font-sans text-xl" />
+            <TypewriterText texts={['Bold.', 'Raw.', 'Unapologetic.']} className="font-display font-black text-3xl" speed={80} />
+          </div>
+        </Row>
 
-        <DemoCard name="NoiseBg">
-          <NoiseBg className="w-full h-24 bg-fx-yellow border-2 border-fx-black rounded-[4px] flex items-center justify-center">
-            <span className="font-black text-sm">Noise texture overlay</span>
-          </NoiseBg>
-        </DemoCard>
+        <Row name="NoiseBg" wide>
+          <div className="grid grid-cols-5 gap-3">
+            {([
+              ['bg-fx-yellow', 'text-fx-black'],
+              ['bg-fx-pink', 'text-white'],
+              ['bg-fx-green', 'text-fx-black'],
+              ['bg-fx-blue', 'text-white'],
+              ['bg-fx-purple', 'text-white'],
+            ] as const).map(([bg, text], i) => (
+              <NoiseBg key={i} className={`${bg} ${text} border-2 border-fx-black rounded-[4px] h-20 flex items-center justify-center`}>
+                <span className="font-black text-sm">Noise {i+1}</span>
+              </NoiseBg>
+            ))}
+          </div>
+        </Row>
 
-        <DemoCard name="BrutalistCard">
-          <BrutalistCard accent="yellow" hoverable className="w-full p-4">
-            <p className="font-black font-display text-lg">BrutalistCard</p>
-            <p className="text-sm text-gray-600 mt-1">Preset neo-brutalist card.</p>
-          </BrutalistCard>
-        </DemoCard>
-      </div>
+        <Row name="BrutalistCard" wide>
+          <div className="grid grid-cols-4 gap-4">
+            {(['yellow', 'pink', 'green', 'blue'] as const).map(accent => (
+              <BrutalistCard key={accent} accent={accent} hoverable className="p-5">
+                <p className="font-black font-display text-lg capitalize">{accent}</p>
+                <p className="text-sm text-gray-600 mt-1">Neo-brutalist card with {accent} accent.</p>
+                <Button size="sm" className="mt-3">Action</Button>
+              </BrutalistCard>
+            ))}
+          </div>
+        </Row>
+      </Section>
 
-      {/* ── THEME ─────────────────────────────────────────────────── */}
-      <CategoryHeader name="THEME" count={1} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* ══════════════════════════════════════════════════════════ MISC */}
+      <Section title="Misc" accent="blue">
 
-        <DemoCard name="ThemeProvider">
+        <Row name="Accordion" wide>
+          <div className="grid grid-cols-2 gap-6">
+            <Accordion type="single" collapsible>
+              <Accordion.Item value="q1">
+                <Accordion.Trigger>What is FXUI?</Accordion.Trigger>
+                <Accordion.Content>A neo-brutalist React component library with 117 components.</Accordion.Content>
+              </Accordion.Item>
+              <Accordion.Item value="q2">
+                <Accordion.Trigger>How many components?</Accordion.Trigger>
+                <Accordion.Content>117 production-ready components across 15 categories.</Accordion.Content>
+              </Accordion.Item>
+              <Accordion.Item value="q3">
+                <Accordion.Trigger>Is it open source?</Accordion.Trigger>
+                <Accordion.Content>Yes, licensed under MIT. Contributions are welcome.</Accordion.Content>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion type="multiple">
+              <Accordion.Item value="a">
+                <Accordion.Trigger>Multiple open — Item A</Accordion.Trigger>
+                <Accordion.Content>Multiple items can be open simultaneously with type=&quot;multiple&quot;.</Accordion.Content>
+              </Accordion.Item>
+              <Accordion.Item value="b">
+                <Accordion.Trigger>Item B</Accordion.Trigger>
+                <Accordion.Content>Both A and B can be open at the same time.</Accordion.Content>
+              </Accordion.Item>
+              <Accordion.Item value="c">
+                <Accordion.Trigger>Item C (disabled)</Accordion.Trigger>
+                <Accordion.Content>This content.</Accordion.Content>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        </Row>
+
+        <Row name="Tour">
+          <Button size="sm" onClick={() => setTourOpen(true)}>Start product tour</Button>
+          <Tour open={tourOpen} onOpenChange={setTourOpen} steps={[
+            { title: 'Welcome to FXUI!', content: 'This is the showcase page with all 117 components.' },
+            { title: 'Neo-brutalist design', content: 'Bold borders, hard shadows, flat colors.' },
+            { title: 'Fully interactive', content: 'Every component is live and interactive.' },
+            { title: 'TypeScript first', content: 'Full type safety with strict TypeScript types.' },
+            { title: 'Ready to ship!', content: 'Start building your neo-brutalist app today.' },
+          ]} />
+        </Row>
+
+        <Row name="ThemeProvider">
           <ThemeProvider defaultColorMode="light">
-            <div className="space-y-2 w-full">
-              <p className="text-xs font-mono text-gray-500">Wraps your app for dark mode + token overrides.</p>
-              <div className="flex gap-2">
-                <Badge variant="neon" color="success">Dark mode</Badge>
-                <Badge variant="outline">Token overrides</Badge>
-              </div>
+            <div className="border-2 border-fx-black rounded-[4px] p-4 flex items-center gap-4">
+              <Badge variant="neon" color="success">Light mode</Badge>
+              <Badge variant="neon">Dark mode</Badge>
+              <Badge variant="outline">Token overrides</Badge>
+              <Code className="text-xs">{'<ThemeProvider defaultColorMode="dark">'}</Code>
             </div>
           </ThemeProvider>
-        </DemoCard>
+        </Row>
+      </Section>
+
+      {/* Footer */}
+      <div className="mt-24 pt-8 border-t-2 border-fx-black flex items-center justify-between">
+        <span className="font-display font-black text-2xl text-fx-black">FXUI</span>
+        <p className="text-sm text-gray-400 font-mono">117 components · MIT License</p>
+        <Badge variant="neon" color="success">v2.0</Badge>
       </div>
 
-      {/* ── MISC ──────────────────────────────────────────────────── */}
-      <CategoryHeader name="MISC" count={2} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-
-        <DemoCard name="Accordion">
-          <Accordion type="single" collapsible className="w-full">
-            <Accordion.Item value="q1">
-              <Accordion.Trigger>What is FXUI?</Accordion.Trigger>
-              <Accordion.Content>A neo-brutalist React component library.</Accordion.Content>
-            </Accordion.Item>
-            <Accordion.Item value="q2">
-              <Accordion.Trigger>How many components?</Accordion.Trigger>
-              <Accordion.Content>117 production-ready components.</Accordion.Content>
-            </Accordion.Item>
-          </Accordion>
-        </DemoCard>
-
-        <DemoCard name="Tour">
-          <div>
-            <Button size="sm" onClick={() => setTourOpen(true)}>Start tour</Button>
-            <Tour
-              open={tourOpen}
-              onOpenChange={setTourOpen}
-              steps={[
-                { title: 'Welcome!', content: 'This is the FXUI showcase.' },
-                { title: 'Components', content: '117 components, all live.' },
-                { title: 'Done!', content: 'Explore the docs for details.' },
-              ]}
-            />
-          </div>
-        </DemoCard>
-      </div>
-
-      <div className="mt-20 pt-8 border-t-2 border-fx-black text-center">
-        <p className="text-sm text-gray-400 font-mono">117 components · MIT License · FXUI</p>
-      </div>
     </div>
   );
 }
