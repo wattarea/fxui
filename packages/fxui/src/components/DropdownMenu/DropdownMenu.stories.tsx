@@ -131,7 +131,7 @@ export const WithSubmenu: Story = {
         <DropdownMenu.Content>
           <DropdownMenu.Item icon="📄" shortcut="⌘N">New file</DropdownMenu.Item>
           <DropdownMenu.Sub>
-            <DropdownMenu.SubTrigger icon="📂">Open recent</DropdownMenu.SubTrigger>
+            <DropdownMenu.SubTrigger>📂 Open recent</DropdownMenu.SubTrigger>
             <DropdownMenu.SubContent>
               <DropdownMenu.Item>index.tsx</DropdownMenu.Item>
               <DropdownMenu.Item>tailwind.config.ts</DropdownMenu.Item>

@@ -23,8 +23,8 @@ export const Default: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3 p-6">
-      <CopyButton value="copy me" variant="default">Default</CopyButton>
-      <CopyButton value="copy me" variant="ghost">Ghost</CopyButton>
+      <CopyButton value="copy me" variant="default" label="Default" />
+      <CopyButton value="copy me" variant="ghost" label="Ghost" />
       <CopyButton value="copy me" iconOnly />
     </div>
   ),

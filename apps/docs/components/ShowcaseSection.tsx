@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import {
-  Button, Badge, Input, Switch, Progress, Alert, Avatar, AvatarGroup,
-  Spinner, Tabs, Checkbox, Slider, Select,
+  Button, Badge, Input, Switch, Progress, Alert,
+  AvatarGroup, Spinner, Tabs, Checkbox, Slider, Select,
 } from '@fxui/core';
 
 export function ShowcaseSection() {
@@ -46,7 +46,7 @@ export function ShowcaseSection() {
               <Badge color="error">Error</Badge>
               <Badge color="info">Info</Badge>
               <Badge variant="outline">Outline</Badge>
-              <Badge variant="solid" color="success">Solid</Badge>
+              <Badge variant="neon" color="success">Neon</Badge>
             </div>
           </div>
 
@@ -55,15 +55,11 @@ export function ShowcaseSection() {
             <p className="font-mono text-xs text-gray-400 uppercase tracking-widest mb-4">Form</p>
             <div className="flex flex-col gap-4">
               <Input label="Username" placeholder="your_handle" />
-              <Select
-                label="Role"
-                placeholder="Pick a role"
-                options={[
-                  { value: 'admin', label: 'Admin' },
-                  { value: 'editor', label: 'Editor' },
-                  { value: 'viewer', label: 'Viewer' },
-                ]}
-              />
+              <Select label="Role" placeholder="Pick a role">
+                <Select.Item value="admin">Admin</Select.Item>
+                <Select.Item value="editor">Editor</Select.Item>
+                <Select.Item value="viewer">Viewer</Select.Item>
+              </Select>
             </div>
           </div>
 
@@ -106,8 +102,8 @@ export function ShowcaseSection() {
           <div className="border-2 border-fx-black rounded-[4px] p-6 shadow-fx bg-white">
             <p className="font-mono text-xs text-gray-400 uppercase tracking-widest mb-4">Alert</p>
             <div className="flex flex-col gap-3">
-              <Alert variant="success" title="Deployed!" description="Your changes are live." />
-              <Alert variant="warning" title="Heads up" description="This action cannot be undone." />
+              <Alert variant="success" title="Deployed!">Your changes are live.</Alert>
+              <Alert variant="warning" title="Heads up">This action cannot be undone.</Alert>
             </div>
           </div>
 
@@ -124,7 +120,7 @@ export function ShowcaseSection() {
                 <p className="text-sm text-gray-500 font-sans mt-4">117 components. Neo-brutalist aesthetic. Radix UI primitives.</p>
               </Tabs.Content>
               <Tabs.Content value="code">
-                <code className="text-xs font-mono text-fx-black mt-4 block">import {'{ Button }'} from '@fxui/core'</code>
+                <code className="text-xs font-mono text-fx-black mt-4 block">import {'{ Button }'} from &apos;@fxui/core&apos;</code>
               </Tabs.Content>
               <Tabs.Content value="api">
                 <p className="text-sm text-gray-500 font-sans mt-4">Full TypeScript types. forwardRef on every component.</p>
@@ -132,21 +128,24 @@ export function ShowcaseSection() {
             </Tabs>
           </div>
 
-          {/* Avatar + Spinner */}
+          {/* AvatarGroup + Spinner */}
           <div className="border-2 border-fx-black rounded-[4px] p-6 shadow-fx bg-white">
-            <p className="font-mono text-xs text-gray-400 uppercase tracking-widest mb-4">Avatar · Spinner</p>
+            <p className="font-mono text-xs text-gray-400 uppercase tracking-widest mb-4">AvatarGroup · Spinner</p>
             <div className="flex items-center gap-6 flex-wrap">
-              <AvatarGroup max={4}>
-                <Avatar initials="JK" size="md" />
-                <Avatar initials="SR" size="md" />
-                <Avatar initials="ME" size="md" />
-                <Avatar initials="TK" size="md" />
-                <Avatar initials="CO" size="md" />
-              </AvatarGroup>
+              <AvatarGroup
+                avatars={[
+                  { name: 'JK', color: 'yellow' },
+                  { name: 'SR', color: 'pink' },
+                  { name: 'ME', color: 'green' },
+                  { name: 'TK', color: 'blue' },
+                  { name: 'CO', color: 'purple' },
+                ]}
+                max={4}
+              />
               <div className="flex items-center gap-4">
                 <Spinner size="sm" />
                 <Spinner size="md" />
-                <Spinner size="lg" variant="dots" />
+                <Spinner size="lg" variant="neon" />
               </div>
             </div>
           </div>

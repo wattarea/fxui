@@ -35,7 +35,7 @@ export const Square: Story = {
   render: () => (
     <div className="p-12 flex flex-wrap gap-6 items-center">
       <FloatingActionButton icon="☰" label="Menu" shape="square" />
-      <FloatingActionButton icon="⚙" label="Settings" shape="square" variant="purple" />
+      <FloatingActionButton icon="⚙" label="Settings" shape="square" variant="blue" />
     </div>
   ),
 };

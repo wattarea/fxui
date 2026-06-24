@@ -110,7 +110,7 @@ export const WithSubmenu: Story = {
         <ContextMenu.Content>
           <ContextMenu.Item icon="✏️">Edit</ContextMenu.Item>
           <ContextMenu.Sub>
-            <ContextMenu.SubTrigger icon="🔗">Share</ContextMenu.SubTrigger>
+            <ContextMenu.SubTrigger>🔗 Share</ContextMenu.SubTrigger>
             <ContextMenu.SubContent>
               <ContextMenu.Item icon="🐦">Twitter</ContextMenu.Item>
               <ContextMenu.Item icon="💼">LinkedIn</ContextMenu.Item>
