@@ -92,7 +92,7 @@ function DemoCard({ name, children }: { name: string; children: React.ReactNode 
       <div className="px-4 py-2 border-b-2 border-fx-black bg-gray-50">
         <span className="font-mono text-xs font-bold text-gray-500 uppercase tracking-widest">{name}</span>
       </div>
-      <div className="p-5 flex flex-col items-start gap-3 min-h-[80px] justify-center">
+      <div className="p-5 flex flex-col items-stretch gap-3 min-h-[80px] justify-center">
         {children}
       </div>
     </div>
@@ -1074,6 +1074,8 @@ export default function ShowcasePage() {
             height={140}
             showGrid
             showDots
+            showLegend={false}
+            className="w-full !border-0 !shadow-none !rounded-none !p-2"
           />
         </DemoCard>
 
@@ -1085,6 +1087,8 @@ export default function ShowcasePage() {
             height={140}
             showGrid
             radius={2}
+            showLegend={false}
+            className="w-full !border-0 !shadow-none !rounded-none !p-2"
           />
         </DemoCard>
 
@@ -1095,6 +1099,8 @@ export default function ShowcasePage() {
             xKey="month"
             height={140}
             showGrid
+            showLegend={false}
+            className="w-full !border-0 !shadow-none !rounded-none !p-2"
           />
         </DemoCard>
 
@@ -1103,8 +1109,9 @@ export default function ShowcasePage() {
             data={donutData}
             centerLabel="Stack"
             centerValue="4"
-            height={160}
-            showLegend
+            height={180}
+            showLegend={false}
+            className="w-full !border-0 !shadow-none !rounded-none !p-2"
           />
         </DemoCard>
 
