@@ -17,7 +17,7 @@ importers:
 
   apps/docs:
     dependencies:
-      '@fxui/core':
+      fxui-core:
         specifier: workspace:*
         version: link:../../packages/fxui
       next:

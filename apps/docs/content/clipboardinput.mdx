@@ -5,7 +5,7 @@ A read-only input with a built-in copy button. Ideal for displaying API keys, in
 ## Import
 
 ```tsx
-import { ClipboardInput } from '@fxui/core';
+import { ClipboardInput } from 'fxui-core';
 ```
 
 ## Usage
@@ -34,8 +34,8 @@ import { ClipboardInput } from '@fxui/core';
 ## With Prefix
 
 ```tsx
-<ClipboardInput prefix="$" value="pnpm add @fxui/core" />
-<ClipboardInput prefix="→" value="import { Button } from '@fxui/core'" />
+<ClipboardInput prefix="$" value="pnpm add fxui-core" />
+<ClipboardInput prefix="→" value="import { Button } from 'fxui-core'" />
 ```
 
 ## Sizes
@@ -59,9 +59,9 @@ import { ClipboardInput } from '@fxui/core';
 
 ```tsx
 {[
-  { prefix: 'npm',  value: 'npm install @fxui/core' },
-  { prefix: 'pnpm', value: 'pnpm add @fxui/core' },
-  { prefix: 'yarn', value: 'yarn add @fxui/core' },
+  { prefix: 'npm',  value: 'npm install fxui-core' },
+  { prefix: 'pnpm', value: 'pnpm add fxui-core' },
+  { prefix: 'yarn', value: 'yarn add fxui-core' },
 ].map(({ prefix, value }) => (
   <ClipboardInput key={prefix} prefix={prefix} value={value} />
 ))}

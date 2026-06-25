@@ -8,7 +8,7 @@ Wrap your app with `CommandPaletteProvider` to enable the global ⌘K shortcut:
 
 ```tsx
 // layout.tsx
-import { CommandPaletteProvider } from '@fxui/core';
+import { CommandPaletteProvider } from 'fxui-core';
 
 export default function RootLayout({ children }) {
   return (
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
 Then place `CommandPalette` once (e.g. in your root layout or navbar):
 
 ```tsx
-import { CommandPalette, useCommandPalette } from '@fxui/core';
+import { CommandPalette, useCommandPalette } from 'fxui-core';
 
 function AppShell() {
   const items = [

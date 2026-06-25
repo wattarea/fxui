@@ -5,9 +5,9 @@ A button that copies text to the clipboard using the Clipboard API. Shows a temp
 ## Usage
 
 ```tsx
-import { CopyButton } from '@fxui/core';
+import { CopyButton } from 'fxui-core';
 
-<CopyButton value="pnpm add @fxui/core" />
+<CopyButton value="pnpm add fxui-core" />
 ```
 
 ## Variants
@@ -29,13 +29,13 @@ import { CopyButton } from '@fxui/core';
 ## Custom Labels
 
 ```tsx
-<CopyButton value="npm install @fxui/core" label="Copy command" copiedLabel="Done!" />
+<CopyButton value="npm install fxui-core" label="Copy command" copiedLabel="Done!" />
 ```
 
 ## With Code Block
 
 ```tsx
-const snippet = "pnpm add @fxui/core";
+const snippet = "pnpm add fxui-core";
 
 <div className="flex items-center justify-between border-2 border-fx-black rounded-[4px] px-4 py-2">
   <Code>{snippet}</Code>

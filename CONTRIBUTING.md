@@ -65,7 +65,7 @@ Register it in 4 places:
 Use Radix UI primitives for anything that involves accessibility concerns (Dialog, Tooltip, Accordion, etc.):
 
 ```bash
-pnpm add @radix-ui/react-<name> --filter @fxui/core
+pnpm add @radix-ui/react-<name> --filter fxui-core
 ```
 
 ## Pull Request Guidelines

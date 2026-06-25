@@ -16,7 +16,7 @@ export default meta;
 type Story = StoryObj<typeof CopyButton>;
 
 export const Default: Story = {
-  args: { value: 'pnpm add @fxui/core', label: 'Copy' },
+  args: { value: 'pnpm add fxui-core', label: 'Copy' },
   decorators: [(S) => <div className="p-6"><S /></div>],
 };
 
@@ -42,7 +42,7 @@ export const AllSizes: Story = {
 
 export const WithCode: Story = {
   render: () => {
-    const snippet = "pnpm add @fxui/core";
+    const snippet = "pnpm add fxui-core";
     return (
       <div className="p-6 max-w-md">
         <div className="flex items-center justify-between gap-3 border-2 border-fx-black rounded-[4px] shadow-fx px-4 py-2 bg-gray-50">
@@ -57,9 +57,9 @@ export const WithCode: Story = {
 export const InstallBlock: Story = {
   render: () => {
     const commands = [
-      { pkg: 'pnpm', cmd: 'pnpm add @fxui/core' },
-      { pkg: 'npm',  cmd: 'npm install @fxui/core' },
-      { pkg: 'yarn', cmd: 'yarn add @fxui/core' },
+      { pkg: 'pnpm', cmd: 'pnpm add fxui-core' },
+      { pkg: 'npm',  cmd: 'npm install fxui-core' },
+      { pkg: 'yarn', cmd: 'yarn add fxui-core' },
     ];
     return (
       <div className="p-6 max-w-sm space-y-2">

@@ -7,11 +7,11 @@ FXUI is a Neo-brutalist React component library built with TypeScript, Tailwind 
 Install the package and its peer dependencies:
 
 ```bash
-pnpm add @fxui/core
+pnpm add fxui-core
 # or
-npm install @fxui/core
+npm install fxui-core
 # or
-yarn add @fxui/core
+yarn add fxui-core
 ```
 
 ## Setup Tailwind CSS
@@ -25,7 +25,7 @@ import type { Config } from 'tailwindcss';
 export default {
   content: [
     './src/**/*.{ts,tsx}',
-    './node_modules/@fxui/core/dist/**/*.js', // Add this
+    './node_modules/fxui-core/dist/**/*.js', // Add this
   ],
   // ... rest of config
 } satisfies Config;
@@ -36,14 +36,14 @@ export default {
 Import the FXUI stylesheet in your root layout or `_app.tsx`:
 
 ```typescript
-import '@fxui/core/styles';
+import 'fxui-core/styles';
 ```
 
 ## Quick Start
 
 ```tsx
-import { Button, Card, Input } from '@fxui/core';
-import '@fxui/core/styles';
+import { Button, Card, Input } from 'fxui-core';
+import 'fxui-core/styles';
 
 export default function App() {
   return (

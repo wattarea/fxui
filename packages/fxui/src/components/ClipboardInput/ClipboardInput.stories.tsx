@@ -48,12 +48,12 @@ export const WithPrefix: Story = {
       <ClipboardInput
         label="Install command"
         prefix="$"
-        value="pnpm add @fxui/core"
+        value="pnpm add fxui-core"
       />
       <ClipboardInput
         label="Import path"
         prefix="→"
-        value="import { Button } from '@fxui/core'"
+        value="import { Button } from 'fxui-core'"
       />
     </div>
   ),
@@ -74,10 +74,10 @@ export const InstallCommands: Story = {
     <div className="p-6 max-w-lg flex flex-col gap-3">
       <h3 className="font-display font-black text-lg text-fx-black">Installation</h3>
       {[
-        { prefix: 'npm',  value: 'npm install @fxui/core' },
-        { prefix: 'pnpm', value: 'pnpm add @fxui/core' },
-        { prefix: 'yarn', value: 'yarn add @fxui/core' },
-        { prefix: 'bun',  value: 'bun add @fxui/core' },
+        { prefix: 'npm',  value: 'npm install fxui-core' },
+        { prefix: 'pnpm', value: 'pnpm add fxui-core' },
+        { prefix: 'yarn', value: 'yarn add fxui-core' },
+        { prefix: 'bun',  value: 'bun add fxui-core' },
       ].map(({ prefix, value }) => (
         <ClipboardInput key={prefix} prefix={prefix} value={value} />
       ))}

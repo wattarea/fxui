@@ -4,7 +4,7 @@ import { useState } from 'react';
 import {
   Button, Badge, Input, Switch, Progress, Alert,
   AvatarGroup, Spinner, Tabs, Checkbox, Slider, Select,
-} from '@fxui/core';
+} from 'fxui-core';
 
 export function ShowcaseSection() {
   const [sliderVal, setSliderVal] = useState(60);
@@ -120,7 +120,7 @@ export function ShowcaseSection() {
                 <p className="text-sm text-gray-500 font-sans mt-4">117 components. Neo-brutalist aesthetic. Radix UI primitives.</p>
               </Tabs.Content>
               <Tabs.Content value="code">
-                <code className="text-xs font-mono text-fx-black mt-4 block">import {'{ Button }'} from &apos;@fxui/core&apos;</code>
+                <code className="text-xs font-mono text-fx-black mt-4 block">import {'{ Button }'} from &apos;fxui-core&apos;</code>
               </Tabs.Content>
               <Tabs.Content value="api">
                 <p className="text-sm text-gray-500 font-sans mt-4">Full TypeScript types. forwardRef on every component.</p>

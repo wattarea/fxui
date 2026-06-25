@@ -53,8 +53,8 @@ export const CodeTerminal: Story = {
             <span className="text-fx-green font-mono text-sm">$</span>
             <TypewriterText
               texts={[
-                'pnpm add @fxui/core',
-                'import { Button } from "@fxui/core"',
+                'pnpm add fxui-core',
+                'import { Button } from "fxui-core"',
                 'npx create-next-app my-app',
                 'pnpm run dev',
               ]}

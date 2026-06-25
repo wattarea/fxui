@@ -335,7 +335,7 @@ export default function HomePage() {
                 <span className="text-gray-600">$</span>
                 <span className={`font-bold ${accent}`}>{pkg}</span>
                 <span className="text-gray-400">{cmd}</span>
-                <span className="text-fx-white">@fxui/core</span>
+                <span className="text-fx-white">fxui-core</span>
               </div>
             ))}
           </div>

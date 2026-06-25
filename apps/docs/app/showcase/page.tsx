@@ -24,7 +24,7 @@ import {
   GlitchText, TypewriterText, NoiseBg, BrutalistCard, type NoiseBlendMode,
   ThemeProvider, Accordion, Tour,
   useToast,
-} from '@fxui/core';
+} from 'fxui-core';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -388,9 +388,9 @@ export default function ShowcasePage() {
         <Row name="Code">
           <div className="w-full space-y-3">
             <p className="text-sm text-gray-600">
-              Install with <Code>pnpm add @fxui/core</Code> and import <Code>{'<Button />'}</Code> directly.
+              Install with <Code>pnpm add fxui-core</Code> and import <Code>{'<Button />'}</Code> directly.
             </p>
-            <Code block className="text-sm">{`import { Button, Badge, useToast } from '@fxui/core';\n\nexport default function App() {\n  const { toast } = useToast();\n  return <Button onClick={() => toast({ title: 'Hello!' })}>Click me</Button>;\n}`}</Code>
+            <Code block className="text-sm">{`import { Button, Badge, useToast } from 'fxui-core';\n\nexport default function App() {\n  const { toast } = useToast();\n  return <Button onClick={() => toast({ title: 'Hello!' })}>Click me</Button>;\n}`}</Code>
           </div>
         </Row>
 
@@ -1418,7 +1418,7 @@ export default function ShowcasePage() {
           <HoverCard trigger={<span className="font-bold underline cursor-pointer">Button component</span>}>
             <div className="space-y-2">
               <p className="font-black text-sm">Button</p>
-              <Code className="text-xs">{'import { Button } from \'@fxui/core\''}</Code>
+              <Code className="text-xs">{'import { Button } from \'fxui-core\''}</Code>
               <p className="text-xs text-gray-500">10 variants · 5 sizes · fully typed</p>
             </div>
           </HoverCard>
@@ -1844,9 +1844,9 @@ export default function ShowcasePage() {
       <Section title="Utility" accent="yellow">
 
         <Row name="CopyButton">
-          <CopyButton value="pnpm add @fxui/core" label="Copy install command" />
-          <CopyButton value="pnpm add @fxui/core" iconOnly />
-          <CopyButton value="pnpm add @fxui/core" label="Copy" variant="ghost" />
+          <CopyButton value="pnpm add fxui-core" label="Copy install command" />
+          <CopyButton value="pnpm add fxui-core" iconOnly />
+          <CopyButton value="pnpm add fxui-core" label="Copy" variant="ghost" />
         </Row>
 
         <Row name="ColorSwatch" wide>
@@ -1925,8 +1925,8 @@ export default function ShowcasePage() {
 
         <Row name="ClipboardInput" wide>
           <div className="grid grid-cols-2 gap-4 max-w-xl">
-            <ClipboardInput value="pnpm add @fxui/core" label="Install" />
-            <ClipboardInput value="import { Button } from '@fxui/core'" label="Import" />
+            <ClipboardInput value="pnpm add fxui-core" label="Install" />
+            <ClipboardInput value="import { Button } from 'fxui-core'" label="Import" />
           </div>
         </Row>
       </Section>

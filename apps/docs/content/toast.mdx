@@ -6,7 +6,7 @@ Context-based notification system built on Radix UI Toast. Wrap your app with `T
 
 ```tsx
 // app/layout.tsx
-import { ToastProvider } from '@fxui/core';
+import { ToastProvider } from 'fxui-core';
 
 export default function Layout({ children }) {
   return <ToastProvider>{children}</ToastProvider>;
@@ -16,7 +16,7 @@ export default function Layout({ children }) {
 ## Usage
 
 ```tsx
-import { useToast } from '@fxui/core';
+import { useToast } from 'fxui-core';
 
 function MyComponent() {
   const { toast } = useToast();

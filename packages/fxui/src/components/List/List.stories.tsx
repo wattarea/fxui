@@ -28,7 +28,7 @@ export const Bullet: Story = {
 export const Numbered: Story = {
   render: () => (
     <div className="p-6 max-w-sm">
-      <List variant="numbered" items={['Install @fxui/core', 'Add Tailwind plugin', 'Import components', 'Build something brutal']} />
+      <List variant="numbered" items={['Install fxui-core', 'Add Tailwind plugin', 'Import components', 'Build something brutal']} />
     </div>
   ),
 };

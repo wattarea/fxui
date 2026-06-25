@@ -17,7 +17,7 @@ export const Inline: Story = {
   render: () => (
     <div className="p-6 max-w-md">
       <p className="font-sans text-sm leading-relaxed">
-        Import the component using <Code>import {'{ Button }'} from '@fxui/core'</Code> and
+        Import the component using <Code>import {'{ Button }'} from 'fxui-core'</Code> and
         apply the <Code>variant="neon"</Code> prop for the yellow variant.
         The <Code>className</Code> prop overrides are always supported.
       </p>
@@ -51,7 +51,7 @@ export const Block: Story = {
     <div className="p-6 max-w-lg">
       <Code block>
 {`import React from 'react';
-import { Button } from '@fxui/core';
+import { Button } from 'fxui-core';
 
 export function App() {
   return (
@@ -69,11 +69,11 @@ export const InProse: Story = {
   render: () => (
     <div className="p-6 max-w-md space-y-4 font-sans text-sm">
       <p>
-        To install, run <Code>pnpm add @fxui/core</Code>.
+        To install, run <Code>pnpm add fxui-core</Code>.
         Then wrap your app with <Code>ToastProvider</Code>.
       </p>
       <p>
-        If you see a <Code variant="error">Cannot find module '@fxui/core'</Code> error,
+        If you see a <Code variant="error">Cannot find module 'fxui-core'</Code> error,
         make sure you've run <Code variant="highlight">pnpm install</Code> first.
       </p>
     </div>
