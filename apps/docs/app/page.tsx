@@ -302,6 +302,25 @@ export default function HomePage() {
       {/* ── Showcase ─────────────────────────────────────── */}
       <ShowcaseSection />
 
+      {/* ── Showcase CTA ─────────────────────────────────── */}
+      <section className="py-20 px-8 bg-fx-yellow border-b-2 border-fx-black">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="font-display text-5xl md:text-7xl font-black text-fx-black leading-none mb-4">
+            See all demos in action
+          </h2>
+          <p className="text-lg md:text-xl text-fx-black/60 font-sans mb-8 max-w-2xl mx-auto">
+            Explore every component variant, interactive state, and dark mode demos in our live showcase.
+          </p>
+          <Link
+            href="/showcase"
+            className="inline-flex items-center gap-3 px-10 py-4 rounded-[4px] bg-fx-black text-fx-white font-black text-lg font-sans border-2 border-fx-black shadow-fx hover:shadow-fx-sm hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all duration-150"
+          >
+            View all {totalComponents} demos
+            <span className="text-2xl" aria-hidden>→</span>
+          </Link>
+        </div>
+      </section>
+
       {/* ── Stats bar ────────────────────────────────────── */}
       <section className="border-y-2 border-fx-black bg-fx-black">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x-2 divide-fx-white/20">
