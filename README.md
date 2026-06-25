@@ -147,4 +147,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for component authoring guidelines and 
 
 ---
 
-MIT License · Built with sharp corners and zero apologies · 2024
+MIT License · Built with sharp corners and zero apologies · 2026
