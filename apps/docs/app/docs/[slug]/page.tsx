@@ -41,8 +41,8 @@ export default async function DocsPage({ params }: PageProps) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-8 py-12">
-      <article className="prose prose-fx max-w-none">
+    <div className="max-w-3xl mx-auto px-4 sm:px-8 py-8 sm:py-12 overflow-x-hidden">
+      <article className="prose prose-fx max-w-none overflow-x-hidden">
         <MDXRemote source={source} components={mdxComponents} />
       </article>
     </div>

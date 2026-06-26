@@ -249,7 +249,7 @@ export default function HomePage() {
     <div className="relative overflow-hidden">
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="fx-grid-pattern relative min-h-[92vh] flex flex-col items-center justify-center px-8 py-28">
+      <section className="fx-grid-pattern relative min-h-[92vh] flex flex-col items-center justify-center px-4 sm:px-8 py-16 sm:py-28">
         {/* Decorative shapes */}
         <div className="absolute top-12 left-14 w-20 h-20 bg-fx-yellow border-2 border-fx-black shadow-fx rotate-12 hidden lg:block pointer-events-none" />
         <div className="absolute top-20 left-36 w-6 h-6 bg-fx-pink border-2 border-fx-black rotate-45 hidden lg:block pointer-events-none" />

@@ -109,7 +109,7 @@ function Row({ name, wide, children }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className={`group py-7 border-b border-gray-100 last:border-0 ${wide ? 'flex flex-col gap-4' : 'flex gap-8 items-start'}`}>
+    <div className={`group py-7 border-b border-gray-100 last:border-0 overflow-x-hidden ${wide ? 'flex flex-col gap-4' : 'flex gap-4 sm:gap-8 items-start'}`}>
       {wide ? (
         <>
           <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400">{name}</span>
@@ -117,7 +117,7 @@ function Row({ name, wide, children }: {
         </>
       ) : (
         <>
-          <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400 w-32 sm:w-44 shrink-0 pt-0.5">{name}</span>
+          <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400 w-24 sm:w-32 lg:w-44 shrink-0 pt-0.5">{name}</span>
           <div className="flex-1 flex flex-wrap gap-3 items-center min-w-0">{children}</div>
         </>
       )}
@@ -189,7 +189,7 @@ export default function ShowcasePage() {
   const [tourOpen, setTourOpen] = useState(false);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-12 sm:py-16 overflow-x-hidden">
 
       {/* Hero */}
       <div className="mb-20">
@@ -1238,7 +1238,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="AppSidebar" wide>
-          <div className="w-40 sm:w-52 border-2 border-fx-black rounded-[4px] overflow-hidden">
+          <div className="w-32 sm:w-52 border-2 border-fx-black rounded-[4px] overflow-hidden">
             <AppSidebar sections={[
               {
                 title: 'Getting Started',
