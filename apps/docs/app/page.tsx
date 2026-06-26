@@ -268,7 +268,7 @@ export default function HomePage() {
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-[9rem] md:text-[13rem] font-black leading-none tracking-tighter mb-4 text-fx-black select-none">
+          <h1 className="font-display text-[5rem] sm:text-[7rem] md:text-[13rem] font-black leading-none tracking-tighter mb-4 text-fx-black select-none">
             FXUI
           </h1>
 
