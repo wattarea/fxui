@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { Drawer } from 'fxui-core';
+import { useBreakpoint } from 'fxui-core';
 
 const navigation = [
   {
@@ -205,12 +208,10 @@ const navigation = [
   },
 ];
 
-export function Sidebar() {
+const NavContent = ({ onItemClick, inDrawer = false }: { onItemClick?: () => void; inDrawer?: boolean }) => {
   const pathname = usePathname();
-
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 border-r-2 border-fx-black bg-fx-white dark:bg-fx-black dark:border-fx-white overflow-y-auto z-40">
-      {/* Logo */}
+    <>
       <div className="px-5 py-5 border-b-2 border-fx-black dark:border-fx-white">
         <Link href="/" className="inline-block">
           <span className="font-display text-2xl font-black text-fx-black dark:text-fx-white hover:text-fx-blue transition-colors">
@@ -219,7 +220,6 @@ export function Sidebar() {
         </Link>
       </div>
 
-      {/* Nav */}
       <nav className="p-4 pb-20">
         {navigation.map((group) => (
           <div key={group.section} className="mb-6">
@@ -233,6 +233,7 @@ export function Sidebar() {
                   <li key={item.label}>
                     <Link
                       href={item.href}
+                      onClick={onItemClick}
                       className={[
                         'block px-3 py-1.5 rounded-[4px] text-sm font-medium font-sans transition-all duration-100',
                         isActive
@@ -250,12 +251,46 @@ export function Sidebar() {
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className="fixed bottom-0 left-0 w-64 p-4 border-t-2 border-fx-black dark:border-fx-white bg-fx-white dark:bg-fx-black">
+      <div className={`absolute bottom-0 p-4 border-t-2 border-fx-black dark:border-fx-white bg-fx-white dark:bg-fx-black ${inDrawer ? 'left-0 right-0' : 'left-0 w-64'}`}>
         <p className="text-xs text-gray-400 font-sans text-center">
           v2.0.0 · MIT License · 117 components
         </p>
       </div>
-    </aside>
+    </>
+  );
+};
+
+export function Sidebar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isDesktop = useBreakpoint('lg');
+
+  if (isDesktop) {
+    return (
+      <aside className="fixed left-0 top-0 h-full w-64 border-r-2 border-fx-black bg-fx-white dark:bg-fx-black dark:border-fx-white overflow-y-auto z-40">
+        <NavContent />
+      </aside>
+    );
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setMobileMenuOpen(true)}
+        className="fixed top-4 left-4 z-50 p-2 border-2 border-fx-black bg-fx-white dark:bg-fx-black dark:border-fx-white shadow-fx-sm hover:shadow-fx-sm hover:translate-x-[1px] hover:translate-y-[1px] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all duration-150 rounded-[4px]"
+        aria-label="Open menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+
+      <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <Drawer.Content placement="left" className="w-80 max-w-[85vw] h-full">
+          <NavContent onItemClick={() => setMobileMenuOpen(false)} inDrawer />
+        </Drawer.Content>
+      </Drawer>
+    </>
   );
 }
