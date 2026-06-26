@@ -117,7 +117,7 @@ function Row({ name, wide, children }: {
         </>
       ) : (
         <>
-          <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400 w-44 shrink-0 pt-0.5">{name}</span>
+          <span className="font-mono text-[11px] font-black uppercase tracking-[0.15em] text-gray-400 w-32 sm:w-44 shrink-0 pt-0.5">{name}</span>
           <div className="flex-1 flex flex-wrap gap-3 items-center min-w-0">{children}</div>
         </>
       )}
@@ -189,14 +189,14 @@ export default function ShowcasePage() {
   const [tourOpen, setTourOpen] = useState(false);
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-16">
+    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
 
       {/* Hero */}
       <div className="mb-20">
         <div className="inline-block bg-fx-yellow border-2 border-fx-black px-3 py-0.5 font-mono text-xs font-black uppercase mb-4">
           117 components · Live demos
         </div>
-        <h1 className="font-display text-[88px] font-black text-fx-black leading-none tracking-tight">Showcase</h1>
+        <h1 className="font-display text-[3rem] sm:text-[5rem] md:text-[88px] font-black text-fx-black leading-none tracking-tight">Showcase</h1>
         <p className="text-gray-500 font-sans mt-4 text-xl max-w-lg">
           Every FXUI component, all variants, fully interactive.
         </p>
@@ -317,7 +317,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="FloatingActionButton">
-          <div className="relative h-28 w-72 border-2 border-dashed border-gray-300 rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
+          <div className="relative h-28 w-full sm:w-72 border-2 border-dashed border-gray-300 rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
             <span className="text-xs text-gray-400">Position demo</span>
             <FloatingActionButton icon="+" label="Add item" position="bottom-right" style={{ position: 'absolute' }} />
             <FloatingActionButton icon="★" label="Favourite" variant="yellow" position="bottom-left" style={{ position: 'absolute' }} />
@@ -407,7 +407,7 @@ export default function ShowcasePage() {
       <Section title="Layout" accent="green">
 
         <Row name="Stack" wide>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">direction=&quot;column&quot; gap=&quot;2&quot;</p>
               <Stack gap="2">
@@ -462,7 +462,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="AspectRatio" wide>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {(['square', 'video', 'portrait', 'wide'] as const).map(r => (
               <div key={r}>
                 <p className="text-xs font-mono text-gray-400 mb-1">ratio=&quot;{r}&quot;</p>
@@ -475,7 +475,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="ScrollArea">
-          <ScrollArea className="h-32 w-56 border-2 border-fx-black rounded-[4px]">
+          <ScrollArea className="h-32 w-48 sm:w-56 border-2 border-fx-black rounded-[4px]">
             <div className="p-3 space-y-2">
               {Array.from({ length: 12 }, (_, i) => (
                 <div key={i} className="text-sm font-sans text-gray-600 flex items-center gap-2">
@@ -510,7 +510,7 @@ export default function ShowcasePage() {
       <Section title="Form" accent="pink">
 
         <Row name="Input" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Input label="Default" placeholder="Enter text..." />
             <Input label="With hint" placeholder="name@example.com" hint="We'll never share your email." />
             <Input label="Error state" placeholder="Enter text..." error="This field is required." />
@@ -521,7 +521,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="PasswordInput" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <PasswordInput label="Password" placeholder="Enter password..." />
             <PasswordInput label="With hint" placeholder="••••••••" hint="Min 8 characters" />
             <PasswordInput label="Error" placeholder="••••••••" error="Password too short." />
@@ -529,7 +529,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="SearchInput" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <SearchInput placeholder="Search components..." />
             <SearchInput placeholder="Filter results..." />
             <SearchInput placeholder="Clearable..." defaultValue="some value" />
@@ -537,7 +537,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Textarea" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Textarea label="Default" placeholder="Write something..." rows={3} />
             <Textarea label="Error state" placeholder="Write something..." rows={3} error="This field is required." />
             <Textarea label="With counter" placeholder="Max 200 characters..." maxLength={200} showCount rows={3} />
@@ -545,7 +545,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Select" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Select label="Framework" placeholder="Pick one">
               <Select.Item value="next">Next.js</Select.Item>
               <Select.Item value="remix">Remix</Select.Item>
@@ -569,7 +569,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="NumberInput" wide>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <NumberInput label="Default" defaultValue={5} />
             <NumberInput label="Min / Max" min={0} max={100} defaultValue={42} />
             <NumberInput label="Step 5" step={5} defaultValue={20} />
@@ -603,7 +603,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="CheckboxGroup" wide>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <CheckboxGroup label="Vertical (default)" options={[
               { value: 'ts', label: 'TypeScript' },
               { value: 'react', label: 'React' },
@@ -632,7 +632,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="SwitchGroup" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <SwitchGroup label="Notification settings" options={[
               { value: 'email', label: 'Email notifications' },
               { value: 'sms', label: 'SMS alerts' },
@@ -648,7 +648,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="RadioGroup" wide>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <RadioGroup label="Plan" value={radioVal} onValueChange={setRadioVal} options={[
               { value: 'free', label: 'Free' },
               { value: 'pro', label: 'Pro — $12/mo' },
@@ -706,7 +706,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="FormField" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <FormField label="Username" hint="3–20 characters, no spaces" required>
               <Input placeholder="your_handle" />
             </FormField>
@@ -720,7 +720,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="InputGroup" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <InputGroup prefix="https://" suffix=".com" placeholder="yoursite" />
             <InputGroup prefix="$" placeholder="0.00" type="number" />
             <InputGroup suffix="kg" placeholder="Weight" type="number" />
@@ -732,7 +732,7 @@ export default function ShowcasePage() {
       <Section title="Form Advanced" accent="purple">
 
         <Row name="DatePicker" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <DatePicker label="Single date" placeholder="Pick a date" />
             <DatePicker label="With default" placeholder="Pick a date" />
             <DatePicker label="Disabled" placeholder="Not available" disabled />
@@ -740,14 +740,14 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="TagInput" wide>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TagInput label="Skills" value={tagsVal} onChange={setTagsVal} placeholder="Add a tag..." />
             <TagInput label="Allowed tags only" placeholder="type: 'react' or 'vue'..." />
           </div>
         </Row>
 
         <Row name="ComboBox" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <ComboBox label="Country" placeholder="Search..." value={comboVal} onChange={setComboVal}
               options={[
                 { value: 'tr', label: 'Turkey' },
@@ -771,7 +771,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="FileUpload" wide>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FileUpload label="Default" accept=".png,.jpg,.gif" />
             <FileUpload label="Multiple files" multiple accept=".pdf,.doc,.docx" />
           </div>
@@ -784,7 +784,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="MaskInput" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <MaskInput label="Phone" mask="(999) 999-9999" placeholder="(555) 000-0000" />
             <MaskInput label="Date" mask="99/99/9999" placeholder="MM/DD/YYYY" />
             <MaskInput label="Credit card" mask="9999 9999 9999 9999" placeholder="1234 5678 9012 3456" />
@@ -792,7 +792,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="TreeSelect" wide>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TreeSelect label="Location" placeholder="Select region..."
               options={[
                 { value: 'eu', label: 'Europe', children: [
@@ -827,7 +827,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="AutoComplete" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <AutoComplete placeholder="Search frameworks..."
               options={[
                 { value: 'next', label: 'Next.js' },
@@ -884,7 +884,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Card" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card>
               <Card.Header><p className="font-bold">Simple card</p></Card.Header>
               <Card.Body><p className="text-sm text-gray-600">Body content goes here.</p></Card.Body>
@@ -946,7 +946,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Stat" wide>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <Stat label="Revenue" value="$48K" trend="up" change="+12%" />
             <Stat label="Active users" value="1,720" trend="up" change="+8%" />
             <Stat label="Churn rate" value="2.4%" trend="down" change="-0.3%" />
@@ -971,7 +971,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Skeleton" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Skeleton className="h-4 w-3/4" />
               <Skeleton className="h-4 w-1/2" />
@@ -992,14 +992,14 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="TreeView" wide>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TreeView nodes={treeNodes} selectable />
             <TreeView nodes={treeNodes} defaultExpanded={['1', '1-1']} selectable />
           </div>
         </Row>
 
         <Row name="DataList" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <DataList items={[
               { label: 'Version', value: '1.0.0' },
               { label: 'License', value: 'MIT' },
@@ -1019,7 +1019,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="List" wide>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <List variant="bullet" items={['TypeScript', 'Tailwind CSS', 'Radix UI', 'Storybook']} />
             <List variant="numbered" items={['Install package', 'Add provider', 'Import components', 'Ship it']} />
             <List variant="check" items={['forwardRef', 'Dark mode', 'Accessible', 'Typed']} />
@@ -1042,7 +1042,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Countdown" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">7 days from now</p>
               {mounted && <Countdown targetDate={new Date(nowRef.current + 86400000 * 7)} />}
@@ -1073,7 +1073,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="EmptyState" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <EmptyState icon="📭" title="No results" description="Try a different search term."
               action={<Button size="sm">Clear filters</Button>} />
             <EmptyState icon="🗂" title="No files" description="Upload your first file to get started."
@@ -1106,7 +1106,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Notification" wide>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Notification title="New message" description="Alice sent you a file: design_system_v2.fig" icon="💬" timestamp="just now" />
             <Notification title="Build succeeded" description="Your deployment to production is complete." icon="✅" timestamp="2m ago" variant="success" />
             <Notification title="Payment received" description="$299 from Acme Inc." icon="💳" timestamp="1h ago" />
@@ -1124,7 +1124,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="LoadingOverlay" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {(['Processing…','Uploading…','Please wait…'] as const).map(msg => (
               <div key={msg} className="relative h-24 border-2 border-fx-black rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
                 <p className="text-xs text-gray-400">{msg.replace('…','')}</p>
@@ -1238,7 +1238,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="AppSidebar" wide>
-          <div className="w-52 border-2 border-fx-black rounded-[4px] overflow-hidden">
+          <div className="w-40 sm:w-52 border-2 border-fx-black rounded-[4px] overflow-hidden">
             <AppSidebar sections={[
               {
                 title: 'Getting Started',
@@ -1480,7 +1480,7 @@ export default function ShowcasePage() {
 
         {/* ── Image ───────────────────────────────────────── */}
         <Row name="Image — ratios" wide>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-1">square</p>
               <Image src="https://picsum.photos/seed/fxa/400/400" alt="Square" ratio="square" bordered rounded shadow />
@@ -1505,7 +1505,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Image — effects" wide>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-1">zoom on hover</p>
               <Image src="https://picsum.photos/seed/fxf/400/300" alt="Zoom" ratio="photo" bordered rounded zoom />
@@ -1530,7 +1530,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Image — caption" wide>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Image src="https://picsum.photos/seed/fxi/600/350" alt="Caption example" ratio="video" bordered rounded shadow caption="Neo-brutalist design with a shadow-fx drop" />
             <Image src="https://picsum.photos/seed/fxj/600/350" alt="Zoom + badge" ratio="video" bordered rounded shadow zoom badge="SALE" caption="Zoom on hover + corner badge" />
             <Image src="https://picsum.photos/seed/fxk/600/350" alt="Gradient + overlay" ratio="video" bordered rounded shadow gradient
@@ -1555,7 +1555,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Carousel — nav variants" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-2">navVariant=&quot;pills&quot;</p>
               <Carousel
@@ -1609,7 +1609,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="Carousel — multi-slide" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-2">slidesToShow=2</p>
               <Carousel
@@ -1668,7 +1668,7 @@ export default function ShowcasePage() {
 
         {/* ── VideoPlayer ──────────────────────────────────── */}
         <Row name="VideoPlayer — themes" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-2">theme=&quot;yellow&quot; (default)</p>
               <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="yellow" caption="Big Buck Bunny — yellow controls" />
@@ -1689,7 +1689,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="VideoPlayer — options" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-[10px] font-mono text-gray-400 mb-2">ratio=&quot;4/3&quot; + showShortcuts</p>
               <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4" theme="yellow" ratio="4/3" showShortcuts caption="Focus the player and use Space/Arrow keys" />
@@ -1702,7 +1702,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="LineChart" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">Single series</p>
               <LineChart data={chartData} xKey="month" height={200} showGrid showDots
@@ -1724,7 +1724,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="BarChart" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">Single bar</p>
               <BarChart data={chartData} xKey="month" height={200} showGrid radius={2}
@@ -1746,7 +1746,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="AreaChart" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">Single area</p>
               <AreaChart data={chartData} xKey="month" height={200} showGrid
@@ -1768,7 +1768,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="DonutChart" wide>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div>
               <p className="text-xs font-mono text-gray-400 mb-2">Donut</p>
               <DonutChart data={donutData} centerLabel="Stack" centerValue="4" height={200}
@@ -1791,7 +1791,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="SparkLine" wide>
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
               { data: [3,7,2,9,5,8,4,11], trend: 'up' as const, label: 'Revenue up' },
               { data: [11,8,6,9,4,7,3,5], trend: 'down' as const, label: 'Churn down' },
@@ -1824,7 +1824,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="AnimatedCounter" wide>
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
               { value: 117, prefix: '', suffix: '', label: 'Components' },
               { value: 48250, prefix: '$', suffix: '', label: 'Revenue' },
@@ -1900,7 +1900,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="ScrollToTop">
-          <div className="relative h-20 w-60 border-2 border-fx-black rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
+          <div className="relative h-20 w-full sm:w-60 border-2 border-fx-black rounded-[4px] overflow-hidden bg-gray-50 flex items-center justify-center">
             <span className="text-xs text-gray-400">Appears after 200px scroll</span>
             <ScrollToTop threshold={0} style={{ position: 'absolute', bottom: 8, right: 8 }} />
           </div>
@@ -1950,7 +1950,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="NoiseBg — blend modes" wide>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {([
               ['overlay', 'bg-fx-yellow', 'text-fx-black'],
               ['soft-light', 'bg-fx-pink', 'text-white'],
@@ -1968,7 +1968,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="NoiseBg — frequency" wide>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {([
               [0.2, 'Coarse'],
               [0.45, 'Medium'],
@@ -1986,7 +1986,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="NoiseBg — opacity + animated" wide>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {([0.1, 0.25, 0.5, 0.75, 1] as number[]).map((op) => (
               <div key={op}>
                 <p className="text-[10px] font-mono text-gray-400 mb-1">opacity={op}</p>
@@ -2019,7 +2019,7 @@ export default function ShowcasePage() {
         </Row>
 
         <Row name="BrutalistCard" wide>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {(['yellow', 'pink', 'green', 'blue'] as const).map(accent => (
               <BrutalistCard key={accent} accent={accent} hoverable className="p-5">
                 <p className="font-black font-display text-lg capitalize">{accent}</p>
@@ -2035,7 +2035,7 @@ export default function ShowcasePage() {
       <Section title="Misc" accent="blue">
 
         <Row name="Accordion" wide>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Accordion type="single" collapsible>
               <Accordion.Item value="q1">
                 <Accordion.Trigger>What is FXUI?</Accordion.Trigger>
